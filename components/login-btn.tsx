@@ -7,6 +7,7 @@ export default function LoginBtn() {
       return (
          <>
             <br></br>
+            <br></br>
             Signed in as {session.user !== undefined ? session.user.email : 'Not found User'}
             <br></br>
             <img src={session.user!.image!}></img>
