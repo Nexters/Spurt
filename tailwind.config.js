@@ -35,12 +35,19 @@ module.exports = {
            },
          ],
          title4: [
-           "20px",
+           "24px",
            {
              lineHeight: "145%",
-             fontSize: 700,
+             fontSize: 400,
            },
          ],
+         title5: [
+            "20px",
+            {
+              lineHeight: "145%",
+              fontSize: 700,
+            },
+          ],
          heading1: [
            "20px",
            {
