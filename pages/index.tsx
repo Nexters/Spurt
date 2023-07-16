@@ -1,7 +1,6 @@
 import Header from '@/components/header';
 import LoginBtn from '@/components/login-btn';
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 
 export default function Home() {
    const { status, data: session } = useSession();
