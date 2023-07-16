@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import Title from '../img/Frame 2609495.svg';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
    const { data: session } = useSession();
@@ -25,7 +26,16 @@ export default function Header() {
                </div>
             </div>
             <div className="flex flex-row items-center ml-24">
-               {session ? <img src={session.user!.image!} className="flex w-16 h-16 rounded-full"></img> : ''}
+               {session ? (
+                  <Image
+                     src={session.user!.image!}
+                     width="64"
+                     height="64"
+                     className="rounded-full"
+                     alt="프로필 사진"></Image>
+               ) : (
+                  ''
+               )}
             </div>
          </div>
       </div>
