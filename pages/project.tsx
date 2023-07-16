@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 
-export default function TenMinuteNote() {
+export default function Project() {
    return (
       <div>
          <Header></Header>
