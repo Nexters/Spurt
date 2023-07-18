@@ -5,7 +5,7 @@ import ButtonXl from "@/components/Buttons/button-xl";
 export default function Home() {
   return (
     <>
-      <div className="text-title1 flex justify-between">
+      <div className="text-title1 flex justify-between mt-5">
         <div>
           <p className="underline underline-offset-8 decoration-main-400">
             꽁지님 안녕하세요
@@ -16,6 +16,13 @@ export default function Home() {
         <div className="flex items-end">
           <ButtonS>질문 만들기</ButtonS>
         </div>
+      </div>
+
+      <div className="text-title3 mt-10">
+        <p>
+          <b>같은 직군의 사람들</b>이
+        </p>
+        <p>최근에 올린 질문이에요</p>
       </div>
       <div>main페이지</div>
 
