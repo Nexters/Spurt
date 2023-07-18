@@ -5,7 +5,7 @@ const ButtonS = ({ ...props }) => {
       {...props}
       style={{
         width: "120px",
-        height: "50px",
+        height: "46px",
         borderRadius: "12px",
         gap: "10px",
       }}

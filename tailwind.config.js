@@ -17,126 +17,126 @@ module.exports = {
           "28px",
           {
             lineHeight: "145%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         title2: [
           "26px",
           {
             lineHeight: "145%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         title3: [
           "24px",
           {
             lineHeight: "145%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         title4: [
           "24px",
           {
             lineHeight: "145%",
-            fontWeight: 400,
+            fontWeight: "400",
           },
         ],
         title5: [
           "20px",
           {
             lineHeight: "145%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         heading1: [
           "20px",
           {
             lineHeight: "145%",
-            fontWeight: 600,
+            fontWeight: "600",
           },
         ],
         heading2: [
           "20px",
           {
             lineHeight: "145%",
-            fontWeight: 500,
+            fontWeight: "500",
           },
         ],
         heading3: [
           "20px",
           {
             lineHeight: "145%",
-            fontWeight: 400,
+            fontWeight: "400",
           },
         ],
         body1: [
           "18px",
           {
             lineHeight: "145%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         body2: [
           "18px",
           {
             lineHeight: "145%",
-            fontWeight: 500,
+            fontWeight: "500",
           },
         ],
         body3: [
           "18px",
           {
             lineHeight: "145%",
-            fontWeight: 400,
+            fontWeight: "400",
           },
         ],
         body4: [
           "16px",
           {
             lineHeight: "140%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         body5: [
           "16px",
           {
             lineHeight: "140%",
-            fontWeight: 600,
+            fontWeight: "600",
           },
         ],
         body6: [
           "16px",
           {
             lineHeight: "140%",
-            fontWeight: 500,
+            fontWeight: "500",
           },
         ],
         body7: [
           "16px",
           {
             lineHeight: "140%",
-            fontWeight: 400,
+            fontWeight: "400",
           },
         ],
         caption1: [
           "14px",
           {
             lineHeight: "145%",
-            fontWeight: 700,
+            fontWeight: "700",
           },
         ],
         caption2: [
           "14px",
           {
             lineHeight: "145%",
-            fontWeight: 500,
+            fontWeight: "500",
           },
         ],
         caption3: [
           "14px",
           {
             lineHeight: "145%",
-            fontWeight: 400,
+            fontWeight: "400",
           },
         ],
       },

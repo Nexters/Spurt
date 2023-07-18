@@ -19,7 +19,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-title3 mt-10">
+      <div className="text-title4 mt-10">
         <p>
           <b>같은 직군의 사람들</b>이
         </p>
