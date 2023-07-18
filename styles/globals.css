@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 body {
-  color: #212025;
-  background: #f9f6f5;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+   color: #212025;
+   background: #f9f6f5;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
 }
 
 .container {
-  width: 600px;
+   width: 600px;
+   padding-left: 20px;
+   padding-right: 20px;
 }

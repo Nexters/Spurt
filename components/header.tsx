@@ -9,7 +9,7 @@ export default function Header() {
    const router = useRouter();
 
    return (
-      <div className="flex flex-row h-32 justify-between">
+      <div className="flex flex-row h-14 justify-between mt-10 mb-8">
          <div className="grid content-center">
             <Title></Title>
          </div>
