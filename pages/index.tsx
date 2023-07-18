@@ -9,13 +9,10 @@ export default function Home() {
     <>
       <div className="text-title1 flex justify-between mt-5">
         <div>
-          <p className="underline underline-offset-8 decoration-main-400">
-            <b>꽁지님 안녕하세요</b>
+          <p className="underline underline-offset-8 decoration-main-400 decoration-4">
+            꽁지님 안녕하세요
           </p>
-
-          <p>
-            <b>오늘도 마지막까지 화이팅!</b>
-          </p>
+          <p>오늘도 마지막까지 화이팅!</p>
         </div>
         <div className="flex items-end">
           <ButtonS>질문 만들기</ButtonS>
