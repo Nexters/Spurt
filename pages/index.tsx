@@ -7,7 +7,7 @@ import Carousel from "@/components/Carousel/Carousel";
 export default function Home() {
   return (
     <>
-      <div className="text-title1 flex justify-between mt-5">
+      <div className="text-title1 flex justify-between mt-[42px]">
         <div>
           <p className="underline underline-offset-8 decoration-main-400 decoration-4">
             꽁지님 안녕하세요
@@ -19,13 +19,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-title4 mt-10">
+      <div className="text-title4 mt-[54px] mb-5">
         <p>
           <b>같은 직군의 사람들</b>이
         </p>
         <p>최근에 올린 질문이에요</p>
       </div>
       <Carousel />
+      <div className="mt-5 bg-white rounded-[20px] pt-5 px-5 pb-[30px]"></div>
       <div>main페이지</div>
 
       <div>버튼 테스트</div>
