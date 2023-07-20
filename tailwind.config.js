@@ -158,6 +158,8 @@ module.exports = {
           400: "#fec20c",
         },
         red: "#fe7448",
+        gray_line: "#00000017",
+        main_line: "#fec20c4d",
       },
     },
   },
