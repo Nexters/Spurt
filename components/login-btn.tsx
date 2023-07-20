@@ -26,9 +26,8 @@ export default function LoginBtn() {
   }
   return (
     <>
-      Not signed in <br />
-      <br />
-      <ButtonXl onClick={() => signIn()}>Sign in 이게 맞아?ㅋㅋㅋ</ButtonXl>
+      {/* Not signed in <br /> */}
+      <ButtonXl onClick={() => signIn()}>구글로 로그인하기</ButtonXl>
     </>
   );
 }
