@@ -3,6 +3,7 @@ import ButtonS from "@/components/Buttons/button-s";
 import ButtonXl from "@/components/Buttons/button-xl";
 import ButtonXs from "@/components/Buttons/button-xs";
 import Carousel from "@/components/Carousel/Carousel";
+import QuestionDiv from "@/components/Questions/QuestionDiv";
 
 export default function Home() {
   return (
@@ -25,15 +26,24 @@ export default function Home() {
         </p>
         <p>최근에 올린 질문이에요</p>
       </div>
+
       <Carousel />
-      <div className="mt-5 bg-white rounded-[20px] pt-5 px-5 pb-[30px]"></div>
-      <div>main페이지</div>
+
+      <div className="mt-5 bg-white rounded-[20px] pt-5 px-5 pb-[30px] mb-[50px]">
+        <QuestionDiv />
+      </div>
+
+      <div className="text-title3 mb-5">
+        <p>나의 질문 모아보기</p>
+      </div>
+      <Carousel />
+      {/* <div>main페이지</div>
 
       <div>버튼 테스트</div>
       <ButtonXl>font-size가 안먹혀 개커</ButtonXl>
       <ButtonM>질문-답변 작성하러 가기</ButtonM>
       <ButtonS>저장하기</ButtonS>
-      <ButtonXs>직무지식</ButtonXs>
+      <ButtonXs>직무지식</ButtonXs> */}
     </>
   );
 }
