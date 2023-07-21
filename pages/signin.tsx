@@ -9,7 +9,7 @@ export default function Signin() {
   const token = isLogin ? session.access_token : "";
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center justify-center h-screen">
       <Logo />
       <div className="mt-[50px] mb-[100px] text-title1 text-center">
         <p>마지막 관문, 면접까지</p>
