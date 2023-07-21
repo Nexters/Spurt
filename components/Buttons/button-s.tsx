@@ -1,14 +1,8 @@
 const ButtonS = ({ ...props }) => {
   return (
     <button
-      className="text-body4 bg-gray-700 text-white py-3 flex justify-center items-center"
+      className="text-body4 bg-gray-700 text-white w-[198px] h-[52px] rounded-xl py-3 px-8 flex justify-center items-center gap-[10px]"
       {...props}
-      style={{
-        width: "120px",
-        height: "46px",
-        borderRadius: "12px",
-        gap: "10px",
-      }}
     ></button>
   );
 };
