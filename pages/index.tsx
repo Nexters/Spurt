@@ -40,7 +40,7 @@ export default function Home() {
         })}
       </div>
 
-      <div className="flex flex-col mt-5 bg-white rounded-[20px] px-5 py-[30px] mb-[50px]">
+      <div className="flex flex-col mt-5 bg-white rounded-[20px] px-5 py-[30px] mb-[100px]">
         <div className="flex justify-around">
           <QuestionCard />
           <QuestionCard />
@@ -61,8 +61,27 @@ export default function Home() {
         })}
       </div>
 
-      <div className="flex bg-white mt-5 px-[30px] pt-[30px] pb-[50px] rounded-[20px]">
-        호로로로로로ㅗㄹ
+      <div className="flex flex-col bg-white mt-5 px-[30px] pt-[30px] pb-[50px] rounded-[20px]">
+        <div className="flex mb-5 items-center justify-between">
+          <div>
+            <button className="text-body1 text-gray-700 mr-5">최신순</button>
+            <button className="text-body2 text-gray-300">핀 고정순</button>
+          </div>
+          <p className="text-body2 text-right text-gray-700">총 0개</p>
+        </div>
+        <div className="flex flex-col justify-center items-center w-[940px] h-[227px] border-[0.7px] border-gray_line rounded-2xl">
+          <div className="mb-6">
+            <p className="text-body7 text-gray-600">
+              예상 질문을 만들고 답하러 가볼까요?
+            </p>
+            <p className="text-heading1 text-gray-700">
+              아직 등록한 질문-답변이 없어요
+            </p>
+          </div>
+          <div>
+            <ButtonS>첫 질문-답변 만들기</ButtonS>
+          </div>
+        </div>
       </div>
     </>
   );
