@@ -1,6 +1,7 @@
 import ButtonS from "@/components/pc/Keywords/Buttons/button-s";
 import ButtonXs from "@/components/pc/Keywords/Buttons/button-xs";
 import RandomBtn from "@/components/pc/Keywords/Buttons/randomBtn";
+import AnswerCard from "@/components/pc/Keywords/Questions/AnswerCard";
 import QuestionCard from "@/components/pc/Keywords/Questions/QuestionCard";
 import { useState } from "react";
 
@@ -12,9 +13,16 @@ export default function Home() {
     "협업경험",
     "장단점",
     "실패경험",
-    "기타",
+    "기본",
   ];
-  const myCategory = ["전체", "직무지식", "직무경험", "협업경험", "실패경험"];
+  const myCategory = [
+    "전체",
+    "직무지식",
+    "직무경험",
+    "협업경험",
+    "실패경험",
+    "기본",
+  ];
   return (
     <>
       <div className="text-title1 text-gray-700 flex justify-between mt-[42px]">
@@ -41,14 +49,14 @@ export default function Home() {
         })}
       </div>
 
-      <div className="flex flex-col mt-5 bg-white rounded-[20px] px-5 py-[30px] mb-[100px]">
-        <div className="flex justify-around">
+      <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
+        <div className="flex justify-around gap-3">
           <QuestionCard />
           <QuestionCard />
           <QuestionCard />
           <QuestionCard />
         </div>
-        <div className="flex justify-center mt-[30px]">
+        <div className="flex justify-center my-[30px]">
           <RandomBtn>다른 질문 더보기 1/3</RandomBtn>
         </div>
       </div>
@@ -101,7 +109,11 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          <div></div>
+          <div className="grid grid-cols-2 gap-3">
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+          </div>
         )}
       </div>
     </>
