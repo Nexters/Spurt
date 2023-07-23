@@ -14,38 +14,38 @@ module.exports = {
       },
       fontSize: {
         title1: [
-          "28px",
+          "30px",
           {
             lineHeight: "145%",
             fontWeight: "700",
           },
         ],
         title2: [
-          "26px",
+          "28px",
           {
             lineHeight: "145%",
             fontWeight: "700",
           },
         ],
         title3: [
-          "24px",
+          "28px",
           {
             lineHeight: "145%",
             fontWeight: "700",
           },
         ],
         title4: [
-          "24px",
+          "26px",
           {
             lineHeight: "145%",
-            fontWeight: "400",
+            fontWeight: "700",
           },
         ],
         title5: [
           "26px",
           {
             lineHeight: "145%",
-            fontWeight: "700",
+            fontWeight: "400",
           },
         ],
         title6: [
@@ -73,21 +73,42 @@ module.exports = {
           "20px",
           {
             lineHeight: "145%",
-            fontWeight: "600",
+            fontWeight: "700",
           },
         ],
         heading2: [
           "20px",
           {
             lineHeight: "145%",
-            fontWeight: "500",
+            fontWeight: "600",
           },
         ],
         heading3: [
           "20px",
           {
             lineHeight: "145%",
+            fontWeight: "500",
+          },
+        ],
+        heading4: [
+          "20px",
+          {
+            lineHeight: "145%",
             fontWeight: "400",
+          },
+        ],
+        heading5: [
+          "16px",
+          {
+            lineHeight: "145%",
+            fontWeight: "700",
+          },
+        ],
+        heading6: [
+          "16px",
+          {
+            lineHeight: "145%",
+            fontWeight: "600",
           },
         ],
         body1: [
@@ -139,6 +160,27 @@ module.exports = {
             fontWeight: "400",
           },
         ],
+        body8: [
+          "14px",
+          {
+            lineHeight: "140%",
+            fontWeight: "700",
+          },
+        ],
+        body9: [
+          "14px",
+          {
+            lineHeight: "140%",
+            fontWeight: "500",
+          },
+        ],
+        body10: [
+          "12px",
+          {
+            lineHeight: "140%",
+            fontWeight: "500",
+          },
+        ],
         caption1: [
           "14px",
           {
@@ -178,6 +220,20 @@ module.exports = {
           "12px",
           {
             lineHeight: "145%",
+            fontWeight: "400",
+          },
+        ],
+        content_body1: [
+          "18px",
+          {
+            lineHeight: "160%",
+            fontWeight: "400",
+          },
+        ],
+        content_body2: [
+          "14px",
+          {
+            lineHeight: "160%",
             fontWeight: "400",
           },
         ],
