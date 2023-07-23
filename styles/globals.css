@@ -16,3 +16,9 @@ body {
    /* padding-left: 20px;
   padding-right: 20px; */
 }
+
+@media (max-width: 665px) {
+   #__next {
+      width: 100%;
+   }
+}

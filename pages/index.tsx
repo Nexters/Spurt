@@ -1,7 +1,6 @@
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import ButtonXs from '@/components/pc/Keywords/Buttons/button-xs';
 import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 
 export default function Home() {

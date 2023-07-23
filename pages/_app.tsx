@@ -15,7 +15,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <SessionProvider session={session}>
          <RecoilRoot>
             {isMobile ? (
-               <div>mobile</div>
+               <div>{!headerVisible && <MobileHeader />}</div>
             ) : (
                <div className="container">
                   {!headerVisible && <Header />}
