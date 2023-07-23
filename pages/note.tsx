@@ -43,7 +43,7 @@ export default function TenMinuteNote() {
                <p className="text-body2">총 20개</p>
             </div>
             <div className="flex mt-[20px]">
-               <Swiper spaceBetween={50} slidesPerView={4} slidesOffsetAfter={50}>
+               <Swiper spaceBetween={12} slidesPerView={4} slidesOffsetAfter={22}>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={0}
