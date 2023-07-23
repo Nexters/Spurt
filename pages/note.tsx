@@ -3,8 +3,19 @@ import Pin from '../img/Group 2609558.svg';
 import Carousel from '@/components/Carousel/Carousel';
 import TenMinuteCard from '@/components/Questions/TenMintueCard';
 import Keyword from '@/components/Keywords/Keyword';
+import EditIcon from '../img/edit-2.svg';
+import CTA4 from '@/components/Buttons/CTA4';
+import VisibleBtn from '@/components/Buttons/visibleBtn';
+import { useRecoilState } from 'recoil';
+import { answerVisibleState, keywordVisibleState, selectedCardState } from '@/status/TenMinuteNoteStatus';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export default function TenMinuteNote() {
+   const [isKeywordVisible, setKeywordVisibility] = useRecoilState(keywordVisibleState);
+   const [isAnswerVisible, setAnswerVisibility] = useRecoilState(answerVisibleState);
+   const [selectedCardIndex, setSelectedCardIndex] = useRecoilState(selectedCardState);
+
    return (
       <>
          <div className="text-title1 flex justify-between mt-[42px]">
@@ -15,7 +26,7 @@ export default function TenMinuteNote() {
                <span>을 확인해요</span>
             </div>
             <div className="flex items-end">
-               <ButtonS>질문 만들기</ButtonS>
+               <ButtonS>질문-답변 만들기</ButtonS>
             </div>
          </div>
          <div className="mt-[46px]">
@@ -31,27 +42,123 @@ export default function TenMinuteNote() {
             <div className="flex justify-end mr-[30px]">
                <p className="text-body2">총 20개</p>
             </div>
-            <div className="flex">
-               <TenMinuteCard text="UX와 UI의 차이점을 말해주세요."></TenMinuteCard>
-               <TenMinuteCard text="UX와 UI의 차이점을 말해주세요."></TenMinuteCard>
-               <TenMinuteCard text="UX와 UI의 차이점을 말해주세요."></TenMinuteCard>
+            <div className="flex mt-[20px]">
+               <Swiper spaceBetween={50} slidesPerView={4} slidesOffsetAfter={50}>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={0}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={1}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={2}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={3}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={4}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={5}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                     <TenMinuteCard
+                        index={6}
+                        selectedIndex={selectedCardIndex}
+                        text="UX와 UI의 차이점을 말해주세요."
+                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                  </SwiperSlide>
+               </Swiper>
             </div>
 
             <div className="flex mt-[30px]">
-               <div className="flex mb-[13px] flex-col w-[390px]">
+               <div className="flex mb-[13px] flex-col max-w-[390px]">
                   <div className="flex justify-between">
                      <div>답변 키워드</div>
-                     <div>눈까리 버튼</div>
+                     <VisibleBtn isVisible={isKeywordVisible} setVisibility={setKeywordVisibility}></VisibleBtn>
                   </div>
-                  <Keyword text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"></Keyword>
-                  <Keyword text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"></Keyword>
-                  <Keyword text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"></Keyword>
-                  <Keyword text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"></Keyword>
+                  <div className="mt-[20px]">
+                     <Keyword text="개발자 협업 : 넥스터즈" isVisible={isKeywordVisible}></Keyword>
+                     <Keyword text="면접을 준비하는 취업준비생을 위한 서비스" isVisible={isKeywordVisible}></Keyword>
+                     <Keyword text="개발자와 협업하며 프론트엔드에 매력" isVisible={isKeywordVisible}></Keyword>
+                     <Keyword
+                        text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"
+                        isVisible={isKeywordVisible}></Keyword>
+                     <Keyword text="이후 개발자로서 커리어를 쌓기 위해" isVisible={isKeywordVisible}></Keyword>
+                  </div>
                </div>
                <div className="flex">
-                  <div></div>
+                  <div className="bg-[#989898] w-[0.7px] mx-[30px]"></div>
                </div>
-               <div className="flex">acv</div>
+               <div className="flex flex-col mr-[30px] max-w-[520px]">
+                  <div className="flex justify-between mb-[20px]">
+                     <div>전체 답변</div>
+                     <VisibleBtn isVisible={isAnswerVisible} setVisibility={setAnswerVisibility}></VisibleBtn>
+                  </div>
+                  <div className={isAnswerVisible ? '' : 'blur'}>
+                     본문 내용 <br></br>
+                     어쩌고 저쩌고 어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고
+                     <br></br>
+                     <br></br>
+                     본문 내용 <br></br>
+                     어쩌고 저쩌고 어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고
+                     <br></br>
+                     <br></br>
+                     본문 내용 <br></br>
+                     어쩌고 저쩌고 어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
+                     저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고
+                  </div>
+               </div>
+            </div>
+            <div className="flex mt-[50px] justify-end mr-[30px]">
+               <CTA4>
+                  수정하기<EditIcon></EditIcon>
+               </CTA4>
             </div>
          </div>
          <div className="h-[100px]"></div>
