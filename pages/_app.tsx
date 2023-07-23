@@ -1,7 +1,7 @@
 import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import Header from '@/components/header';
+import Header from '@/components/pc/Keywords/header';
 import useHeader from '@/utils/useHeader';
 import { RecoilRoot } from 'recoil';
 import { Mobile, PC } from '@/components/responsive';

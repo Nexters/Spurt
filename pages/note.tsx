@@ -1,11 +1,11 @@
-import ButtonS from '@/components/Buttons/button-s';
+import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import Pin from '../img/Group 2609558.svg';
-import Carousel from '@/components/Carousel/Carousel';
-import TenMinuteCard from '@/components/Questions/TenMintueCard';
-import Keyword from '@/components/Keywords/Keyword';
+import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
+import TenMinuteCard from '@/components/pc/Keywords/Questions/TenMintueCard';
+import Keyword from '@/components/pc/Keywords/Keyword';
 import EditIcon from '../img/edit-2.svg';
-import CTA4 from '@/components/Buttons/CTA4';
-import VisibleBtn from '@/components/Buttons/visibleBtn';
+import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
+import VisibleBtn from '@/components/pc/Keywords/Buttons/visibleBtn';
 import { useRecoilState } from 'recoil';
 import { answerVisibleState, keywordVisibleState, selectedCardState } from '@/status/TenMinuteNoteStatus';
 import { Swiper, SwiperSlide } from 'swiper/react';
