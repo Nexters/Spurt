@@ -1,5 +1,5 @@
-import VisibleIcon from '../../img/visible.svg';
-import InVisibleIcon from '../../img/invisible.svg';
+import VisibleIcon from '../../../../img/visible.svg';
+import InVisibleIcon from '../../../../img/invisible.svg';
 
 interface VisibleProps {
    isVisible: boolean;
