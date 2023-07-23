@@ -96,7 +96,7 @@ export default function Home() {
         </div>
         {recent ? (
           <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
-            <div className="mb-6">
+            <div className="flex flex-col mb-6 items-center">
               <p className="text-body7 text-gray-600">
                 예상 질문을 만들고 답하러 가볼까요?
               </p>
