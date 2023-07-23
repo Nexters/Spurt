@@ -41,6 +41,27 @@ module.exports = {
                },
             ],
             title5: [
+               '26px',
+               {
+                  lineHeight: '145%',
+                  fontWeight: '700',
+               },
+            ],
+            title6: [
+               '24px',
+               {
+                  lineHeight: '145%',
+                  fontWeight: '400',
+               },
+            ],
+            title7: [
+               '24px',
+               {
+                  lineHeight: '145%',
+                  fontWeight: '700',
+               },
+            ],
+            title8: [
                '20px',
                {
                   lineHeight: '145%',
@@ -133,6 +154,27 @@ module.exports = {
             ],
             caption3: [
                '14px',
+               {
+                  lineHeight: '145%',
+                  fontWeight: '400',
+               },
+            ],
+            caption4: [
+               '12px',
+               {
+                  lineHeight: '145%',
+                  fontWeight: '700',
+               },
+            ],
+            caption5: [
+               '12px',
+               {
+                  lineHeight: '145%',
+                  fontWeight: '500',
+               },
+            ],
+            caption6: [
+               '12px',
                {
                   lineHeight: '145%',
                   fontWeight: '400',

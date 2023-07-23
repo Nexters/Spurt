@@ -6,6 +6,7 @@ import useHeader from '@/utils/useHeader';
 import { RecoilRoot } from 'recoil';
 import MobileHeader from '@/components/mobile/header';
 import { useIsMobile } from '@/components/responsive';
+import MobileHome from '@/components/mobile/home';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
    const headerVisible = useHeader();
@@ -15,7 +16,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
       <SessionProvider session={session}>
          <RecoilRoot>
             {isMobile ? (
-               <div>{!headerVisible && <MobileHeader />}</div>
+               <div>
+                  {!headerVisible && <MobileHeader />}
+                  <MobileHome></MobileHome>
+               </div>
             ) : (
                <div className="container">
                   {!headerVisible && <Header />}
