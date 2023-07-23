@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-export const Mobile = ({ children }: any) => {
-   const isMobile = useMediaQuery({
+export function useIsMobile() {
+   const [isMobile, setIsMobile] = useState(false)
+   const mobile = useMediaQuery({
       query: '(max-width:665px)',
    });
+   useEffect(() => {
+      setIsMobile(mobile)
+   }, [mobile])
 
-   return <>{isMobile && children}</>;
-};
-
-export const PC = ({ children }: any) => {
-   const isPc = useMediaQuery({
-      query: '(min-width:666px)',
-   });
-
-   return <>{isPc && children}</>;
-};
+   return isMobile
+}
