@@ -19,7 +19,7 @@ const Post = () => {
       <hr />
       <p className="mt-[60px] mb-5 text-title1">질문-답변 만들기</p>
       <input
-        className=" text-heading1 text-gray-600 w-full px-6 py-[18px] mb-5 border border-gray-300 rounded-2xl placeholder:text-heading3 placeholder:text-gray-300"
+        className="text-heading1 text-gray-600 w-full px-6 py-[18px] mb-5 border border-gray-300 rounded-2xl placeholder:text-heading3 placeholder:text-gray-300"
         placeholder="질문은 35자 이내로 작성해주세요"
         maxLength={35}
       ></input>
@@ -30,7 +30,7 @@ const Post = () => {
       </div>
       <div className="p-[30px] min-h-[476px] w-full border border-gray-300 rounded-[20px] bg-white">
         <textarea
-          className="min-h-[360px] w-full text-body3 resize-none"
+          className="min-h-[360px] w-full text-body3 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300"
           placeholder="답변을 입력해주세요"
         ></textarea>
         <hr />
