@@ -1,3 +1,5 @@
+import SumKeyWord from "@/components/pc/Keywords/Buttons/Keyword";
+import AddKeyWordBtn from "@/components/pc/Keywords/Buttons/addKeyword";
 import ButtonS from "@/components/pc/Keywords/Buttons/button-s";
 import ButtonXs from "@/components/pc/Keywords/Buttons/button-xs";
 
@@ -40,7 +42,19 @@ const Post = () => {
             요약 키워드는 최대 20개까지 가능해요
           </p>
         </div>
-        <div>키워드 자리</div>
+        <div className="flex mb-[12px] gap-[6px] flex-wrap">
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+          <SumKeyWord></SumKeyWord>
+        </div>
+        <div>
+          <AddKeyWordBtn> 키워드 추가 + </AddKeyWordBtn>
+        </div>
       </div>
       <div className="flex justify-end mt-[30px] mb-[150px]">
         <ButtonS>저장하기</ButtonS>
