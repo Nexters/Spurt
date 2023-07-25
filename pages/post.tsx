@@ -2,8 +2,25 @@ import SumKeyWord from "@/components/pc/Keywords/Buttons/Keyword";
 import AddKeyWordBtn from "@/components/pc/Keywords/Buttons/addKeyword";
 import ButtonS from "@/components/pc/Keywords/Buttons/button-s";
 import ButtonXs from "@/components/pc/Keywords/Buttons/button-xs";
+import { useRef, useState } from "react";
+import { InputItem } from "@/components/pc/Keywords/Buttons/Keyword";
 
 const Post = () => {
+  const nextID = useRef<number>(1);
+  const [inputItems, setInputItems] = useState<InputItem[]>([
+    { id: 0, title: "" },
+  ]);
+  const addInput = () => {
+    const input = {
+      id: nextID.current,
+      title: "",
+    };
+    setInputItems([...inputItems, input]);
+    nextID.current += 1;
+  };
+  const deleteInput = (index: number) => {
+    setInputItems(inputItems.filter((item) => item.id !== index));
+  };
   const qCategory = [
     "직무지식",
     "직무경험",
@@ -43,19 +60,15 @@ const Post = () => {
           </p>
         </div>
         <div className="flex mb-[12px] gap-[6px] flex-wrap">
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
-          <SumKeyWord></SumKeyWord>
+          {inputItems.map((item, index) => (
+            <SumKeyWord key={index} deleteInput={deleteInput} id={item.id} />
+          ))}
         </div>
         <div>
-          <AddKeyWordBtn> 키워드 추가 + </AddKeyWordBtn>
+          <AddKeyWordBtn value="키워드 추가 +" addInput={addInput} />
         </div>
       </div>
+
       <div className="flex justify-end mt-[30px] mb-[150px]">
         <ButtonS>저장하기</ButtonS>
       </div>
