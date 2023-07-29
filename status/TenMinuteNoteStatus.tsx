@@ -14,3 +14,8 @@ export const selectedCardState = atom({
    key: 'selectedCard',
    default: -1,
 });
+
+export const mobileContentToggle = atom({
+   key: 'contentToggle',
+   default: true,
+});

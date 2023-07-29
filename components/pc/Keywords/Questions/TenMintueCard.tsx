@@ -3,19 +3,34 @@ interface CardProp {
    selectedIndex: number;
    text: string;
    onClick: (value: number) => void;
+   isPc: boolean;
 }
 
-const TenMinuteCard = ({ index, selectedIndex, text, onClick }: CardProp) => {
+const TenMinuteCard = ({ index, selectedIndex, text, onClick, isPc }: CardProp) => {
    return (
-      <div
-         className={
-            index == selectedIndex
-               ? 'flex p-[20px] h-[160px] bg-main-200 rounded-[20px] cursor-pointer'
-               : 'flex p-[20px] h-[160px] bg-gray-100 rounded-[20px] cursor-pointer'
-         }
-         onClick={() => onClick(index)}>
-         <div className="text-heading2">{text}</div>
-      </div>
+      <>
+         {isPc ? (
+            <div
+               className={
+                  index == selectedIndex
+                     ? `flex p-[20px] h-[160px] bg-main-200 rounded-[20px] cursor-pointer`
+                     : `flex p-[20px] h-[160px] bg-gray-100 rounded-[20px] cursor-pointer`
+               }
+               onClick={() => onClick(index)}>
+               <div className="text-heading2">{text}</div>
+            </div>
+         ) : (
+            <div
+               className={
+                  index == selectedIndex
+                     ? `flex p-[16px] h-[106px] bg-main-200 rounded-[20px] cursor-pointer`
+                     : `flex p-[16px] h-[106px] bg-gray-100 rounded-[20px] cursor-pointer`
+               }
+               onClick={() => onClick(index)}>
+               <div className="text-heading6">{text}</div>
+            </div>
+         )}
+      </>
    );
 };
 

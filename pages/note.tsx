@@ -18,7 +18,7 @@ export default function TenMinuteNote() {
 
    return (
       <>
-         <div className="text-title1 flex justify-between mt-[42px]">
+         <div className="text-title8 flex justify-between mt-[42px]">
             <div>
                <p>내가 저장한</p>
 
@@ -32,7 +32,7 @@ export default function TenMinuteNote() {
          <div className="mt-[46px]">
             <div className="flex">
                <Pin></Pin>
-               <span className="text-title3 ml-[10px]">10분 노트</span>
+               <span className="text-caption3 ml-[10px]">10분 노트</span>
             </div>
             <div className="mt-[20px]">
                <Carousel></Carousel>
@@ -49,49 +49,56 @@ export default function TenMinuteNote() {
                         index={0}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={1}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={2}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={3}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={4}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={5}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                   <SwiperSlide>
                      <TenMinuteCard
                         index={6}
                         selectedIndex={selectedCardIndex}
                         text="UX와 UI의 차이점을 말해주세요."
-                        onClick={setSelectedCardIndex}></TenMinuteCard>
+                        onClick={setSelectedCardIndex}
+                        isPc={true}></TenMinuteCard>
                   </SwiperSlide>
                </Swiper>
             </div>
@@ -103,13 +110,23 @@ export default function TenMinuteNote() {
                      <VisibleBtn isVisible={isKeywordVisible} setVisibility={setKeywordVisibility}></VisibleBtn>
                   </div>
                   <div className="mt-[20px]">
-                     <Keyword text="개발자 협업 : 넥스터즈" isVisible={isKeywordVisible}></Keyword>
-                     <Keyword text="면접을 준비하는 취업준비생을 위한 서비스" isVisible={isKeywordVisible}></Keyword>
-                     <Keyword text="개발자와 협업하며 프론트엔드에 매력" isVisible={isKeywordVisible}></Keyword>
+                     <Keyword text="개발자 협업 : 넥스터즈" isVisible={isKeywordVisible} isPc={true}></Keyword>
+                     <Keyword
+                        text="면접을 준비하는 취업준비생을 위한 서비스"
+                        isVisible={isKeywordVisible}
+                        isPc={true}></Keyword>
+                     <Keyword
+                        text="개발자와 협업하며 프론트엔드에 매력"
+                        isVisible={isKeywordVisible}
+                        isPc={true}></Keyword>
                      <Keyword
                         text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"
-                        isVisible={isKeywordVisible}></Keyword>
-                     <Keyword text="이후 개발자로서 커리어를 쌓기 위해" isVisible={isKeywordVisible}></Keyword>
+                        isVisible={isKeywordVisible}
+                        isPc={true}></Keyword>
+                     <Keyword
+                        text="이후 개발자로서 커리어를 쌓기 위해"
+                        isVisible={isKeywordVisible}
+                        isPc={true}></Keyword>
                   </div>
                </div>
                <div className="flex">
