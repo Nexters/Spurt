@@ -12,6 +12,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Home(props: any) {
   const router = useRouter();
@@ -42,7 +43,9 @@ export default function Home(props: any) {
           <p>오늘도 마지막까지 화이팅!</p>
         </div>
         <div className="flex items-end">
-          <ButtonS>질문-답변 만들기</ButtonS>
+          <Link href={'/post'}>
+            <ButtonS>질문-답변 만들기</ButtonS>
+          </Link>
         </div>
       </div>
       <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
