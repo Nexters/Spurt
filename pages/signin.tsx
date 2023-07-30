@@ -1,13 +1,9 @@
-import LoginBtn from "@/components/pc/Keywords/login-btn";
-import { useSession } from "next-auth/react";
-import Logo from "../img/Group 2609434.svg";
+import { getProviders, useSession } from 'next-auth/react';
+import Logo from '../img/Group 2609434.svg';
+import GoogleSignInButton from '@/components/pc/Keywords/GoogleSigninButton';
+import { useEffect, useState } from 'react';
 
 export default function Signin() {
-  const { status, data: session } = useSession();
-
-  const isLogin = !!session && status === "authenticated";
-  const token = isLogin ? session.access_token : "";
-
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <Logo />
@@ -16,8 +12,7 @@ export default function Signin() {
 
         <p>차근차근 스퍼트와 함께 준비해요</p>
       </div>
-      <LoginBtn></LoginBtn>
-      <div>{token}</div>
+      <GoogleSignInButton></GoogleSignInButton>
     </div>
   );
 }
