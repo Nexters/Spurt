@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 export default function useHeader(): boolean {
   const router = useRouter();
 
-  const visiblePages = ["/signin", "/selectJob", "/post"];
+  const visiblePages = ['/signin', '/selectJob', '/post', '/read'];
 
   return visiblePages.includes(router.pathname);
 }
