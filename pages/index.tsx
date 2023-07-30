@@ -26,11 +26,11 @@ export default function Home(props: any) {
 
   const { userExists, isLoggined } = props;
 
-  useEffect(() => {
-    if (!userExists && isLoggined) {
-      router.push('/selectJob');
-    }
-  });
+  // useEffect(() => {
+  //   if (!userExists && isLoggined) {
+  //     router.push('/selectJob');
+  //   }
+  // });
 
   return (
     <>
@@ -115,13 +115,13 @@ export default function Home(props: any) {
   );
 }
 
-export async function getServerSideProps() {
-  const response = await ApiClient.get('/v1/user/exist');
+// export async function getServerSideProps() {
+//   const response = await ApiClient.get('/v1/user/exist');
 
-  return {
-    props: {
-      userExists: response.data.data.userExists,
-      isLoggined: false,
-    },
-  };
-}
+//   return {
+//     props: {
+//       userExists: response.data.data.userExists,
+//       isLoggined: false,
+//     },
+//   };
+// }
