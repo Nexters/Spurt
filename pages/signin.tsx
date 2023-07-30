@@ -1,7 +1,5 @@
-import { getProviders, useSession } from 'next-auth/react';
 import Logo from '../img/Group 2609434.svg';
-import GoogleSignInButton from '@/components/pc/Keywords/GoogleSigninButton';
-import { useEffect, useState } from 'react';
+import GoogleSignInButton from '@/components/pc/Keywords/GoogleSignInButton';
 
 export default function Signin() {
   return (

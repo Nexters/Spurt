@@ -1,18 +1,21 @@
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import ButtonXs from '@/components/pc/Keywords/Buttons/button-xs';
 import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
+import ApiClient from '@/config/config';
 import {
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
 } from '@/status/MainStatus';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
 
-export default function Home() {
+export default function Home(props: any) {
+  const router = useRouter();
+
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
     selectedMainMyCategoriesState,
   );
@@ -20,6 +23,14 @@ export default function Home() {
     selectedMainOthersCategoriesState,
   );
   const [recent, setRecent] = useState(false);
+
+  const { userExists, isLoggined } = props;
+
+  useEffect(() => {
+    if (!userExists && isLoggined) {
+      router.push('/selectJob');
+    }
+  });
 
   return (
     <>
@@ -102,4 +113,15 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const response = await ApiClient.get('/v1/user/exist');
+
+  return {
+    props: {
+      userExists: response.data.data.userExists,
+      isLoggined: false,
+    },
+  };
 }
