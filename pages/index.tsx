@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="text-title1 text-gray-700 flex justify-between mt-[42px]">
+      <div className="text-title1 text-gray-700 flex justify-between mt-[60px]">
         <div>
           <p className="underline underline-offset-8 decoration-main-400 decoration-4">
             꽁지님 안녕하세요
@@ -37,7 +37,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-title4 text-gray-700 mt-[54px] mb-5">
+      <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
         <p>
           <b>같은 직군의 사람들</b>이
         </p>
@@ -64,6 +64,7 @@ export default function Home() {
       </div>
 
       <div className="text-title3 text-gray-700 mb-5">
+      <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
         <p>나의 질문 모아보기</p>
       </div>
 
@@ -74,7 +75,7 @@ export default function Home() {
         setCategory={setSelectedMyCategory}
       ></Carousel>
 
-      <div className="flex flex-col bg-white mt-5 mb-[150px] px-[30px] pt-[30px] pb-[50px] rounded-[20px] ">
+      <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
         <div className="flex mb-5 items-center justify-between">
           <div>
             <button
@@ -97,6 +98,7 @@ export default function Home() {
             </button>
           </div>
           <p className="text-body2 text-right text-gray-700">총 0개</p>
+          <p className="text-body2 w-full text-right text-gray-700">총 8개</p>
         </div>
         {recent ? (
           <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
@@ -117,8 +119,37 @@ export default function Home() {
             <AnswerCard />
             <AnswerCard />
             <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
           </div>
         )}
+      </div>
+      <div className="text-gray-700 mb-5">
+        <p>
+          <span className="text-title2">같은 직군의 사람들</span>
+          <span className="text-title3">이</span>
+        </p>
+        <p className="text-title3">최근에 올린 질문이에요</p>
+      </div>
+      <div className="flex">
+        {otherCategory.map((category) => {
+          return <ButtonXs key={category}>{category}</ButtonXs>;
+        })}
+      </div>
+
+      <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
+        <div className="flex justify-around gap-3">
+          <QuestionCard />
+          <QuestionCard />
+          <QuestionCard />
+          <QuestionCard />
+        </div>
+        <div className="flex justify-center my-[30px]">
+          <RandomBtn>다른 질문 더보기 1/3</RandomBtn>
+        </div>
       </div>
     </>
   );

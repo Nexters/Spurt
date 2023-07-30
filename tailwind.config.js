@@ -31,7 +31,7 @@ module.exports = {
           '28px',
           {
             lineHeight: '145%',
-            fontWeight: '700',
+            fontWeight: '400',
           },
         ],
         title4: [

@@ -1,5 +1,7 @@
 interface JobBtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   job?: boolean;
+  //handleClick: (e: any) => void;
+  //select: string;
 }
 
 const JobBtn = ({ job, ...props }: JobBtnProps) => {
