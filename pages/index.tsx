@@ -16,12 +16,10 @@ export default function Home() {
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
     selectedMainMyCategoriesState,
   );
-
-  const [selectedOtherCategory, setSelectedOtherCategory] = useRecoilState(
+  const [selectedOthersCategory, setSelectedOthersCategory] = useRecoilState(
     selectedMainOthersCategoriesState,
   );
-
-  const [recent, setRecent] = useState(true);
+  const [recent, setRecent] = useState(false);
 
   return (
     <>
@@ -36,38 +34,9 @@ export default function Home() {
           <ButtonS>질문-답변 만들기</ButtonS>
         </div>
       </div>
-
-      <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
-        <p>
-          <b>같은 직군의 사람들</b>이
-        </p>
-        <p>최근에 올린 질문이에요</p>
-      </div>
-
-      <Carousel
-        categories={mainOtherCategory}
-        isPc={true}
-        selectedCateogry={selectedOtherCategory}
-        setCategory={setSelectedOtherCategory}
-      ></Carousel>
-
-      <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
-        <div className="flex justify-around gap-3">
-          <QuestionCard />
-          <QuestionCard />
-          <QuestionCard />
-          <QuestionCard />
-        </div>
-        <div className="flex justify-center my-[30px]">
-          <RandomBtn>다른 질문 더보기 1/3</RandomBtn>
-        </div>
-      </div>
-
-      <div className="text-title3 text-gray-700 mb-5">
       <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
         <p>나의 질문 모아보기</p>
       </div>
-
       <Carousel
         categories={mainMyCategory}
         isPc={true}
@@ -77,27 +46,6 @@ export default function Home() {
 
       <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
         <div className="flex mb-5 items-center justify-between">
-          <div>
-            <button
-              className={`${
-                recent
-                  ? 'text-body1 text-gray-700 mr-5'
-                  : 'text-body2 text-gray-300 mr-5'
-              }`}
-              onClick={() => setRecent(true)}
-            >
-              최신순
-            </button>
-            <button
-              className={`${
-                recent ? 'text-body2 text-gray-300' : 'text-body1 text-gray-700'
-              }`}
-              onClick={() => setRecent(false)}
-            >
-              핀 고정순
-            </button>
-          </div>
-          <p className="text-body2 text-right text-gray-700">총 0개</p>
           <p className="text-body2 w-full text-right text-gray-700">총 8개</p>
         </div>
         {recent ? (
@@ -134,11 +82,12 @@ export default function Home() {
         </p>
         <p className="text-title3">최근에 올린 질문이에요</p>
       </div>
-      <div className="flex">
-        {otherCategory.map((category) => {
-          return <ButtonXs key={category}>{category}</ButtonXs>;
-        })}
-      </div>
+      <Carousel
+        categories={mainOtherCategory}
+        isPc={true}
+        selectedCateogry={selectedOthersCategory}
+        setCategory={setSelectedOthersCategory}
+      ></Carousel>
 
       <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
         <div className="flex justify-around gap-3">
