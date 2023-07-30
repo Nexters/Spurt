@@ -1,46 +1,67 @@
-import { useRef, useEffect } from 'react';
-import styles from './Carousel.module.css';
+import MobileButtonXs from '@/components/mobile/buttonXs';
 import ButtonXs from '../Buttons/button-xs';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-const Carousel = () => {
-   const sliderRef = useRef<HTMLDivElement>(null);
+interface CarouselProps {
+  categories: string[];
+  isPc: boolean;
+  selectedCateogry: number;
+  setCategory: (value: number) => void;
+}
 
-   useEffect(() => {
-      const handleScroll = (event: WheelEvent) => {
-         if (sliderRef.current) {
-            if (event.deltaY < 0) {
-               sliderRef.current.scrollLeft -= 100;
-            } else {
-               sliderRef.current.scrollLeft += 100;
-            }
-         }
-      };
-
-      if (sliderRef.current) {
-         sliderRef.current.addEventListener('wheel', handleScroll);
-      }
-
-      return () => {
-         if (sliderRef.current) {
-            sliderRef.current.removeEventListener('wheel', handleScroll);
-         }
-      };
-   }, []);
-
-   return (
-      <div className={styles.sliderContainer}>
-         <div ref={sliderRef} className={styles.slider}>
-            <ButtonXs>전체</ButtonXs>
-            <ButtonXs>직무지식</ButtonXs>
-            <ButtonXs>직무경험</ButtonXs>
-            <ButtonXs>협업경험</ButtonXs>
-            <ButtonXs>프로젝트 소개</ButtonXs>
-            <ButtonXs>장단점</ButtonXs>
-            <ButtonXs>실패경험</ButtonXs>
-            <ButtonXs>기타</ButtonXs>
-         </div>
-      </div>
-   );
+const Carousel = ({
+  categories,
+  isPc,
+  selectedCateogry,
+  setCategory,
+}: CarouselProps) => {
+  return (
+    <>
+      {isPc ? (
+        <Swiper
+          spaceBetween={6}
+          slidesPerView={5}
+          slidesOffsetAfter={20}
+          autoHeight={true}
+        >
+          {categories.map((name, index) => (
+            <SwiperSlide key={index} onClick={() => setCategory(index)}>
+              {selectedCateogry == index ? (
+                <ButtonXs key={index} name={name} isSelected={true}></ButtonXs>
+              ) : (
+                <ButtonXs key={index} name={name} isSelected={false}></ButtonXs>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <Swiper
+          spaceBetween={6}
+          slidesPerView={2}
+          slidesOffsetAfter={20}
+          autoHeight={true}
+        >
+          {categories.map((name, index) => (
+            <SwiperSlide key={index} onClick={() => setCategory(index)}>
+              {selectedCateogry == index ? (
+                <MobileButtonXs
+                  key={index}
+                  name={name}
+                  isSelected={true}
+                ></MobileButtonXs>
+              ) : (
+                <MobileButtonXs
+                  key={index}
+                  name={name}
+                  isSelected={false}
+                ></MobileButtonXs>
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+    </>
+  );
 };
 
 export default Carousel;

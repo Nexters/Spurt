@@ -161,7 +161,7 @@ module.exports = {
           },
         ],
         body8: [
-          '14px',
+          '0.875rem',
           {
             lineHeight: '140%',
             fontWeight: '700',

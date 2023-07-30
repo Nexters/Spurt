@@ -1,28 +1,28 @@
-import ButtonS from "@/components/pc/Keywords/Buttons/button-s";
-import ButtonXs from "@/components/pc/Keywords/Buttons/button-xs";
-import RandomBtn from "@/components/pc/Keywords/Buttons/randomBtn";
-import AnswerCard from "@/components/pc/Keywords/Questions/AnswerCard";
-import QuestionCard from "@/components/pc/Keywords/Questions/QuestionCard";
-import { useState } from "react";
+import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
+import ButtonXs from '@/components/pc/Keywords/Buttons/button-xs';
+import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
+import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
+import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
+import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
+import { mainMyCategory, mainOtherCategory } from '@/const/categories';
+import {
+  selectedMainMyCategoriesState,
+  selectedMainOthersCategoriesState,
+} from '@/status/MainStatus';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 export default function Home() {
+  const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
+    selectedMainMyCategoriesState,
+  );
+
+  const [selectedOtherCategory, setSelectedOtherCategory] = useRecoilState(
+    selectedMainOthersCategoriesState,
+  );
+
   const [recent, setRecent] = useState(true);
-  const otherCategory = [
-    "직무지식",
-    "직무경험",
-    "협업경험",
-    "장단점",
-    "실패경험",
-    "기본",
-  ];
-  const myCategory = [
-    "전체",
-    "직무지식",
-    "직무경험",
-    "협업경험",
-    "실패경험",
-    "기본",
-  ];
+
   return (
     <>
       <div className="text-title1 text-gray-700 flex justify-between mt-[42px]">
@@ -43,11 +43,13 @@ export default function Home() {
         </p>
         <p>최근에 올린 질문이에요</p>
       </div>
-      <div className="flex">
-        {otherCategory.map((category) => {
-          return <ButtonXs key={category}>{category}</ButtonXs>;
-        })}
-      </div>
+
+      <Carousel
+        categories={mainOtherCategory}
+        isPc={true}
+        selectedCateogry={selectedOtherCategory}
+        setCategory={setSelectedOtherCategory}
+      ></Carousel>
 
       <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
         <div className="flex justify-around gap-3">
@@ -64,11 +66,13 @@ export default function Home() {
       <div className="text-title3 text-gray-700 mb-5">
         <p>나의 질문 모아보기</p>
       </div>
-      <div className="flex">
-        {myCategory.map((category) => {
-          return <ButtonXs key={category}>{category}</ButtonXs>;
-        })}
-      </div>
+
+      <Carousel
+        categories={mainMyCategory}
+        isPc={true}
+        selectedCateogry={selectedMyCategory}
+        setCategory={setSelectedMyCategory}
+      ></Carousel>
 
       <div className="flex flex-col bg-white mt-5 mb-[150px] px-[30px] pt-[30px] pb-[50px] rounded-[20px] ">
         <div className="flex mb-5 items-center justify-between">
@@ -76,8 +80,8 @@ export default function Home() {
             <button
               className={`${
                 recent
-                  ? "text-body1 text-gray-700 mr-5"
-                  : "text-body2 text-gray-300 mr-5"
+                  ? 'text-body1 text-gray-700 mr-5'
+                  : 'text-body2 text-gray-300 mr-5'
               }`}
               onClick={() => setRecent(true)}
             >
@@ -85,7 +89,7 @@ export default function Home() {
             </button>
             <button
               className={`${
-                recent ? "text-body2 text-gray-300" : "text-body1 text-gray-700"
+                recent ? 'text-body2 text-gray-300' : 'text-body1 text-gray-700'
               }`}
               onClick={() => setRecent(false)}
             >
