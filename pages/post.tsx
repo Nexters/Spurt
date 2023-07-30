@@ -1,7 +1,6 @@
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import ButtonXs from '@/components/pc/Keywords/Buttons/button-xs';
 import { useRef, useState } from 'react';
 import { InputItem } from '@/components/pc/Keywords/Buttons/Keyword';
 import { postCategory } from '@/const/categories';
