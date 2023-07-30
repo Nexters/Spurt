@@ -1,6 +1,6 @@
-interface ButtonProps {
-  name: string;
-  isSelected: boolean;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  name?: string;
+  isSelected?: boolean;
 }
 
 const ButtonXs = ({ name, isSelected }: ButtonProps) => {

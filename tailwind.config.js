@@ -258,6 +258,7 @@ module.exports = {
         },
         red: '#fe7448',
         gray_line: '#00000017',
+        keyword_border: '#fec20c4d',
       },
     },
   },

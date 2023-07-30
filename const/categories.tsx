@@ -26,3 +26,13 @@ export const noteCategory = [
   '실패경험',
   '기타',
 ];
+
+export const postCategory = [
+  '직무지식',
+  '직무경험',
+  '협업경험',
+  '프로젝트소개',
+  '장단점',
+  '실패경험',
+  '기타',
+];
