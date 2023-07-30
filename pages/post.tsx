@@ -1,14 +1,24 @@
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
-import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
+import SaveIcon from '@/img/save.svg';
 import { useRef, useState } from 'react';
 import { InputItem } from '@/components/pc/Keywords/Buttons/Keyword';
 import { postCategory } from '@/const/categories';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { useRecoilState } from 'recoil';
 import { selectedPostCategoriesState } from '@/status/PostStatus';
+import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 
 const Post = () => {
+  const [content, setContent] = useState('');
+  const [contentCount, setContentCount] = useState(0);
+  const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
+    setContentCount(
+      event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
+        .length,
+    );
+  };
   const nextID = useRef<number>(1);
   const [selectedPostCategory, setSelectedPostCategory] = useRecoilState(
     selectedPostCategoriesState,
@@ -33,7 +43,7 @@ const Post = () => {
       <div className="flex justify-start h-[100px]">
         <button>X</button>
       </div>
-      <hr />
+
       <p className="mt-[60px] mb-5 text-title1">질문-답변 만들기</p>
       <div className="border border-gray-300 flex flex-col items-start rounded-2xl bg-white px-6 pt-[14px] pb-4 mb-3">
         <input
@@ -56,7 +66,12 @@ const Post = () => {
         <textarea
           className="min-h-[360px] w-full text-body3 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300"
           placeholder="답변을 입력해주세요"
+          maxLength={1000}
+          onChange={onChangeContent}
         ></textarea>
+        <p className="text-right text-body9 text-gray-300 mb-[30px]">
+          {contentCount} / 1000
+        </p>
         <hr />
         <div className="flex items-center mt-[30px] mb-[20px] gap-[10px]">
           <p className="text-body1 text-gray-600">Keyword</p>
@@ -75,7 +90,10 @@ const Post = () => {
       </div>
 
       <div className="flex justify-end mt-[30px] mb-[150px]">
-        <ButtonS>저장하기</ButtonS>
+        <CTA4>
+          저장하기
+          <SaveIcon />
+        </CTA4>
       </div>
     </>
   );
