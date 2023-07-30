@@ -36,7 +36,7 @@ export default function Home() {
           <ButtonS>질문-답변 만들기</ButtonS>
         </div>
       </div>
-      <div className="text-title3 text-gray-700 mb-[120px] mt-[80px]">
+      <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
         <p>나의 질문 모아보기</p>
       </div>
       <div className="flex">
@@ -45,9 +45,9 @@ export default function Home() {
         })}
       </div>
 
-      <div className="flex flex-col bg-white mt-5 mb-[150px] px-[30px] pt-[30px] pb-[50px] rounded-[20px] ">
+      <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
         <div className="flex mb-5 items-center justify-between">
-          <p className="text-body2 w-full text-right text-gray-700">총 0개</p>
+          <p className="text-body2 w-full text-right text-gray-700">총 8개</p>
         </div>
         {recent ? (
           <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
@@ -68,14 +68,20 @@ export default function Home() {
             <AnswerCard />
             <AnswerCard />
             <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
+            <AnswerCard />
           </div>
         )}
       </div>
-      <div className="text-title4 text-gray-700 mb-5">
+      <div className="text-gray-700 mb-5">
         <p>
-          <b>같은 직군의 사람들</b>이
+          <span className="text-title2">같은 직군의 사람들</span>
+          <span className="text-title3">이</span>
         </p>
-        <p>최근에 올린 질문이에요</p>
+        <p className="text-title3">최근에 올린 질문이에요</p>
       </div>
       <div className="flex">
         {otherCategory.map((category) => {

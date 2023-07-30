@@ -40,9 +40,13 @@ const SelectJob = () => {
       </div>
       <div>
         {job ? (
-          <ButtonXl styles="bg-gray-700">이 직군으로 지원하기</ButtonXl>
+          <ButtonXl style={{ backgroundColor: '#302e2e' }}>
+            이 직군으로 지원하기
+          </ButtonXl>
         ) : (
-          <ButtonXl styles="bg-gray-200">이 직군으로 지원하기</ButtonXl>
+          <ButtonXl style={{ backgroundColor: '#e9e9e9' }}>
+            이 직군으로 지원하기
+          </ButtonXl>
         )}
       </div>
     </div>

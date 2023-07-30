@@ -8,7 +8,7 @@ interface AnswerCardProps {
 
 const AnswerCard = () => {
   return (
-    <div className="flex flex-col border border-gray_line rounded-[20px]">
+    <div className="flex flex-col border border-gray_line rounded-[20px] mb-2">
       <div className="flex flex-1 p-4 max-w-[464px] h-[135px]  bg-main-100 rounded-t-[20px]">
         <div className="flex flex-col w-[366px] px-1 pt-2 pb-1">
           <div className="text-heading5 mb-[10px] text-main-500">
