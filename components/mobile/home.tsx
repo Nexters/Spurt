@@ -1,4 +1,4 @@
-import Pin from 'img/Group 2609558.svg';
+import Pin from '@/img/mobile-pin-red-24.svg';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

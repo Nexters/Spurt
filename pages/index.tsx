@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import RotateIcon from '@/img/rotate.svg';
+import RotateIcon from '@/img/rotate-24.svg';
 
 export default function Home(props: any) {
   const router = useRouter();

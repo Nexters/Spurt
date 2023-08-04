@@ -1,7 +1,7 @@
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
-import SaveIcon from '@/img/save.svg';
-import ArrowRightIcon from '@/img/arrow-circle-yellow-54.svg';
+import SaveIcon from '@/img/check-16.svg';
+import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import PlusIcon from '@/img/plus-16.svg';
 import { useRef, useState } from 'react';
 import { InputItem } from '@/components/pc/Keywords/Buttons/Keyword';

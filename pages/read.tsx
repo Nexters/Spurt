@@ -1,7 +1,7 @@
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import EditIcon from 'img/edit-2.svg';
-import DelIcon from 'img/delete.svg';
-import ArrowRightIcon from '@/img/arrow-circle-yellow-54.svg';
+import EditIcon from '@/img/edit-16.svg';
+import DelIcon from '@/img/trash-16.svg';
+import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
 
 const ReadPost = () => {
   const key = [

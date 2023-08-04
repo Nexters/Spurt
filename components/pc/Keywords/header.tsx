@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import Logo from 'img/Frame 2609495.svg';
+import Logo from '@/img/logo.svg';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';

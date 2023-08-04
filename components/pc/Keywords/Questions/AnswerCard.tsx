@@ -1,5 +1,5 @@
-import PinFilledIcon from '@/img/pin-filled.svg';
-import PinStrokeIcon from '@/img/pin-stroke.svg';
+import PinFilledIcon from '@/img/pin-fill-42.svg';
+import PinStrokeIcon from '@/img/pin-stroke-42.svg';
 interface AnswerCardProps {
   category: string;
   question: string;

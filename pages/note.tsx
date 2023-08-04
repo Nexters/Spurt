@@ -1,9 +1,9 @@
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import Pin from 'img/Group 2609558.svg';
+import Pin from '@/img/pc-pin-red-24.svg';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import TenMinuteCard from '@/components/pc/Keywords/Questions/TenMintueCard';
 import Keyword from '@/components/pc/Keywords/Keyword';
-import EditIcon from 'img/edit-2.svg';
+import EditIcon from '@/img/edit-16.svg';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import VisibleBtn from '@/components/pc/Keywords/Buttons/visibleBtn';
 import { useRecoilState } from 'recoil';
