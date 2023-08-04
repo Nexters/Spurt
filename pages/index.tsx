@@ -4,7 +4,7 @@ import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
-import ApiClient from '@/config/config';
+import ApiClient from '@/apis/client';
 import {
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import RotateIcon from '@/img/rotate.svg';
 
 export default function Home(props: any) {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function Home(props: any) {
   const [selectedOthersCategory, setSelectedOthersCategory] = useRecoilState(
     selectedMainOthersCategoriesState,
   );
-  const [recent, setRecent] = useState(false);
+  const [recent, setRecent] = useState(false); //로그인 여부 확인으로 나의 질문 모아보기 아래 컴포넌트 유무
 
   const { userExists, isLoggined } = props;
 
@@ -51,16 +52,22 @@ export default function Home(props: any) {
       <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
         <p>나의 질문 모아보기</p>
       </div>
-      <Carousel
-        categories={mainMyCategory}
-        isPc={true}
-        selectedCateogry={selectedMyCategory}
-        setCategory={setSelectedMyCategory}
-      ></Carousel>
+      {recent ? (
+        <></>
+      ) : (
+        <Carousel
+          categories={mainMyCategory}
+          isPc={true}
+          selectedCateogry={selectedMyCategory}
+          setCategory={setSelectedMyCategory}
+        ></Carousel>
+      )}
 
       <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
         <div className="flex mb-5 items-center justify-between">
-          <p className="text-body2 w-full text-right text-gray-700">총 8개</p>
+          <p className="text-body2 w-full text-right text-gray-700">
+            총 {'8'}개
+          </p>
         </div>
         {recent ? (
           <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
@@ -72,26 +79,31 @@ export default function Home(props: any) {
                 아직 등록한 질문-답변이 없어요
               </p>
             </div>
-            <div>
+            <Link href={'/post'}>
               <ButtonS>첫 질문-답변 만들기</ButtonS>
-            </div>
+            </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3">
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
-            <AnswerCard />
-          </div>
+          <>
+            <div className="grid grid-cols-2 gap-3">
+              <AnswerCard />
+              <AnswerCard />
+              <AnswerCard />
+              <AnswerCard />
+              <AnswerCard />
+              <AnswerCard />
+              <AnswerCard />
+              <AnswerCard />
+            </div>
+            <div className="flex justify-center mt-[40px]">
+              페이지네이션 위치
+            </div>
+          </>
         )}
       </div>
       <div className="text-gray-700 mb-5">
         <p>
-          <span className="text-title2">같은 직군의 사람들</span>
+          <span className="text-title2">{'같은 직군의'} 사람들</span>
           <span className="text-title3">이</span>
         </p>
         <p className="text-title3">최근에 올린 질문이에요</p>
@@ -111,7 +123,10 @@ export default function Home(props: any) {
           <QuestionCard />
         </div>
         <div className="flex justify-center my-[30px]">
-          <RandomBtn>다른 질문 더보기 1/3</RandomBtn>
+          <RandomBtn>
+            다른 질문 더보기
+            <RotateIcon />
+          </RandomBtn>
         </div>
       </div>
     </>

@@ -1,6 +1,7 @@
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import EditIcon from 'img/edit-2.svg';
 import DelIcon from 'img/delete.svg';
+import ArrowRightIcon from '@/img/arrow-circle-yellow-54.svg';
 
 const ReadPost = () => {
   const key = [
@@ -15,7 +16,9 @@ const ReadPost = () => {
 
       <div className="absolute w-[1000px]">
         <div className="flex justify-start h-[54px] mt-6">
-          <button>X</button>
+          <button>
+            <ArrowRightIcon />
+          </button>
         </div>
 
         <div className="mt-[82px] mb-[10px] text-heading1 text-main-500">
@@ -58,7 +61,7 @@ const ReadPost = () => {
         </div>
         <hr className="mb-[50px]" />
         <div className="mb-[150px] flex w-full justify-end">
-          <CTA4 className="text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] mr-[10px] flex justify-center items-center rounded-[12px] border-gray_line border">
+          <CTA4 className="gap-1 text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] mr-[10px] flex justify-center items-center rounded-[12px] border-gray_line border">
             삭제하기 <DelIcon />
           </CTA4>
           <CTA4>

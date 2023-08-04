@@ -27,8 +27,8 @@ const SelectJob = () => {
               style={
                 item === job
                   ? {
-                      backgroundColor:
-                        'rgb(255 244 206 / var(--tw-bg-opacity))',
+                      backgroundColor: '#FFF4CE',
+                      border: '1px solid #FEC20C',
                     }
                   : { backgroundColor: 'white' }
               }
@@ -41,11 +41,11 @@ const SelectJob = () => {
       <div>
         {job ? (
           <ButtonXl style={{ backgroundColor: '#302e2e' }}>
-            이 직군으로 지원하기
+            이 직군으로 저장하기
           </ButtonXl>
         ) : (
           <ButtonXl style={{ backgroundColor: '#e9e9e9' }}>
-            이 직군으로 지원하기
+            이 직군으로 저장하기
           </ButtonXl>
         )}
       </div>

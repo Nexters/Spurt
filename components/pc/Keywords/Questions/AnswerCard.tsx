@@ -1,3 +1,5 @@
+import PinFilledIcon from '@/img/pin-filled.svg';
+import PinStrokeIcon from '@/img/pin-stroke.svg';
 interface AnswerCardProps {
   category: string;
   question: string;
@@ -19,7 +21,9 @@ const AnswerCard = () => {
             이유를 설명하시오.
           </p>
         </div>
-        <div className="h-[103px] w-[42px] ml-6">핀</div>
+        <div className="h-[103px] w-[42px] ml-6">
+          <PinFilledIcon />
+        </div>
       </div>
       <div className="flex flex-1 flex-col maw-w-[464px] h-[82px] p-5">
         <p className="text-body3 text-gray-600 mb-[10px] min-h-[52px] line-clamp-3">

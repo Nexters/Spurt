@@ -1,6 +1,8 @@
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import SaveIcon from '@/img/save.svg';
+import ArrowRightIcon from '@/img/arrow-circle-yellow-54.svg';
+import PlusIcon from '@/img/plus-16.svg';
 import { useRef, useState } from 'react';
 import { InputItem } from '@/components/pc/Keywords/Buttons/Keyword';
 import { postCategory } from '@/const/categories';
@@ -10,8 +12,13 @@ import { selectedPostCategoriesState } from '@/status/PostStatus';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 
 const Post = () => {
+  const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
+
+  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
     setContentCount(
@@ -41,7 +48,9 @@ const Post = () => {
   return (
     <>
       <div className="flex justify-start h-[100px]">
-        <button>X</button>
+        <button>
+          <ArrowRightIcon />
+        </button>
       </div>
 
       <p className="mt-[60px] mb-5 text-title1">질문-답변 만들기</p>
@@ -50,6 +59,7 @@ const Post = () => {
           className="text-heading3 text-gray-600 w-full rounded-2xl placeholder:text-heading3 mb-[14px] placeholder:text-gray-300"
           placeholder="질문은 35자 이내로 작성해주세요"
           maxLength={35}
+          onChange={onChangeTitle}
         ></input>
         <hr />
         <div className="flex mt-4">
@@ -85,15 +95,32 @@ const Post = () => {
           ))}
         </div>
         <div>
-          <AddKeyWordBtn value="키워드 추가 +" addInput={addInput} />
+          <AddKeyWordBtn value="키워드 추가" addInput={addInput}>
+            키워드 추가
+            <PlusIcon />
+          </AddKeyWordBtn>
         </div>
       </div>
 
       <div className="flex justify-end mt-[30px] mb-[150px]">
-        <CTA4>
-          저장하기
-          <SaveIcon />
-        </CTA4>
+        {title.length > 0 && content.length > 0 ? (
+          <CTA4>
+            저장하기
+            <SaveIcon />
+          </CTA4>
+        ) : (
+          <CTA4
+            style={{
+              backgroundColor: '#E9E9E9',
+              color: '#A7A7A7',
+              border: '1px solid #00000017',
+            }}
+            disabled={true}
+          >
+            저장하기
+            <SaveIcon />
+          </CTA4>
+        )}
       </div>
     </>
   );
