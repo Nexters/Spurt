@@ -10,6 +10,7 @@ import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { useRecoilState } from 'recoil';
 import { selectedPostCategoriesState } from '@/status/PostStatus';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
+import issuePost from '@/apis/Questions/issuePost';
 
 const Post = () => {
   const [title, setTitle] = useState('');
@@ -26,23 +27,32 @@ const Post = () => {
         .length,
     );
   };
+
+  const handlePost = () => {
+    issuePost({
+      subject: title,
+      mainText: content,
+      keyWordList: inputItems,
+      categoryList: postCategory,
+      jobGroup: 'DEVELOPER',
+    });
+  };
   const nextID = useRef<number>(1);
   const [selectedPostCategory, setSelectedPostCategory] = useRecoilState(
     selectedPostCategoriesState,
   );
-  const [inputItems, setInputItems] = useState<InputItem[]>([
-    { id: 0, title: '' },
-  ]);
+  const [inputItems, setInputItems] = useState<InputItem[]>([]);
   const addInput = () => {
     const input = {
       id: nextID.current,
       title: '',
     };
     setInputItems([...inputItems, input]);
+
     nextID.current += 1;
   };
-  const deleteInput = (index: number) => {
-    setInputItems(inputItems.filter((item) => item.id !== index));
+  const deleteInput = (id: number) => {
+    setInputItems(inputItems.filter((item) => item.id !== id));
   };
 
   return (
@@ -56,7 +66,7 @@ const Post = () => {
       <p className="mt-[60px] mb-5 text-title1">질문-답변 만들기</p>
       <div className="border border-gray-300 flex flex-col items-start rounded-2xl bg-white px-6 pt-[14px] pb-4 mb-3">
         <input
-          className="text-heading3 text-gray-600 w-full rounded-2xl placeholder:text-heading3 mb-[14px] placeholder:text-gray-300"
+          className="text-heading3 text-gray-600 w-full  placeholder:text-heading3 mb-[14px] placeholder:text-gray-300 outline-none"
           placeholder="질문은 35자 이내로 작성해주세요"
           maxLength={35}
           onChange={onChangeTitle}
@@ -74,7 +84,7 @@ const Post = () => {
 
       <div className="p-[30px] min-h-[476px] w-full border border-gray-300 rounded-[20px] bg-white">
         <textarea
-          className="min-h-[360px] w-full text-body3 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300"
+          className="min-h-[360px] w-full text-body3 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300 outline-none"
           placeholder="답변을 입력해주세요"
           maxLength={1000}
           onChange={onChangeContent}
@@ -90,8 +100,12 @@ const Post = () => {
           </p>
         </div>
         <div className="flex mb-[12px] gap-[6px] flex-wrap">
-          {inputItems.map((item, index) => (
-            <SumKeyWord key={index} deleteInput={deleteInput} id={item.id} />
+          {inputItems.map((item) => (
+            <SumKeyWord
+              key={item.id}
+              deleteInput={() => deleteInput(item.id)}
+              id={item.id}
+            />
           ))}
         </div>
         <div>
@@ -104,7 +118,7 @@ const Post = () => {
 
       <div className="flex justify-end mt-[30px] mb-[150px]">
         {title.length > 0 && content.length > 0 ? (
-          <CTA4>
+          <CTA4 onClick={handlePost}>
             저장하기
             <SaveIcon />
           </CTA4>
