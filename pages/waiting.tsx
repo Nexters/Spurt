@@ -16,7 +16,9 @@ export default function Waiting() {
         router.push('/', undefined, { shallow: true });
       }
     }
-    call();
+    setTimeout(() => {
+      call();
+    }, 1000);
   }, [router]);
   return <div className="flex"> </div>;
 }

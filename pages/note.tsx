@@ -16,6 +16,9 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { noteCategory } from '@/const/categories';
+import ApiClient from '../apis/client';
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function TenMinuteNote() {
   const [isKeywordVisible, setKeywordVisibility] =
@@ -27,6 +30,19 @@ export default function TenMinuteNote() {
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedNoteCategoriesState,
   );
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    async function call() {
+      const result = await ApiClient.get('/v1/question', {
+        params: { jobGroup: 'DEVELOPER', myQuestionIndicator: true, size: 20 },
+      });
+      console.log(result);
+    }
+    if (session?.user) {
+      call();
+    }
+  }, [session]);
 
   return (
     <>
@@ -62,7 +78,19 @@ export default function TenMinuteNote() {
           <p className="text-body2">총 20개</p>
         </div>
         <div className="flex mt-[20px]">
-          <Swiper spaceBetween={12} slidesPerView={4} slidesOffsetAfter={22}>
+          <Swiper
+            spaceBetween={12}
+            slidesPerView={4}
+            slidesOffsetAfter={1100}
+            breakpoints={{
+              766: {
+                slidesOffsetAfter: 880,
+              },
+              1025: {
+                slidesOffsetAfter: 470,
+              },
+            }}
+          >
             <SwiperSlide>
               <TenMinuteCard
                 index={0}
