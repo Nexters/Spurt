@@ -3,10 +3,12 @@ import Logo from '@/img/logo.svg';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
+import CTA3 from './Buttons/CTA3';
 
 export default function Header() {
   const { data: session } = useSession();
   const router = useRouter();
+  const user = session?.user;
 
   return (
     <div className="flex flex-row h-[100px] justify-between border-b border-[#E9E9E9]">
@@ -40,17 +42,19 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      <div className="flex flex-row items-center w-16">
-        {session ? (
+      <div className="flex flex-row items-center">
+        {user ? (
           <Image
-            src={session.user!.image!}
+            src={user.image!}
             width="61"
             height="61"
             className="rounded-full"
             alt="프로필 사진"
           ></Image>
         ) : (
-          '네?'
+          <Link href="/signin">
+            <CTA3 text="로그인"></CTA3>
+          </Link>
         )}
       </div>
     </div>

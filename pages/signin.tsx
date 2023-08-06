@@ -1,4 +1,4 @@
-import Logo from '../img/Group 2609434.svg';
+import Logo from '@/img/logo.svg';
 import GoogleSignInButton from '@/components/pc/Keywords/GoogleSignInButton';
 
 export default function Signin() {

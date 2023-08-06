@@ -4,20 +4,17 @@ import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
-import ApiClient from '@/apis/client';
 import {
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
 } from '@/status/MainStatus';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import RotateIcon from '@/img/rotate-24.svg';
 
 export default function Home(props: any) {
-  const router = useRouter();
-
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
     selectedMainMyCategoriesState,
   );
@@ -25,14 +22,6 @@ export default function Home(props: any) {
     selectedMainOthersCategoriesState,
   );
   const [recent, setRecent] = useState(false); //로그인 여부 확인으로 나의 질문 모아보기 아래 컴포넌트 유무
-
-  const { userExists, isLoggined } = props;
-
-  // useEffect(() => {
-  //   if (!userExists && isLoggined) {
-  //     router.push('/selectJob');
-  //   }
-  // });
 
   return (
     <>
@@ -132,14 +121,3 @@ export default function Home(props: any) {
     </>
   );
 }
-
-// export async function getServerSideProps() {
-//   const response = await ApiClient.get('/v1/user/exist');
-
-//   return {
-//     props: {
-//       userExists: response.data.data.userExists,
-//       isLoggined: false,
-//     },
-//   };
-// }
