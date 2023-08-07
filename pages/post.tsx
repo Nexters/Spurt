@@ -1,16 +1,20 @@
-import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
-import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
-import SaveIcon from '@/img/check-16.svg';
-import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
-import PlusIcon from '@/img/plus-16.svg';
-import { useRef, useState } from 'react';
-import { InputItem } from '@/components/pc/Keywords/Buttons/Keyword';
-import { postCategory } from '@/const/categories';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
-import { useRecoilState } from 'recoil';
-import { selectedPostCategoriesState } from '@/status/PostStatus';
-import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import issuePost from '@/apis/Questions/issuePost';
+import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
+import SumKeyWord, {
+  InputItem,
+} from '@/components/pc/Keywords/Buttons/Keyword';
+import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
+import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
+import { postCategory } from '@/const/categories';
+import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
+import SaveIcon from '@/img/check-16.svg';
+import PlusIcon from '@/img/plus-16.svg';
+import {
+  selectedMultiplePostCategoriesState,
+  selectedPostCategoriesState,
+} from '@/status/PostStatus';
+import { useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 const Post = () => {
   const [title, setTitle] = useState('');
@@ -42,6 +46,10 @@ const Post = () => {
     selectedPostCategoriesState,
   );
   const [inputItems, setInputItems] = useState<InputItem[]>([]);
+
+  const [selectedMutiplePostCategory, setSelectedMultiplePostCategory] =
+    useRecoilState(selectedMultiplePostCategoriesState);
+
   const addInput = () => {
     const input = {
       id: nextID.current,
