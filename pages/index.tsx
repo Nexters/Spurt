@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import RotateIcon from '@/img/rotate-24.svg';
 import fetchQuestionByJob from '@/apis/Questions/fetchQuestionByJob';
+import fetchQuestion from '@/apis/Questions/fetchQuestion';
 
 export default function Home(props: any) {
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
@@ -25,6 +26,7 @@ export default function Home(props: any) {
   const [recent, setRecent] = useState(false); //로그인 여부 확인으로 나의 질문 모아보기 아래 컴포넌트 유무
   const handleData = () => {
     const data = fetchQuestionByJob();
+    //const data = fetchQuestion();
     console.log(data);
   };
   // useEffect(() => {
