@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react';
 
 const ApiClient = () => {
   const defaultOptions = {
-    baseURL: 'https://sirius-spurt.duckdns.org:8080',
+    baseURL: 'https://sirius-spurt.duckdns.org',
   };
 
   const instance = axios.create(defaultOptions);
