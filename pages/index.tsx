@@ -8,11 +8,12 @@ import {
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
 } from '@/status/MainStatus';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import RotateIcon from '@/img/rotate-24.svg';
+import fetchQuestionByJob from '@/apis/Questions/fetchQuestionByJob';
 
 export default function Home(props: any) {
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
@@ -22,7 +23,14 @@ export default function Home(props: any) {
     selectedMainOthersCategoriesState,
   );
   const [recent, setRecent] = useState(false); //로그인 여부 확인으로 나의 질문 모아보기 아래 컴포넌트 유무
-
+  const handleData = () => {
+    const data = fetchQuestionByJob();
+    console.log(data);
+  };
+  // useEffect(() => {
+  //   const data = fetchQuestionByJob();
+  //   console.log();
+  // }, []);
   return (
     <>
       <div className="text-title1 text-gray-700 flex justify-between mt-[60px]">
@@ -112,7 +120,7 @@ export default function Home(props: any) {
           <QuestionCard />
         </div>
         <div className="flex justify-center my-[30px]">
-          <RandomBtn>
+          <RandomBtn onClick={handleData}>
             다른 질문 더보기
             <RotateIcon />
           </RandomBtn>
