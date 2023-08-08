@@ -17,7 +17,7 @@ const Project = () => {
           <p>질문과 답변을 확인해요</p>
         </div>
         <div className="flex items-end">
-          <Link href={'/post'}>
+          <Link href={'/experience'}>
             <ButtonS>경험 정리하기</ButtonS>
           </Link>
         </div>

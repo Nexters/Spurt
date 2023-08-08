@@ -3,7 +3,14 @@ import { useRouter } from 'next/router';
 export default function useHeader(): boolean {
   const router = useRouter();
 
-  const visiblePages = ['/signin', '/selectJob', '/post', '/read', '/waiting'];
+  const invisiblePages = [
+    '/signin',
+    '/selectJob',
+    '/post',
+    '/read',
+    '/waiting',
+    '/experience',
+  ];
 
-  return visiblePages.includes(router.pathname);
+  return invisiblePages.includes(router.pathname);
 }
