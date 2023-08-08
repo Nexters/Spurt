@@ -4,7 +4,11 @@ interface QuestionByJobProps {}
 
 export default function fetchQuestionByJob() {
   return new Promise((resolve) => {
-    ApiClient.get(`/v1/question/random`)
+    ApiClient.get(`/v1/question/random`, {
+      params: {
+        offest: 4,
+      },
+    })
       .then((res) => {
         resolve(res.data);
         console.log(res.data);

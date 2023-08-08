@@ -2,21 +2,29 @@ import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import EditIcon from '@/img/edit-16.svg';
 import DelIcon from '@/img/trash-16.svg';
 import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
+import { useRouter } from 'next/router';
 
 const ReadPost = () => {
+  const router = useRouter();
+
   const key = [
     '면접을 준비하는 취업준비생을 위한 서비스',
     '면접을 준비하는 취업준비생을 위한 서비스',
     '면접을 준비하는 취업준비생을 위한 서비스',
     '면접을 준비하는 취업준비생을 위한 서비스',
   ];
+
+  const goBack = () => {
+    router.back();
+  };
+
   return (
     <>
       <div className="absolute top-0 left-0 bottom-0 w-full bg-main-100 h-[293px] border-b border-b-main-400"></div>
 
       <div className="absolute w-[1000px]">
         <div className="flex justify-start h-[54px] mt-6">
-          <button>
+          <button onClick={goBack}>
             <ArrowRightIcon />
           </button>
         </div>

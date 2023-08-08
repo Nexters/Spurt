@@ -16,12 +16,13 @@ export const authOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
-      if (session) {
-        session = Object.assign({}, session, {
-          access_token: token.access_token,
-        });
-      }
+    async session({ session, token, user }) {
+      session.access_token = token.access_token;
+      // if (session) {
+      //   session = Object.assign({}, session, {
+      //     access_token: token.access_token,
+      //   });
+      // }
       return session;
     },
   },

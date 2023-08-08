@@ -46,7 +46,7 @@ export default function TenMinuteNote() {
 
   return (
     <>
-      <div className="text-title1 flex justify-between mt-[42px]">
+      <div className="text-title1 flex justify-between mt-[60px]">
         <div>
           <p>내가 저장한</p>
 

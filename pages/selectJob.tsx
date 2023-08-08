@@ -1,13 +1,18 @@
+import signup from '@/apis/Questions/signup';
 import ButtonXl from '@/components/pc/Keywords/Buttons/button-xl';
 import JobBtn from '@/components/pc/Keywords/Buttons/jobBtn';
 import { useState } from 'react';
 
 const SelectJob = () => {
-  const jobValue = ['개발', '디자인', '마케팅', '그 외 직군'];
+  const jobValue = ['DEVELOPER', '디자인', '마케팅', '그 외 직군'];
   const [job, setJob] = useState('');
+
   const handleClick = (type: string) => {
     setJob(type);
     //console.log(job);
+  };
+  const handleSignUp = (job: string) => {
+    signup(job);
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -40,7 +45,10 @@ const SelectJob = () => {
       </div>
       <div>
         {job ? (
-          <ButtonXl style={{ backgroundColor: '#302e2e' }}>
+          <ButtonXl
+            onClick={() => handleSignUp(job)}
+            style={{ backgroundColor: '#302e2e' }}
+          >
             이 직군으로 저장하기
           </ButtonXl>
         ) : (
