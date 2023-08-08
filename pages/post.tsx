@@ -15,8 +15,13 @@ import {
 } from '@/status/PostStatus';
 import { useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
 
 const Post = () => {
+  const router = useRouter();
+
+  const nextID = useRef<number>(1);
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
@@ -24,6 +29,7 @@ const Post = () => {
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
+
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
     setContentCount(
@@ -36,12 +42,16 @@ const Post = () => {
     issuePost({
       subject: title,
       mainText: content,
-      keyWordList: inputItems,
-      categoryList: postCategory,
+      keyWordList: ['keyword1', 'keyword2'],
+      categoryList: ['CONFLICT'],
       jobGroup: 'DEVELOPER',
     });
   };
-  const nextID = useRef<number>(1);
+
+  const goBack = () => {
+    router.back();
+  };
+
   const [selectedPostCategory, setSelectedPostCategory] = useRecoilState(
     selectedPostCategoriesState,
   );
@@ -66,7 +76,7 @@ const Post = () => {
   return (
     <>
       <div className="flex justify-start h-[100px]">
-        <button>
+        <button onClick={goBack}>
           <ArrowRightIcon />
         </button>
       </div>

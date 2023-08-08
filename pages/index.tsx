@@ -25,13 +25,17 @@ export default function Home(props: any) {
   );
   const [recent, setRecent] = useState(false); //로그인 여부 확인으로 나의 질문 모아보기 아래 컴포넌트 유무
   const handleData = () => {
-    const data = fetchQuestionByJob();
-    //const data = fetchQuestion();
-    console.log(data);
+    //const data = fetchQuestionByJob();
+    fetchQuestion();
+    fetchQuestionByJob();
   };
   // useEffect(() => {
-  //   const data = fetchQuestionByJob();
-  //   console.log();
+  //   fetchQuestionByJob().then((v) => {
+  //
+  //    })
+  //   fetchQuestion().then((v) => {
+  //
+  //    })
   // }, []);
   return (
     <>

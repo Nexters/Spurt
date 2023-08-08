@@ -24,11 +24,11 @@ const ReadPost = () => {
         <div className="mt-[82px] mb-[10px] text-heading1 text-main-500">
           <p>직무지식 ・ 직무경험</p>
         </div>
-        <p className="mb-[130px] text-title1 text-gray-700">
+        <p className="mb-[50px] text-title1 text-gray-700">
           javaScript에서 this 바인딩이 무엇인지 설명해주세요
         </p>
 
-        <div className="mb-[50px] text-gray-600">
+        <div className="mt-[110px] mb-[50px] text-gray-600">
           <p className="text-title7">지원동기</p>
           <p className="text-body3">
             애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는
@@ -47,11 +47,11 @@ const ReadPost = () => {
             있습니다.
           </p>
         </div>
-        <div className="flex gap-2 flex-wrap mb-[50px]">
-          {key.map((item) => {
+        <div className="flex gap-2 flex-wrap mb-[40px]">
+          {key.map((item, id) => {
             return (
               <div
-                key={item}
+                key={id}
                 className="px-[14px] py-2 bg-main-200 border border-keyword_border rounded-[5px]"
               >
                 {item}
@@ -59,9 +59,11 @@ const ReadPost = () => {
             );
           })}
         </div>
-        <hr className="mb-[50px]" />
-        <div className="mb-[150px] flex w-full justify-end">
-          <CTA4 className="gap-1 text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] mr-[10px] flex justify-center items-center rounded-[12px] border-gray_line border">
+        <div>
+          <p className="text-body6 text-gray-400 mb-[50px]">{'2023.07.01'}</p>
+        </div>
+        <div className="mb-[150px] flex w-full justify-end gap-[10px]">
+          <CTA4 className="gap-1 text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] flex justify-center items-center rounded-[12px] border-gray_line border">
             삭제하기 <DelIcon />
           </CTA4>
           <CTA4>

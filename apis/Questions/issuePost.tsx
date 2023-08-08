@@ -4,7 +4,7 @@ import ApiClient from '../client';
 interface PostProps {
   subject: string;
   mainText: string;
-  keyWordList: InputItem[];
+  keyWordList: string[];
   categoryList: string[];
   jobGroup: string;
 }
@@ -12,17 +12,16 @@ export default function issuePost({
   subject,
   mainText,
   keyWordList,
-  categoryList, //jobGroup,
+  categoryList,
+  jobGroup,
 }: PostProps) {
   return new Promise((resolve) => {
     ApiClient.post<PostProps>(`/v1/question`, {
-      params: {
-        subject: subject,
-        mainText: mainText,
-        keyWordList: keyWordList,
-        categoryList: categoryList,
-        jobGroup: 'DEVELOPER', //jobGroup: jobGroup
-      },
+      subject,
+      mainText,
+      keyWordList,
+      categoryList,
+      jobGroup, //jobGroup: jobGroup
     })
       .then((res) => {
         resolve(res);
