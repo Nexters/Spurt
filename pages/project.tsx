@@ -4,8 +4,34 @@ import LinkIcon from '@/img/link-yellow-18.svg';
 import ModifyIcon from '@/img/edit-16.svg';
 import PlusIcon from '@/img/plus-20.svg';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const Project = () => {
+  const router = useRouter();
+
+  const [exp, setExp] = useState(
+    '기업적 디자인 스튜디오 : 언어재활 환자를 위한 홈 Iot 네이티브 앱 서비스',
+  );
+
+  const [content, setContent] = useState(
+    '애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등 애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등 애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등(300)',
+  );
+
+  const handleEdit = () => {
+    router.push({
+      pathname: '/experience',
+      query: { content },
+    });
+  };
+
+  const handleQuestion = () => {
+    router.push({
+      pathname: '/post',
+      query: { exp },
+    });
+  };
+
   return (
     <>
       <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[30px]">
@@ -22,9 +48,7 @@ const Project = () => {
           </Link>
         </div>
       </div>
-      <div className="h-[360px] w-[1000px] border border-red mb-[100px]">
-        쀼루븅
-      </div>
+      <div className="h-[360px] border border-red mb-[100px]">쀼루븅</div>
       <div>
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
         <div className="h-[98px] border border-red mb-[20px]">캐러셀</div>
@@ -37,14 +61,7 @@ const Project = () => {
           <p className="text-body6 text-gray-400">2023.8 - 진행중</p>
         </div>
         <div className="text-content_body1 text-gray-600 mb-[20px]">
-          애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올
-          가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이
-          포함됩니다.암호 공유 기능 등 애플이 iOS 17 베타 버전을 공개했습니다.
-          iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage,
-          암호 공유 기능 등이 포함됩니다.암호 공유 기능 등 애플이 iOS 17 베타
-          버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번
-          배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등
-          (300)
+          {content}
         </div>
         <div className="flex items-center gap-[10px] text-body7 text-gray-500 mb-[20px]">
           <LinkIcon />
@@ -56,7 +73,7 @@ const Project = () => {
           </a>
         </div>
         <div className="flex justify-end mb-[30px]">
-          <CTA4>
+          <CTA4 onClick={handleEdit}>
             수정하기
             <ModifyIcon />
           </CTA4>
@@ -67,7 +84,10 @@ const Project = () => {
           <p className="text-body2 text-gray700">총 {'10'}개</p>
         </div>
         <div className="flex gap-3">
-          <button className="flex items-center py-[70px] px-[30px] bg-gray-100 rounded-2xl h-[244px]">
+          <button
+            className="flex items-center py-[70px] px-[30px] bg-gray-100 rounded-2xl h-[244px]"
+            onClick={handleQuestion}
+          >
             <PlusIcon />
           </button>
           <div className="h-[244px] w-[226px] bg-main-100 rounded-2xl">

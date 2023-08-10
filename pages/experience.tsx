@@ -5,14 +5,20 @@ import LinkIcon from '@/img/link-yellow-18.svg';
 import SaveIcon from '@/img/check-16.svg';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 
 const Experience = () => {
   const router = useRouter();
 
+  const { content } = router.query;
+
+  useEffect(() => {
+    if (content) setContents(content as string);
+  }, [content]);
+
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [contents, setContents] = useState('');
   const [contentCount, setContentCount] = useState(0);
   const [startY, setStartY] = useState('');
   const [startM, setStartM] = useState('');
@@ -25,7 +31,7 @@ const Experience = () => {
   };
 
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
+    setContents(event.target.value);
     setContentCount(
       event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
         .length,
@@ -75,6 +81,10 @@ const Experience = () => {
     setEndM('');
   };
 
+  const handleSave = () => {
+    console.log('저장 api');
+  };
+
   const goBack = () => {
     router.back();
   };
@@ -88,7 +98,7 @@ const Experience = () => {
       <div className="border border-gray-300 flex flex-col rounded-2xl bg-white px-6 pt-[14px] pb-4 mb-3">
         <div>
           <input
-            className="text-heading3 text-gray-600 w-full  placeholder:text-heading3 mb-[14px] placeholder:text-gray-300 outline-none"
+            className="text-heading1 text-gray-600 w-full placeholder:text-heading3 mb-[14px] placeholder:text-gray-300 outline-none"
             placeholder="제목은 30자 이내로 작성해주세요"
             maxLength={30}
             onChange={onChangeTitle}
@@ -144,24 +154,30 @@ const Experience = () => {
         </p>
         <div>
           <textarea
-            className="text-body3 text-gray-600 w-full resize-none h-[180px] placeholder:text-gray-300"
+            className="text-body3 text-gray-600 w-full resize-none h-[180px] outline-none placeholder:text-gray-300"
             placeholder="해당 프로젝트에 대해 설명해주세요"
             maxLength={300}
             onChange={onChangeContent}
+            value={contents}
           ></textarea>
           <p className="text-body9 text-gray-300 text-right">
             {contentCount}/300
           </p>
         </div>
         <hr />
-        <div className="flex flex-row items-center gap-[10px] text-body6 text-gray-400">
-          <LinkIcon /> 링크 첨부{' '}
-          <p className="text-body7 text-gray-300">링크를 첨부해주세요</p>
+        <div className="flex flex-row">
+          <div className="flex flex-row items-center gap-[10px] text-body6 text-gray-400 pr-[20px] border-r-[2px] border-r-gray_line">
+            <LinkIcon /> 링크 첨부
+          </div>
+          <input
+            className="text-body7 text-gray-500 ml-[20px] placeholder:text-gray-300 outline-none"
+            placeholder="링크를 첨부해주세요"
+          ></input>
         </div>
       </div>
       <div className="flex justify-end mb-[150px]">
-        {title.length > 0 && content.length > 0 ? (
-          <CTA4 onClick={() => console.log('api호출')}>
+        {title.length > 0 && contents.length > 0 ? (
+          <CTA4 onClick={handleSave}>
             저장하기
             <SaveIcon />
           </CTA4>

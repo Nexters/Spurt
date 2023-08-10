@@ -13,18 +13,24 @@ import {
   selectedMultiplePostCategoriesState,
   selectedPostCategoriesState,
 } from '@/status/PostStatus';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 
 const Post = () => {
   const router = useRouter();
+  const { exp } = router.query;
 
   const nextID = useRef<number>(1);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
+  const [project, setProject] = useState('');
+
+  useEffect(() => {
+    if (exp) setProject(exp as string);
+  }, [exp]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -39,13 +45,17 @@ const Post = () => {
   };
 
   const handlePost = () => {
-    issuePost({
-      subject: title,
-      mainText: content,
-      keyWordList: ['keyword1', 'keyword2'],
-      categoryList: ['CONFLICT'],
-      jobGroup: 'DEVELOPER',
-    });
+    if (!exp) {
+      issuePost({
+        subject: title,
+        mainText: content,
+        keyWordList: ['keyword1', 'keyword2'],
+        categoryList: ['CONFLICT'],
+        jobGroup: 'DEVELOPER',
+      });
+    } else {
+      //TD: 프로젝트 관련 질문답변일 때
+    }
   };
 
   const goBack = () => {
@@ -80,8 +90,14 @@ const Post = () => {
           <ArrowRightIcon />
         </button>
       </div>
-
-      <p className="mt-[60px] mb-5 text-title1">질문-답변 만들기</p>
+      <div className="flex flex-row mt-[60px] mb-5 items-center">
+        <p className="text-title1 mr-[16px]">질문-답변 만들기</p>
+        {exp && (
+          <p className="pl-[12px] text-heading3 text-gray-600 border-l-2 border-l-main-300">
+            {project}
+          </p>
+        )}
+      </div>
       <div className="border border-gray-300 flex flex-col items-start rounded-2xl bg-white px-6 pt-[14px] pb-4 mb-3">
         <input
           className="text-heading3 text-gray-600 w-full  placeholder:text-heading3 mb-[14px] placeholder:text-gray-300 outline-none"
