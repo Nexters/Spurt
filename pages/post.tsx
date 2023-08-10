@@ -133,15 +133,17 @@ const Post = () => {
             키워드는 최대 20개까지 가능해요
           </p>
         </div>
-        <div className="flex mb-[12px] gap-[6px] flex-wrap">
-          {inputItems.map((item) => (
-            <SumKeyWord
-              key={item.id}
-              deleteInput={() => deleteInput(item.id)}
-              id={item.id}
-            />
-          ))}
-        </div>
+        {inputItems.length > 0 && (
+          <div className="flex mb-[12px] gap-[6px] flex-wrap">
+            {inputItems.map((item) => (
+              <SumKeyWord
+                key={item.id}
+                deleteInput={() => deleteInput(item.id)}
+                id={item.id}
+              />
+            ))}
+          </div>
+        )}
         <div>
           <AddKeyWordBtn value="키워드 추가" addInput={addInput}>
             키워드 추가

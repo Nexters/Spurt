@@ -170,7 +170,7 @@ const Experience = () => {
             <LinkIcon /> 링크 첨부
           </div>
           <input
-            className="text-body7 text-gray-500 ml-[20px] placeholder:text-gray-300 outline-none"
+            className="text-body7 text-gray-500 ml-[20px] w-[400px] placeholder:text-gray-300 outline-none"
             placeholder="링크를 첨부해주세요"
           ></input>
         </div>

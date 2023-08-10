@@ -3,9 +3,12 @@ import EditIcon from '@/img/edit-16.svg';
 import DelIcon from '@/img/trash-16.svg';
 import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const ReadPost = () => {
   const router = useRouter();
+
+  const [project, setProject] = useState(true);
 
   const key = [
     '면접을 준비하는 취업준비생을 위한 서비스',
@@ -29,14 +32,19 @@ const ReadPost = () => {
           </button>
         </div>
 
-        <div className="mt-[82px] mb-[10px] text-heading1 text-main-500">
+        <div className="flex flex-row mt-[82px] mb-[10px] text-heading1 text-main-500">
+          {project && (
+            <p className="text-heading1 text-gray-500">
+              사이드 프로젝트 : SPURT {'>'}&nbsp;{' '}
+            </p>
+          )}
           <p>직무지식 ・ 직무경험</p>
         </div>
         <p className="mb-[50px] text-title1 text-gray-700">
           javaScript에서 this 바인딩이 무엇인지 설명해주세요
         </p>
 
-        <div className="mt-[110px] mb-[50px] text-gray-600">
+        <div className="mt-[110px] mb-[30px] text-gray-600">
           <p className="text-title7">지원동기</p>
           <p className="text-body3">
             애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는
@@ -78,6 +86,19 @@ const ReadPost = () => {
             수정하기 <EditIcon />
           </CTA4>
         </div>
+        {project && (
+          <div className="mt-[-100px] mb-[150px]">
+            <hr />
+            <div className="flex flex-row justify-between mt-[30px]">
+              <p className="text-heading2 text-main-500">
+                기업적 디자인 스튜디오 : 언어재활 환자를 위한 홈 Iot 서비스
+              </p>
+              <p className="text-body2 text-gray-700">총 {10}개</p>
+            </div>
+            <p className="text-title8 text-gray-700 mb-[30px]">다른 예상질문</p>
+            <div className="border border-red h-[192px]">캐러셀 자리</div>
+          </div>
+        )}
       </div>
     </>
   );
