@@ -36,18 +36,27 @@ export default function TenMinuteNote() {
 
   useEffect(() => {
     async function call() {
-      const result = await fetchQuestion({
-        jobGroup: 'DEVELOPER',
-        myQuestionIndicator: true,
-        size: 20,
-      });
-      console.log(result);
-      setMyNotes(result);
+      if (noteCategory[selectedCategory].code == 'ALL') {
+        const result = await fetchQuestion({
+          jobGroup: 'DEVELOPER',
+          myQuestionIndicator: true,
+          size: 20,
+        });
+        setMyNotes(result);
+      } else {
+        const result = await fetchQuestion({
+          category: noteCategory[selectedCategory].code,
+          jobGroup: 'DEVELOPER',
+          myQuestionIndicator: true,
+          size: 20,
+        });
+        setMyNotes(result);
+      }
     }
     if (session?.user) {
       call();
     }
-  }, [session]);
+  }, [session, selectedCategory]);
 
   return (
     <>

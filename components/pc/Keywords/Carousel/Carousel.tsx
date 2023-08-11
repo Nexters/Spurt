@@ -1,9 +1,10 @@
 import MobileButtonXs from '@/components/mobile/buttonXs';
-import ButtonXs from '../Buttons/button-xs';
+import { Category } from '@/const/categories';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import ButtonXs from '../Buttons/button-xs';
 
 interface CarouselProps {
-  categories: string[];
+  categories: Category[];
   isPc: boolean;
   selectedCateogry: number;
   setCategory: (value: number) => void;
@@ -24,12 +25,20 @@ const Carousel = ({
           slidesOffsetAfter={20}
           autoHeight={true}
         >
-          {categories.map((name, index) => (
+          {categories.map((category, index) => (
             <SwiperSlide key={index} onClick={() => setCategory(index)}>
               {selectedCateogry == index ? (
-                <ButtonXs key={index} name={name} isSelected={true}></ButtonXs>
+                <ButtonXs
+                  key={index}
+                  name={category.name}
+                  isSelected={true}
+                ></ButtonXs>
               ) : (
-                <ButtonXs key={index} name={name} isSelected={false}></ButtonXs>
+                <ButtonXs
+                  key={index}
+                  name={category.name}
+                  isSelected={false}
+                ></ButtonXs>
               )}
             </SwiperSlide>
           ))}
@@ -41,18 +50,18 @@ const Carousel = ({
           slidesOffsetAfter={20}
           autoHeight={true}
         >
-          {categories.map((name, index) => (
+          {categories.map((category, index) => (
             <SwiperSlide key={index} onClick={() => setCategory(index)}>
               {selectedCateogry == index ? (
                 <MobileButtonXs
                   key={index}
-                  name={name}
+                  name={category.name}
                   isSelected={true}
                 ></MobileButtonXs>
               ) : (
                 <MobileButtonXs
                   key={index}
-                  name={name}
+                  name={category.name}
                   isSelected={false}
                 ></MobileButtonXs>
               )}
