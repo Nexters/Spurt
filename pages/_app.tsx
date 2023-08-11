@@ -3,9 +3,8 @@ import MobileHome from '@/components/mobile/home';
 import Header from '@/components/pc/Keywords/header';
 import { useIsMobile } from '@/components/responsive';
 import useHeader from '@/utils/useHeader';
-import { SessionProvider, signIn } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
-import { useEffect } from 'react';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
 
@@ -15,12 +14,6 @@ export default function App({
 }: AppProps) {
   const headerVisible = useHeader();
   const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (session?.error === 'RefreshAccessTokenError') {
-      signIn(); // Force sign in to hopefully resolve error
-    }
-  }, [session]);
 
   return (
     <SessionProvider session={session}>

@@ -1,3 +1,4 @@
+import { Question } from '@/apis/Questions/fetchQuestion';
 import { atom } from 'recoil';
 
 export const keywordVisibleState = atom({
@@ -22,5 +23,5 @@ export const selectedNoteCategoriesState = atom({
 
 export const myNotesState = atom({
   key: 'myNotes',
-  default: [],
+  default: [] as Question[],
 });

@@ -1,8 +1,8 @@
-import { useSession } from 'next-auth/react';
 import Logo from '@/img/logo.svg';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import CTA3 from './Buttons/CTA3';
 
 export default function Header() {
@@ -30,7 +30,7 @@ export default function Header() {
               router.pathname === '/note' ? 'text-heading1' : 'text-heading4'
             } mr-[50px]`}
           >
-            10분 노트
+            요약 노트
           </Link>
           <Link
             href="/project"

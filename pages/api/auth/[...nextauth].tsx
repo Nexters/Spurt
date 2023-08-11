@@ -17,8 +17,6 @@ export const authOptions = {
           return token;
         } else {
           try {
-            // https://accounts.google.com/.well-known/openid-configuration
-            // We need the `token_endpoint`.
             const response = await fetch(
               'https://oauth2.googleapis.com/token',
               {
@@ -60,6 +58,7 @@ export const authOptions = {
     },
     async session({ session, token }: any) {
       session.access_token = token.access_token;
+      session.expires_at = token.expires_at;
       return session;
     },
   },
@@ -76,6 +75,7 @@ declare module 'next-auth' {
    */
   interface Session {
     access_token: string;
+    expires_at: number;
     error?: 'RefreshAccessTokenError';
   }
 

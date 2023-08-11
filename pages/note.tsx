@@ -1,4 +1,4 @@
-import fetchQuestion from '@/apis/Questions/fetchQuestion';
+import fetchQuestion, { Question } from '@/apis/Questions/fetchQuestion';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import VisibleBtn from '@/components/pc/Keywords/Buttons/visibleBtn';
@@ -31,23 +31,22 @@ export default function TenMinuteNote() {
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedNoteCategoriesState,
   );
-  const [myNotes, setMyNotes] = useRecoilState(myNotesState);
+  const [myNotes, setMyNotes] = useRecoilState<Question[]>(myNotesState);
   const { data: session } = useSession();
 
   useEffect(() => {
     async function call() {
-      const result = await fetchQuestion(
-        {
-          jobGroup: 'DEVELOPER',
-          myQuestionIndicator: true,
-          size: 20,
-        },
-        session?.user,
-      );
+      const result = await fetchQuestion({
+        jobGroup: 'DEVELOPER',
+        myQuestionIndicator: true,
+        size: 20,
+      });
       console.log(result);
       setMyNotes(result);
     }
-    call();
+    if (session?.user) {
+      call();
+    }
   }, [session]);
 
   return (
@@ -68,7 +67,7 @@ export default function TenMinuteNote() {
       <div className="mt-[46px]">
         <div className="flex items-center">
           <Pin></Pin>
-          <span className="text-title2 ml-[10px]">10분 노트</span>
+          <span className="text-title2 ml-[10px]">요약 노트</span>
         </div>
         <div className="mt-[20px]">
           <Carousel
@@ -81,13 +80,13 @@ export default function TenMinuteNote() {
       </div>
       <div className="flex flex-col pt-[30px] pl-[30px] pb-[30px] rounded-[20px] bg-white mt-[20px]">
         <div className="flex justify-end mr-[30px]">
-          <p className="text-body2">총 20개</p>
+          <p className="text-body2">총 {myNotes.length}개</p>
         </div>
         <div className="flex mt-[20px]">
           <Swiper
             spaceBetween={12}
             slidesPerView={4}
-            slidesOffsetAfter={1100}
+            slidesOffsetAfter={200}
             breakpoints={{
               766: {
                 slidesOffsetAfter: 880,
@@ -97,74 +96,28 @@ export default function TenMinuteNote() {
               },
             }}
           >
-            <SwiperSlide>
-              <TenMinuteCard
-                index={0}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <TenMinuteCard
-                index={1}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <TenMinuteCard
-                index={2}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <TenMinuteCard
-                index={3}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <TenMinuteCard
-                index={4}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <TenMinuteCard
-                index={5}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
-            <SwiperSlide>
-              <TenMinuteCard
-                index={6}
-                selectedIndex={selectedCardIndex}
-                text="UX와 UI의 차이점을 말해주세요."
-                onClick={setSelectedCardIndex}
-                isPc={true}
-              ></TenMinuteCard>
-            </SwiperSlide>
+            {myNotes.length === 0 ? (
+              <>아무것도 없지롱</>
+            ) : (
+              myNotes.map((value, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <TenMinuteCard
+                      index={index}
+                      selectedIndex={selectedCardIndex}
+                      text={value.subject}
+                      onClick={setSelectedCardIndex}
+                      isPc={true}
+                    ></TenMinuteCard>
+                  </SwiperSlide>
+                );
+              })
+            )}
           </Swiper>
         </div>
 
         <div className="flex mt-[30px]">
-          <div className="flex mb-[13px] flex-col max-w-[390px]">
+          <div className="flex mb-[13px] flex-col w-[70%]">
             <div className="flex justify-between">
               <div>답변 키워드</div>
               <VisibleBtn
@@ -203,7 +156,7 @@ export default function TenMinuteNote() {
           <div className="flex">
             <div className="bg-[#989898] w-[0.7px] mx-[30px]"></div>
           </div>
-          <div className="flex flex-col mr-[30px] max-w-[520px]">
+          <div className="flex flex-col mr-[30px] w-[100%]">
             <div className="flex justify-between mb-[20px]">
               <div>전체 답변</div>
               <VisibleBtn
@@ -212,46 +165,9 @@ export default function TenMinuteNote() {
               ></VisibleBtn>
             </div>
             <div className={isAnswerVisible ? '' : 'blur'}>
-              본문 내용 <br></br>
-              어쩌고 저쩌고 어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고
-              <br></br>
-              <br></br>
-              본문 내용 <br></br>
-              어쩌고 저쩌고 어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고
-              <br></br>
-              <br></br>
-              본문 내용 <br></br>
-              어쩌고 저쩌고 어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고
-              저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고
+              {myNotes[selectedCardIndex]
+                ? myNotes[selectedCardIndex].mainText
+                : ''}
             </div>
           </div>
         </div>

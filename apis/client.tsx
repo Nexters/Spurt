@@ -1,9 +1,7 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 
 const ApiClient = () => {
-  //const { data: session } = useSession(); // 실시간 세션 정보 가져오기
-
   const defaultOptions = {
     baseURL: 'https://sirius-spurt.duckdns.org',
   };
@@ -19,7 +17,10 @@ const ApiClient = () => {
   });
 
   instance.interceptors.response.use(
-    (response) => {
+    async (response) => {
+      if (response.data.code === 2000) {
+        await signIn('google', { callbackUrl: window.location.pathname });
+      }
       return response;
     },
     (error) => {

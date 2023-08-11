@@ -1,5 +1,4 @@
 import ApiClient from '@/apis/client';
-import { SpurtUser } from '@/pages/api/auth/[...nextauth]';
 
 export interface Params {
   subject?: string;
@@ -11,11 +10,13 @@ export interface Params {
   size?: number;
 }
 
-const fetchQuestion = async (param: Params, user: SpurtUser | undefined) => {
-  if (!user) {
-    return [];
-  }
+export interface Question {
+  subject: string;
+  mainText: string;
+  categoryList: string[];
+}
 
+const fetchQuestion = async (param: Params) => {
   try {
     const res = await ApiClient.get(`/v1/question`, { params: param });
     if (res.data.code === 2000) {
@@ -23,10 +24,10 @@ const fetchQuestion = async (param: Params, user: SpurtUser | undefined) => {
     } else {
       console.log(res.data.data.questions);
     }
-    return res.data.data.questions;
+    return res.data.data.questions as Question[];
   } catch (error) {
     console.log('fetchQuestion 에러 ', error);
-    return [];
+    return [] as Question[];
   }
 };
 
