@@ -1,24 +1,25 @@
-import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import Pin from '@/img/pc-pin-red-24.svg';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
-import TenMinuteCard from '@/components/pc/Keywords/Questions/TenMintueCard';
-import Keyword from '@/components/pc/Keywords/Keyword';
-import EditIcon from '@/img/edit-16.svg';
+import fetchQuestion from '@/apis/Questions/fetchQuestion';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
+import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import VisibleBtn from '@/components/pc/Keywords/Buttons/visibleBtn';
-import { useRecoilState } from 'recoil';
+import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
+import Keyword from '@/components/pc/Keywords/Keyword';
+import TenMinuteCard from '@/components/pc/Keywords/Questions/TenMintueCard';
+import { noteCategory } from '@/const/categories';
+import EditIcon from '@/img/edit-16.svg';
+import Pin from '@/img/pc-pin-red-24.svg';
 import {
   answerVisibleState,
   keywordVisibleState,
+  myNotesState,
   selectedCardState,
   selectedNoteCategoriesState,
 } from '@/status/NoteStatus';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { noteCategory } from '@/const/categories';
-import ApiClient from '../apis/client';
-import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function TenMinuteNote() {
   const [isKeywordVisible, setKeywordVisibility] =
@@ -30,18 +31,23 @@ export default function TenMinuteNote() {
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedNoteCategoriesState,
   );
+  const [myNotes, setMyNotes] = useRecoilState(myNotesState);
   const { data: session } = useSession();
 
   useEffect(() => {
     async function call() {
-      const result = await ApiClient.get('/v1/question', {
-        params: { jobGroup: 'DEVELOPER', myQuestionIndicator: true, size: 20 },
-      });
+      const result = await fetchQuestion(
+        {
+          jobGroup: 'DEVELOPER',
+          myQuestionIndicator: true,
+          size: 20,
+        },
+        session?.user,
+      );
       console.log(result);
+      setMyNotes(result);
     }
-    if (session?.user) {
-      call();
-    }
+    call();
   }, [session]);
 
   return (

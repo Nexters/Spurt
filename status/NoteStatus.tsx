@@ -19,3 +19,8 @@ export const selectedNoteCategoriesState = atom({
   key: 'selectedNoteCateogries',
   default: 0,
 });
+
+export const myNotesState = atom({
+  key: 'myNotes',
+  default: [],
+});

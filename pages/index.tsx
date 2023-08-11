@@ -1,4 +1,3 @@
-import fetchQuestion from '@/apis/Questions/fetchQuestion';
 import fetchQuestionByJob from '@/apis/Questions/fetchQuestionByJob';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
@@ -25,7 +24,7 @@ export default function Home(props: any) {
   const [recent, setRecent] = useState(false); //로그인 여부 확인으로 나의 질문 모아보기 아래 컴포넌트 유무
   const handleData = () => {
     //const data = fetchQuestionByJob();
-    fetchQuestion();
+    // fetchQuestion();
     fetchQuestionByJob();
   };
   // useEffect(() => {

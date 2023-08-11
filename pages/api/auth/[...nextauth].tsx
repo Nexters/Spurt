@@ -86,3 +86,9 @@ declare module 'next-auth' {
     error?: 'RefreshAccessTokenError';
   }
 }
+
+export interface SpurtUser {
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+}
