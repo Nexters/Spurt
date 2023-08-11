@@ -1,6 +1,5 @@
 import ApiClient from '@/apis/client';
 import { SpurtUser } from '@/pages/api/auth/[...nextauth]';
-import { getSession } from 'next-auth/react';
 
 export interface Params {
   subject?: string;
@@ -13,7 +12,6 @@ export interface Params {
 }
 
 const fetchQuestion = async (param: Params, user: SpurtUser | undefined) => {
-  const session = getSession();
   if (!user) {
     return [];
   }
