@@ -15,7 +15,7 @@ const collaboration: Category = {
 
 const persandcons: Category = {
   name: '장단점',
-  code: 'PERSANDCONS',
+  code: 'PROSANDCONS',
 };
 
 const conflict: Category = {
