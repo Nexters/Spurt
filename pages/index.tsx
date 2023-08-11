@@ -1,20 +1,19 @@
+import fetchQuestion from '@/apis/Questions/fetchQuestion';
+import fetchQuestionByJob from '@/apis/Questions/fetchQuestionByJob';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
+import RotateIcon from '@/img/rotate-24.svg';
 import {
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
 } from '@/status/MainStatus';
-import { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import RotateIcon from '@/img/rotate-24.svg';
-import fetchQuestionByJob from '@/apis/Questions/fetchQuestionByJob';
-import fetchQuestion from '@/apis/Questions/fetchQuestion';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 export default function Home(props: any) {
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(

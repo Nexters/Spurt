@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
 const ApiClient = () => {
   //const { data: session } = useSession(); // 실시간 세션 정보 가져오기
@@ -14,7 +14,6 @@ const ApiClient = () => {
     const session = await getSession();
     if (session) {
       request.headers.Authorization = `Bearer ${session.access_token}`;
-      console.log(session.access_token);
     }
     return request;
   });
