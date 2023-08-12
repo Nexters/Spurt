@@ -6,7 +6,7 @@ export default function fetchQuestionByJob() {
   return new Promise((resolve) => {
     ApiClient.get(`/v1/question/random`, {
       params: {
-        offest: 4,
+        offset: 4,
       },
     })
       .then((res) => {

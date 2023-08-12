@@ -6,7 +6,7 @@ export interface Params {
   category?: string;
   pinIndicator?: boolean;
   myQuestionIndicator?: boolean;
-  offest?: number;
+  offset?: number;
   size?: number;
 }
 
