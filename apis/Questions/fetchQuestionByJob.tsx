@@ -1,20 +1,27 @@
 import ApiClient from '@/apis/client';
 
-interface QuestionByJobProps {}
+export interface RandomQuestion {
+  subject: string;
+  jobGroup?: string;
+}
 
-export default function fetchQuestionByJob() {
-  return new Promise((resolve) => {
-    ApiClient.get(`/v1/question/random`, {
+const fetchQuestionByJob = async () => {
+  try {
+    const res = await ApiClient.get(`/v1/question/random`, {
       params: {
         offset: 4,
       },
-    })
-      .then((res) => {
-        resolve(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log('fetchQuestionByJob 에러 ', error);
-      });
-  });
-}
+    });
+    if (res.data.code === 2000) {
+      console.log(res.data);
+    } else {
+      console.log(res.data.data.questions);
+    }
+    return res.data.data.questions as RandomQuestion[];
+  } catch (error) {
+    console.log('fetchQuestionByJob 에러 ', error);
+    return [] as RandomQuestion[];
+  }
+};
+
+export default fetchQuestionByJob;

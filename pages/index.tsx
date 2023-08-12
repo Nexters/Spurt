@@ -1,4 +1,6 @@
-import fetchQuestionByJob from '@/apis/Questions/fetchQuestionByJob';
+import fetchQuestionByJob, {
+  RandomQuestion,
+} from '@/apis/Questions/fetchQuestionByJob';
 import fetchQuestion, {
   QuestionResponse,
 } from '@/apis/Questions/fetchQuestion';
@@ -28,6 +30,7 @@ export default function Home(props: any) {
     selectedMainOthersCategoriesState,
   );
   const [myPost, setMyPost] = useState<QuestionResponse>();
+  const [random, setRandom] = useState<RandomQuestion[]>([]);
   const handleData = () => {
     //const data = fetchQuestionByJob();
     // fetchQuestion();
@@ -37,6 +40,10 @@ export default function Home(props: any) {
     // fetchQuestionByJob().then((v) => {
 
     //  })
+    async function getRandomQuestion() {
+      const result = await fetchQuestionByJob();
+      setRandom(result);
+    }
     async function getMyQuestion() {
       const result = await fetchQuestion({
         category: mainMyCategory[selectedMyCategory].code,
@@ -48,6 +55,7 @@ export default function Home(props: any) {
       setMyPost(result);
     }
     getMyQuestion();
+    getRandomQuestion();
   }, [selectedMyCategory]);
 
   return (
@@ -87,8 +95,8 @@ export default function Home(props: any) {
         </div>
         {!session ? (
           <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
-            <div className="flex flex-col mb-6 items-center">
-              <p className="text-body7 text-gray-600">
+            <div className="flex flex-col mb-8 items-center">
+              <p className="text-body7 text-gray-600 mb-[6px]">
                 예상 질문을 만들고 답하러 가볼까요?
               </p>
               <p className="text-heading1 text-gray-700">
@@ -138,11 +146,10 @@ export default function Home(props: any) {
       ></Carousel>
 
       <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
-        <div className="flex justify-around gap-3">
-          <QuestionCard />
-          <QuestionCard />
-          <QuestionCard />
-          <QuestionCard />
+        <div className="flex flex-row justify-around gap-3">
+          {random.map((item) => {
+            return <QuestionCard key={item.subject} subject={item.subject} />;
+          })}
         </div>
         <div className="flex justify-center my-[30px]">
           <RandomBtn onClick={handleData}>

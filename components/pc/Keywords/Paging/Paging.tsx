@@ -33,12 +33,12 @@ const Paging = ({ totalCount, totalPage }: Meta) => {
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
-          <div className="flex flex-col mb-6 items-center">
-            <p className="text-body7 text-gray-600">
-              예상 질문을 만들고 답하러 가볼까요?
-            </p>
+          <div className="flex flex-col mb-8 items-center">
             <p className="text-heading1 text-gray-700">
-              아직 해당 카테고리로 등록한 질문-답변이 없어요
+              해당 카테고리에 등록한 질문-답변이 없어요
+            </p>
+            <p className="text-body7 text-gray-600 mt-[6px]">
+              예상 질문을 만들고 답하러 가볼까요?
             </p>
           </div>
           <Link href={'/post'}>
