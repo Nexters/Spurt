@@ -1,22 +1,27 @@
-import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import Link from 'next/link';
-import LinkIcon from '@/img/link-yellow-18.svg';
-import ModifyIcon from '@/img/edit-16.svg';
-import PlusIcon from '@/img/plus-20.svg';
+import fetchProject, { Experience } from '@/apis/Project/fetchProject';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import { useState } from 'react';
+import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
+import ProjectCard from '@/components/pc/Keywords/Project/ProjectCard';
+import ModifyIcon from '@/img/edit-16.svg';
+import LinkIcon from '@/img/link-yellow-18.svg';
+import PlusIcon from '@/img/plus-20.svg';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Project = () => {
   const router = useRouter();
 
-  const [exp, setExp] = useState(
-    '기업적 디자인 스튜디오 : 언어재활 환자를 위한 홈 Iot 네이티브 앱 서비스',
-  );
+  const [exp, setExp] = useState('');
 
-  const [content, setContent] = useState(
-    '애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등 애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등 애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는 올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이 포함됩니다.암호 공유 기능 등(300)',
-  );
+  const [content, setContent] = useState('');
+
+  const [projects, setProjects] = useState<Experience[]>([]);
+
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
 
   const handleEdit = () => {
     router.push({
@@ -31,6 +36,26 @@ const Project = () => {
       query: { exp },
     });
   };
+
+  const { data: session } = useSession();
+
+  const onClickCard = (index: number) => {
+    setSelectedCardIndex(index);
+  };
+
+  useEffect(() => {
+    async function call() {
+      const result = await fetchProject();
+      if (result) {
+        setProjects(result.experienceList);
+      }
+
+      setSelectedCardIndex(0);
+    }
+    if (session?.user) {
+      call();
+    }
+  }, [session]);
 
   return (
     <>
@@ -51,17 +76,41 @@ const Project = () => {
       <div className="h-[360px] border border-red mb-[100px]">쀼루븅</div>
       <div>
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
-        <div className="h-[98px] border border-red mb-[20px]">캐러셀</div>
+        <div className="mb-[20px]">
+          <Swiper spaceBetween={12} slidesPerView={2}>
+            {projects.length === 0 ? (
+              <>아무것도 없지롱</>
+            ) : (
+              projects.map((value, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <ProjectCard
+                      title={value.title}
+                      index={index}
+                      selectedIndex={selectedCardIndex}
+                      onClickCard={onClickCard}
+                    ></ProjectCard>
+                  </SwiperSlide>
+                );
+              })
+            )}
+          </Swiper>
+        </div>
       </div>
       <div className="p-[30px] rounded-[20px] bg-white mb-[150px]">
         <div className="flex justify-between items-center mb-[20px]">
           <p className="text-heading2 text-gray-600 border-l-2 border-l-main-300 pl-[10px]">
             경험 소개
           </p>
-          <p className="text-body6 text-gray-400">2023.8 - 진행중</p>
+          <p className="text-body6 text-gray-400">
+            {projects[selectedCardIndex]?.startDate.replace('-', '.')} -{' '}
+            {projects[selectedCardIndex]?.endDate === null
+              ? '진행 중'
+              : projects[selectedCardIndex]?.endDate}
+          </p>
         </div>
         <div className="text-content_body1 text-gray-600 mb-[20px]">
-          {content}
+          {projects[selectedCardIndex]?.content}
         </div>
         <div className="flex items-center gap-[10px] text-body7 text-gray-500 mb-[20px]">
           <LinkIcon />
@@ -69,7 +118,7 @@ const Project = () => {
             href="https://www.pinterest.co.kr/pin/122793527321162632/"
             target="_blank"
           >
-            https://www.pinterest.co.kr/pin/122793527321162632/
+            {projects[selectedCardIndex]?.link}
           </a>
         </div>
         <div className="flex justify-end mb-[30px]">

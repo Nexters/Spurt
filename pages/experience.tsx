@@ -1,29 +1,31 @@
-import BackIcon from '@/img/arrow-right-circle-54.svg';
-import CheckIcon from '@/img/check box-on-yellow - 24.svg';
-import NonCheckIcon from '@/img/check box-off-gray-24.svg';
-import LinkIcon from '@/img/link-yellow-18.svg';
-import SaveIcon from '@/img/check-16.svg';
+import createProject from '@/apis/Project/createProject';
+import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
+import BackIcon from '@/img/arrow-right-circle-54.svg';
+import NonCheckIcon from '@/img/check box-off-gray-24.svg';
+import CheckIcon from '@/img/check box-on-yellow - 24.svg';
+import SaveIcon from '@/img/check-16.svg';
+import LinkIcon from '@/img/link-yellow-18.svg';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 
 const Experience = () => {
   const router = useRouter();
 
-  const { content } = router.query;
+  const { content: paraamContent } = router.query;
 
   useEffect(() => {
-    if (content) setContents(content as string);
-  }, [content]);
+    if (paraamContent) setContent(paraamContent as string);
+  }, [paraamContent]);
 
   const [title, setTitle] = useState('');
-  const [contents, setContents] = useState('');
+  const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
   const [startY, setStartY] = useState('');
   const [startM, setStartM] = useState('');
   const [endY, setEndY] = useState('');
   const [endM, setEndM] = useState('');
+  const [link, setLink] = useState('');
   const [proceeding, setProceeding] = useState(true);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,48 +33,31 @@ const Experience = () => {
   };
 
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContents(event.target.value);
+    setContent(event.target.value);
     setContentCount(
       event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
         .length,
     );
   };
 
-  //이건 좀 아닌거 같은데...... 오바잖아 나린아?
   const onChangeStartY = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStartY(event.target.value);
-  };
-
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    if (!inputValue.endsWith('년')) setStartY(inputValue + '년');
+    setStartY(event.target.value.replace(/[^0-9]/g, ''));
   };
 
   const onChangeStartM = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStartM(event.target.value);
-  };
-
-  const handleBlur2 = (event: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    if (!inputValue.endsWith('월')) setStartM(inputValue + '월');
+    setStartM(event.target.value.replace(/[^0-9]/g, ''));
   };
 
   const onChangeEndY = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEndY(event.target.value);
-  };
-
-  const handleBlur3 = (event: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    if (!inputValue.endsWith('년') && !proceeding) setEndY(inputValue + '년');
+    setEndY(event.target.value.replace(/[^0-9]/g, ''));
   };
 
   const onChangeEndM = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEndM(event.target.value);
+    setEndM(event.target.value.replace(/[^0-9]/g, ''));
   };
 
-  const handleBlur4 = (event: React.FocusEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    if (!inputValue.endsWith('월') && !proceeding) setEndM(inputValue + '월');
+  const onChangeLink = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLink(event.target.value);
   };
 
   const handleProceeding = () => {
@@ -81,8 +66,17 @@ const Experience = () => {
     setEndM('');
   };
 
-  const handleSave = () => {
-    console.log('저장 api');
+  const handleSave = async () => {
+    const startDate = startY + '-' + startM;
+    const endDate = proceeding ? null : startY + '-' + startM;
+    await createProject({
+      title: title,
+      content: content,
+      startDate: startDate,
+      endDate: endDate,
+      link: link,
+    });
+    router.back();
   };
 
   const goBack = () => {
@@ -110,29 +104,29 @@ const Experience = () => {
           <InputDate
             placeholder="시작년도"
             value={startY}
+            maxLength={4}
             onChange={onChangeStartY}
-            onBlur={handleBlur}
           />
           <InputDate
             placeholder="월"
             value={startM}
+            maxLength={2}
             onChange={onChangeStartM}
-            onBlur={handleBlur2}
           />
 
           <p className="mx-[10px]">-</p>
           <InputDate
             placeholder="종료년도"
             value={endY}
+            maxLength={4}
             onChange={onChangeEndY}
-            onBlur={handleBlur3}
             proceeding={proceeding}
           />
           <InputDate
             placeholder="월"
             value={endM}
+            maxLength={2}
             onChange={onChangeEndM}
-            onBlur={handleBlur4}
             proceeding={proceeding}
           />
 
@@ -158,7 +152,7 @@ const Experience = () => {
             placeholder="해당 프로젝트에 대해 설명해주세요"
             maxLength={300}
             onChange={onChangeContent}
-            value={contents}
+            value={content}
           ></textarea>
           <p className="text-body9 text-gray-300 text-right">
             {contentCount}/300
@@ -172,11 +166,12 @@ const Experience = () => {
           <input
             className="text-body7 text-gray-500 ml-[20px] w-[400px] placeholder:text-gray-300 outline-none"
             placeholder="링크를 첨부해주세요"
+            onChange={onChangeLink}
           ></input>
         </div>
       </div>
       <div className="flex justify-end mb-[150px]">
-        {title.length > 0 && contents.length > 0 ? (
+        {title.length > 0 && content.length > 0 ? (
           <CTA4 onClick={handleSave}>
             저장하기
             <SaveIcon />

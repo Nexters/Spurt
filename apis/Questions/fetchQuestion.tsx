@@ -19,7 +19,6 @@ export interface Question {
   mainText: string;
   categoryList: string[];
   keyWordList: string[];
-  jobGroup: string;
   createTime: string;
   pinIndicator: boolean;
 }
