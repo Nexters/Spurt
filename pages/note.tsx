@@ -134,6 +134,7 @@ export default function TenMinuteNote() {
                       text={value.subject}
                       onClick={setSelectedCardIndex}
                       isPc={true}
+                      questionId={value.questionId}
                       isPinned={value.pinIndicator}
                     ></TenMinuteCard>
                   </SwiperSlide>
