@@ -5,9 +5,11 @@ import NextIcon from '@/img/arrow-left-circle-30.svg';
 import { Meta } from '@/apis/Questions/fetchQuestion';
 import Link from 'next/link';
 import ButtonS from '../Buttons/button-s';
+import { useRecoilState } from 'recoil';
+import { PageState } from '@/status/MainStatus';
 
 const Paging = ({ totalCount, totalPage }: Meta) => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useRecoilState(PageState);
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -18,7 +20,7 @@ const Paging = ({ totalCount, totalPage }: Meta) => {
         <div className="flex justify-center mt-[40px]">
           <Pagination
             activePage={page}
-            itemsCountPerPage={10}
+            itemsCountPerPage={8}
             totalItemsCount={totalCount} //총 아이템 개수
             pageRangeDisplayed={5}
             firstPageText={''}

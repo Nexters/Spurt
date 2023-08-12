@@ -27,8 +27,14 @@ export class PostCategory implements IPostCategory {
 
 const Post = () => {
   const router = useRouter();
-  const { exp, paramQuestionId, paramTitle, paramContent, paramCategories } =
-    router.query;
+  const {
+    exp,
+    paramQuestionId,
+    paramTitle,
+    paramContent,
+    paramCategories,
+    subject,
+  } = router.query;
 
   const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
@@ -54,6 +60,7 @@ const Post = () => {
 
       handleCategories(categories);
     }
+    if (subject) setTitle(subject as string);
   }, [exp, paramQuestionId, paramTitle, paramContent, paramCategories]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {

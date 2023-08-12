@@ -1,18 +1,20 @@
 import signup from '@/apis/Questions/signup';
 import ButtonXl from '@/components/pc/Keywords/Buttons/button-xl';
 import JobBtn from '@/components/pc/Keywords/Buttons/jobBtn';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const SelectJob = () => {
+  const router = useRouter();
   const jobValue = ['DEVELOPER', '디자인', '마케팅', '그 외 직군'];
   const [job, setJob] = useState('');
 
   const handleClick = (type: string) => {
     setJob(type);
-    //console.log(job);
   };
   const handleSignUp = (job: string) => {
     signup(job);
+    router.push({ pathname: '/' });
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen">

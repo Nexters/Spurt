@@ -13,16 +13,18 @@ import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
 import RotateIcon from '@/img/rotate-24.svg';
 import {
+  PageState,
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
 } from '@/status/MainStatus';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useSession } from 'next-auth/react';
 
 export default function Home(props: any) {
   const { data: session } = useSession();
+  const page = useRecoilValue(PageState);
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
     selectedMainMyCategoriesState,
   );
@@ -46,7 +48,7 @@ export default function Home(props: any) {
     async function getMyQuestion() {
       const result = await fetchQuestion({
         category: mainMyCategory[selectedMyCategory].code,
-        offset: 0,
+        offset: page,
         myQuestionIndicator: true,
         jobGroup: 'DEVELOPER',
         size: 10,
@@ -55,7 +57,7 @@ export default function Home(props: any) {
     }
     getMyQuestion();
     getRandomQuestion();
-  }, [selectedMyCategory]);
+  }, [selectedMyCategory, page]);
 
   return (
     <>

@@ -5,8 +5,12 @@ export const selectedMainMyCategoriesState = atom({
   default: 0,
 });
 
-
 export const selectedMainOthersCategoriesState = atom({
   key: 'selectedMainOthersCateogries',
+  default: 0,
+});
+
+export const PageState = atom({
+  key: 'pageState',
   default: 0,
 });

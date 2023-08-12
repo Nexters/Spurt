@@ -25,7 +25,7 @@ const SumKeyWord = ({ fixInput, deleteInput, index }: KeywordProps) => {
         <input
           className="inline-block bg-main-100 border border-main-100 rounded-lg py-2 px-[14px] h-[38px] focus:bg-white focus:border-main-400 fucus:border focus:outline-none"
           onChange={handleInputChange}
-          style={{ width: `${inputValue.length * 10 + 42}px` }}
+          style={{ width: `${inputValue.length * 15 + 42}px` }}
           value={inputValue}
           autoFocus
           maxLength={30}

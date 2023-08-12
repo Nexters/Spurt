@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface Category {
   name: string;
   code: string;
