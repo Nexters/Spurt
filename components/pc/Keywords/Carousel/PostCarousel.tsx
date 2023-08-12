@@ -1,4 +1,4 @@
-import { PostCategory } from '@/status/PostStatus';
+import { PostCategory } from '@/pages/post';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ButtonXs from '../Buttons/button-xs';
 
@@ -23,8 +23,6 @@ const PostCarousel = ({
     const selectedCategoryCount = newPostCategories.filter(
       (value) => value.isSelected,
     ).length;
-
-    console.log(selectedCategoryCount);
 
     if (selectedCategoryCount <= 2) {
       setPostCategories(newPostCategories);

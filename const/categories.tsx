@@ -38,6 +38,24 @@ const major: Category = {
   code: 'MAJOR',
 };
 
+export const allCategoryMaps = new Map<string, Category>([
+  [collaboration.code, collaboration],
+  [persandcons.code, persandcons],
+  [conflict.code, conflict],
+  [practical.code, practical],
+  [undertanding.code, undertanding],
+  [major.code, major],
+]);
+
+export const allCategoryList = [
+  collaboration,
+  persandcons,
+  conflict,
+  practical,
+  undertanding,
+  major,
+];
+
 export const mainOtherCategory = [
   all,
   major,

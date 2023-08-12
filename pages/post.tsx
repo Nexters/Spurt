@@ -1,24 +1,34 @@
 import issuePost from '@/apis/Questions/issuePost';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import SumKeyWord, {
-  InputItem,
-} from '@/components/pc/Keywords/Buttons/Keyword';
+import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
 import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
+import { Category, allCategoryList, postCategory } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import SaveIcon from '@/img/check-16.svg';
 import PlusIcon from '@/img/plus-16.svg';
-import { postCategoriesState } from '@/status/PostStatus';
+import { keywordState } from '@/status/PostStatus';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+
+interface IPostCategory {
+  category: Category;
+  isSelected: boolean;
+}
+
+export class PostCategory implements IPostCategory {
+  constructor(
+    public category: Category,
+    public isSelected: boolean,
+  ) {}
+}
 
 const Post = () => {
   const router = useRouter();
-  const { exp, paramQuestionId, paramTitle, paramContent } = router.query;
-
-  const nextID = useRef<number>(1);
+  const { exp, paramQuestionId, paramTitle, paramContent, paramCategories } =
+    router.query;
 
   const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
@@ -32,7 +42,19 @@ const Post = () => {
     if (paramQuestionId) setQuestionId(paramQuestionId as string);
     if (paramTitle) setTitle(paramTitle as string);
     if (paramContent) setContent(paramContent as string);
-  }, [exp, paramQuestionId, paramTitle, paramContent]);
+    if (paramCategories) {
+      const categoryNames = paramCategories as string[];
+      const categories = allCategoryList.map((value) => {
+        if (categoryNames.includes(value.code)) {
+          return new PostCategory(value, true);
+        } else {
+          return new PostCategory(value, false);
+        }
+      });
+
+      handleCategories(categories);
+    }
+  }, [exp, paramQuestionId, paramTitle, paramContent, paramCategories]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -52,10 +74,11 @@ const Post = () => {
 
   const handlePost = () => {
     if (!exp) {
+      console.log(inputItems);
       issuePost({
         subject: title,
         mainText: content,
-        keyWordList: ['keyword1', 'keyword2'],
+        keyWordList: inputItems,
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
@@ -75,22 +98,43 @@ const Post = () => {
     }
   };
 
-  const [inputItems, setInputItems] = useState<InputItem[]>([]);
+  const [inputItems, setInputItems] = useState<string[]>([]);
 
-  const [postCategories, setPostCategories] =
-    useRecoilState(postCategoriesState);
+  const [postCategories, setPostCategories] = useState(
+    postCategory.map((category) => {
+      return new PostCategory(category, false);
+    }),
+  );
+
+  const [keyword, setKeyword] = useRecoilState(keywordState);
 
   const addInput = () => {
-    const input = {
-      id: nextID.current,
-      title: '',
-    };
-    setInputItems([...inputItems, input]);
+    const hasEmptyKeyword = inputItems.find((value) => value === '');
+    if (hasEmptyKeyword !== undefined || inputItems.length === 20) {
+      return;
+    }
+    const items = inputItems.map((value) => value).concat(keyword);
 
-    nextID.current += 1;
+    setInputItems(items);
   };
-  const deleteInput = (id: number) => {
-    setInputItems(inputItems.filter((item) => item.id !== id));
+
+  const fixInput = (fixedIndex: number) => {
+    const newInputItems = inputItems.map((value, index) => {
+      if (fixedIndex === index) {
+        return keyword;
+      } else {
+        return value;
+      }
+    });
+
+    setInputItems(newInputItems);
+  };
+  const deleteInput = (deletedIndex: number) => {
+    setInputItems(inputItems.filter((_, index) => index !== deletedIndex));
+  };
+
+  const handleCategories = (categories: PostCategory[]) => {
+    setPostCategories(categories);
   };
 
   return (
@@ -120,7 +164,7 @@ const Post = () => {
         <div className="flex mt-4">
           <PostCarousel
             postCateogries={postCategories}
-            setPostCategories={setPostCategories}
+            setPostCategories={handleCategories}
           ></PostCarousel>
         </div>
       </div>
@@ -145,17 +189,18 @@ const Post = () => {
         </div>
         {inputItems.length > 0 && (
           <div className="flex mb-[12px] gap-[6px] flex-wrap">
-            {inputItems.map((item) => (
+            {inputItems.map((item, index) => (
               <SumKeyWord
-                key={item.id}
-                deleteInput={() => deleteInput(item.id)}
-                id={item.id}
+                key={index}
+                fixInput={() => fixInput(index)}
+                deleteInput={() => deleteInput(index)}
+                index={index}
               />
             ))}
           </div>
         )}
         <div>
-          <AddKeyWordBtn value="키워드 추가" addInput={addInput}>
+          <AddKeyWordBtn value="키워드 추가" addInput={() => addInput()}>
             키워드 추가
             <PlusIcon />
           </AddKeyWordBtn>

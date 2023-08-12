@@ -27,8 +27,10 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface EditParam {
+  paramQuestionId: number;
   paramTitle: string;
   paramContent: string;
+  paramCategories: string[];
 }
 
 export default function TenMinuteNote() {
@@ -61,10 +63,15 @@ export default function TenMinuteNote() {
     }
   }, [session, selectedCategory]);
 
-  const handleEdit = ({ paramTitle, paramContent }: EditParam) => {
+  const handleEdit = ({
+    paramQuestionId,
+    paramTitle,
+    paramContent,
+    paramCategories,
+  }: EditParam) => {
     router.push({
       pathname: '/post',
-      query: { paramTitle, paramContent },
+      query: { paramQuestionId, paramTitle, paramContent, paramCategories },
     });
   };
 
@@ -146,7 +153,8 @@ export default function TenMinuteNote() {
               ></VisibleBtn>
             </div>
             <div className="mt-[20px]">
-              {myNotes.questions[selectedCardIndex].keyWordList.length === 0 ? (
+              {!myNotes.questions[selectedCardIndex] ||
+              myNotes.questions[selectedCardIndex].keyWordList.length === 0 ? (
                 <Keyword
                   text="작성된 키워드가 없어요."
                   isVisible={isKeywordVisible}
@@ -196,8 +204,12 @@ export default function TenMinuteNote() {
           <CTA4
             onClick={() =>
               handleEdit({
+                paramQuestionId:
+                  myNotes.questions[selectedCardIndex].questionId,
                 paramTitle: myNotes.questions[selectedCardIndex].subject,
                 paramContent: myNotes.questions[selectedCardIndex].mainText,
+                paramCategories:
+                  myNotes.questions[selectedCardIndex].categoryList,
               })
             }
           >
