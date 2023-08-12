@@ -9,6 +9,7 @@ import Keyword from '@/components/pc/Keywords/Keyword';
 import TenMinuteCard from '@/components/pc/Keywords/Questions/TenMintueCard';
 import { noteCategory } from '@/const/categories';
 import EditIcon from '@/img/edit-16.svg';
+import NoteIlust from '@/img/note.png';
 import Pin from '@/img/pc-pin-red-24.svg';
 import {
   answerVisibleState,
@@ -18,6 +19,7 @@ import {
   selectedNoteCategoriesState,
 } from '@/status/NoteStatus';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -90,6 +92,9 @@ export default function TenMinuteNote() {
             <ButtonS>질문-답변 만들기</ButtonS>
           </Link>
         </div>
+      </div>
+      <div className="mt-[12px] mb-[100px]">
+        <Image src={NoteIlust} alt="NoteIlust"></Image>
       </div>
       <div className="mt-[46px]">
         <div className="flex items-center">

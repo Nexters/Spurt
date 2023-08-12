@@ -4,8 +4,10 @@ import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import ProjectCard from '@/components/pc/Keywords/Project/ProjectCard';
 import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';
+import ProjectIlust from '@/img/myproject.png';
 import PlusIcon from '@/img/plus-20.svg';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -73,7 +75,9 @@ const Project = () => {
           </Link>
         </div>
       </div>
-      <div className="h-[360px] border border-red mb-[100px]">쀼루븅</div>
+      <div className="h-[360px] mb-[100px]">
+        <Image src={ProjectIlust} alt="MyProject"></Image>
+      </div>
       <div>
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
         <div className="mb-[20px]">
