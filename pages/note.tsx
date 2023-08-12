@@ -24,8 +24,10 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface EditParam {
+  paramQuestionId: number;
   paramTitle: string;
   paramContent: string;
+  paramCategories: string[];
 }
 
 export default function TenMinuteNote() {
@@ -68,10 +70,15 @@ export default function TenMinuteNote() {
     }
   }, [session, selectedCategory]);
 
-  const handleEdit = ({ paramTitle, paramContent }: EditParam) => {
+  const handleEdit = ({
+    paramQuestionId,
+    paramTitle,
+    paramContent,
+    paramCategories,
+  }: EditParam) => {
     router.push({
       pathname: '/post',
-      query: { paramTitle, paramContent },
+      query: { paramQuestionId, paramTitle, paramContent, paramCategories },
     });
   };
 
@@ -202,8 +209,10 @@ export default function TenMinuteNote() {
           <CTA4
             onClick={() =>
               handleEdit({
+                paramQuestionId: myNotes[selectedCardIndex].questionId,
                 paramTitle: myNotes[selectedCardIndex].subject,
                 paramContent: myNotes[selectedCardIndex].mainText,
+                paramCategories: myNotes[selectedCardIndex].categoryList,
               })
             }
           >

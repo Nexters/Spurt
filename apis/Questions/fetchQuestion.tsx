@@ -11,6 +11,7 @@ export interface Params {
 }
 
 export interface Question {
+  questionId: number;
   subject: string;
   mainText: string;
   categoryList: string[];

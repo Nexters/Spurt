@@ -4,7 +4,7 @@ import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
 import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
-import { Category, postCategory } from '@/const/categories';
+import { Category, allCategoryList, postCategory } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import SaveIcon from '@/img/check-16.svg';
 import PlusIcon from '@/img/plus-16.svg';
@@ -27,7 +27,8 @@ export class PostCategory implements IPostCategory {
 
 const Post = () => {
   const router = useRouter();
-  const { exp, paramQuestionId, paramTitle, paramContent } = router.query;
+  const { exp, paramQuestionId, paramTitle, paramContent, paramCategories } =
+    router.query;
 
   const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
@@ -41,7 +42,19 @@ const Post = () => {
     if (paramQuestionId) setQuestionId(paramQuestionId as string);
     if (paramTitle) setTitle(paramTitle as string);
     if (paramContent) setContent(paramContent as string);
-  }, [exp, paramQuestionId, paramTitle, paramContent]);
+    if (paramCategories) {
+      const categoryNames = paramCategories as string[];
+      const categories = allCategoryList.map((value) => {
+        if (categoryNames.includes(value.code)) {
+          return new PostCategory(value, true);
+        } else {
+          return new PostCategory(value, false);
+        }
+      });
+
+      handleCategories(categories);
+    }
+  }, [exp, paramQuestionId, paramTitle, paramContent, paramCategories]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
