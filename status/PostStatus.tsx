@@ -6,21 +6,7 @@ export const selectedPostCategoryState = atom({
   default: 0,
 });
 
-interface IPostCategory {
-  category: Category;
-  isSelected: boolean;
-}
-
-export class PostCategory implements IPostCategory {
-  constructor(
-    public category: Category,
-    public isSelected: boolean,
-  ) {}
-}
-
-export const postCategoriesState = atom({
-  key: 'postCateogries',
-  default: postCategory.map((category) => {
-    return new PostCategory(category, false);
-  }),
+export const keywordState = atom({
+  key: 'keyword',
+  default: '',
 });

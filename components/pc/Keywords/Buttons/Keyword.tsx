@@ -1,22 +1,22 @@
 import DeleteIcon from '@/img/delete-16.svg';
+import { keywordState } from '@/status/PostStatus';
 import { ChangeEvent, useState } from 'react';
-
-export interface InputItem {
-  id: number;
-  title: string;
-}
+import { useRecoilState } from 'recoil';
 
 interface KeywordProps {
-  deleteInput: (id: number) => void;
-  id: number;
+  fixInput: (index: number) => void;
+  deleteInput: (index: number) => void;
+  index: number;
 }
 
-const SumKeyWord = ({ deleteInput, id }: KeywordProps) => {
+const SumKeyWord = ({ fixInput, deleteInput, index }: KeywordProps) => {
   const [focus, setFocus] = useState(true);
   const [inputValue, setInputValue] = useState('');
+  const [keyword, setKeyword] = useRecoilState(keywordState);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+    setKeyword(e.target.value);
   };
 
   return (
@@ -25,13 +25,15 @@ const SumKeyWord = ({ deleteInput, id }: KeywordProps) => {
         <input
           className="inline-block bg-main-100 border border-main-100 rounded-lg py-2 px-[14px] h-[38px] focus:bg-white focus:border-main-400 fucus:border focus:outline-none"
           onChange={handleInputChange}
-          style={{ width: `${inputValue.length * 15 + 42}px` }}
+          style={{ width: `${inputValue.length * 10 + 42}px` }}
           value={inputValue}
           autoFocus
+          maxLength={30}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              setInputValue(inputValue);
+              fixInput(index);
+              setKeyword('');
               setFocus(false);
             }
           }}
@@ -41,7 +43,7 @@ const SumKeyWord = ({ deleteInput, id }: KeywordProps) => {
           {inputValue}
           <button
             className="text-main-400 ml-[6px]"
-            onClick={() => deleteInput(id)}
+            onClick={() => deleteInput(index)}
           >
             <DeleteIcon />
           </button>

@@ -1,4 +1,3 @@
-import { InputItem } from '@/components/pc/Keywords/Buttons/Keyword';
 import ApiClient from '../client';
 
 interface PostProps {
