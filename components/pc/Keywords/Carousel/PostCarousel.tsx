@@ -1,18 +1,36 @@
-import MobileButtonXs from '@/components/mobile/buttonXs';
-import ButtonXs from '../Buttons/button-xs';
+import { PostCategory } from '@/status/PostStatus';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import ButtonXs from '../Buttons/button-xs';
 
 interface CarouselProps {
-  categories: string[];
-  selectedCateogry: number;
-  setCategory: (value: number) => void;
+  postCateogries: PostCategory[];
+  setPostCategories: (value: PostCategory[]) => void;
 }
 
 const PostCarousel = ({
-  categories,
-  selectedCateogry,
-  setCategory,
+  postCateogries: postCateogries,
+  setPostCategories: setPostCategories,
 }: CarouselProps) => {
+  const handleClick = (selectedIndex: number) => {
+    const newPostCategories = postCateogries.map((value, index) => {
+      if (selectedIndex == index) {
+        return new PostCategory(value.category, !value.isSelected);
+      } else {
+        return new PostCategory(value.category, value.isSelected);
+      }
+    });
+
+    const selectedCategoryCount = newPostCategories.filter(
+      (value) => value.isSelected,
+    ).length;
+
+    console.log(selectedCategoryCount);
+
+    if (selectedCategoryCount <= 2) {
+      setPostCategories(newPostCategories);
+    }
+  };
+
   return (
     <>
       <Swiper
@@ -21,13 +39,13 @@ const PostCarousel = ({
         slidesOffsetAfter={20}
         autoHeight={true}
       >
-        {categories.map((name, index) => (
-          <SwiperSlide key={index} onClick={() => setCategory(index)}>
-            {selectedCateogry == index ? (
-              <ButtonXs key={index} name={name} isSelected={true}></ButtonXs>
-            ) : (
-              <ButtonXs key={index} name={name} isSelected={false}></ButtonXs>
-            )}
+        {postCateogries.map((category, index) => (
+          <SwiperSlide key={index} onClick={() => handleClick(index)}>
+            <ButtonXs
+              key={index}
+              name={category.category.name}
+              isSelected={category.isSelected}
+            ></ButtonXs>
           </SwiperSlide>
         ))}
       </Swiper>

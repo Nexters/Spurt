@@ -4,15 +4,11 @@ import SumKeyWord, {
   InputItem,
 } from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
-import { postCategory } from '@/const/categories';
+import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import SaveIcon from '@/img/check-16.svg';
 import PlusIcon from '@/img/plus-16.svg';
-import {
-  selectedMultiplePostCategoriesState,
-  selectedPostCategoriesState,
-} from '@/status/PostStatus';
+import { postCategoriesState } from '@/status/PostStatus';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -66,13 +62,10 @@ const Post = () => {
     router.back();
   };
 
-  const [selectedPostCategory, setSelectedPostCategory] = useRecoilState(
-    selectedPostCategoriesState,
-  );
   const [inputItems, setInputItems] = useState<InputItem[]>([]);
 
-  const [selectedMutiplePostCategory, setSelectedMultiplePostCategory] =
-    useRecoilState(selectedMultiplePostCategoriesState);
+  const [postCategories, setPostCategories] =
+    useRecoilState(postCategoriesState);
 
   const addInput = () => {
     const input = {
@@ -112,12 +105,10 @@ const Post = () => {
         ></input>
         <hr />
         <div className="flex mt-4">
-          <Carousel
-            categories={postCategory}
-            isPc={true}
-            selectedCateogry={selectedPostCategory}
-            setCategory={setSelectedPostCategory}
-          ></Carousel>
+          <PostCarousel
+            postCateogries={postCategories}
+            setPostCategories={setPostCategories}
+          ></PostCarousel>
         </div>
       </div>
 
