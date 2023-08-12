@@ -153,7 +153,8 @@ export default function TenMinuteNote() {
               ></VisibleBtn>
             </div>
             <div className="mt-[20px]">
-              {myNotes[selectedCardIndex].keyWordList.length === 0 ? (
+              {!myNotes[selectedCardIndex] ||
+              myNotes[selectedCardIndex].keyWordList.length === 0 ? (
                 <Keyword
                   text="작성된 키워드가 없어요."
                   isVisible={isKeywordVisible}
