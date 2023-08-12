@@ -16,12 +16,20 @@ import {
   selectedNoteCategoriesState,
 } from '@/status/NoteStatus';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+interface EditParam {
+  paramTitle: string;
+  paramContent: string;
+}
+
 export default function TenMinuteNote() {
+  const router = useRouter();
   const [isKeywordVisible, setKeywordVisibility] =
     useRecoilState(keywordVisibleState);
   const [isAnswerVisible, setAnswerVisibility] =
@@ -43,6 +51,7 @@ export default function TenMinuteNote() {
           size: 20,
         });
         setMyNotes(result);
+        setSelectedCardIndex(0);
       } else {
         const result = await fetchQuestion({
           category: noteCategory[selectedCategory].code,
@@ -51,12 +60,20 @@ export default function TenMinuteNote() {
           size: 20,
         });
         setMyNotes(result);
+        setSelectedCardIndex(0);
       }
     }
     if (session?.user) {
       call();
     }
   }, [session, selectedCategory]);
+
+  const handleEdit = ({ paramTitle, paramContent }: EditParam) => {
+    router.push({
+      pathname: '/post',
+      query: { paramTitle, paramContent },
+    });
+  };
 
   return (
     <>
@@ -70,7 +87,9 @@ export default function TenMinuteNote() {
           <span>을 확인해요</span>
         </div>
         <div className="flex items-end">
-          <ButtonS>질문-답변 만들기</ButtonS>
+          <Link href={'/post'}>
+            <ButtonS>질문-답변 만들기</ButtonS>
+          </Link>
         </div>
       </div>
       <div className="mt-[46px]">
@@ -181,7 +200,14 @@ export default function TenMinuteNote() {
           </div>
         </div>
         <div className="flex mt-[50px] justify-end mr-[30px]">
-          <CTA4>
+          <CTA4
+            onClick={() =>
+              handleEdit({
+                paramTitle: myNotes[selectedCardIndex].subject,
+                paramContent: myNotes[selectedCardIndex].mainText,
+              })
+            }
+          >
             수정하기<EditIcon></EditIcon>
           </CTA4>
         </div>

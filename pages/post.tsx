@@ -13,16 +13,17 @@ import {
   selectedMultiplePostCategoriesState,
   selectedPostCategoriesState,
 } from '@/status/PostStatus';
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { useRouter } from 'next/router';
 
 const Post = () => {
   const router = useRouter();
-  const { exp } = router.query;
+  const { exp, paramQuestionId, paramTitle, paramContent } = router.query;
 
   const nextID = useRef<number>(1);
 
+  const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
@@ -30,7 +31,10 @@ const Post = () => {
 
   useEffect(() => {
     if (exp) setProject(exp as string);
-  }, [exp]);
+    if (paramQuestionId) setQuestionId(paramQuestionId as string);
+    if (paramTitle) setTitle(paramTitle as string);
+    if (paramContent) setContent(paramContent as string);
+  }, [exp, paramQuestionId, paramTitle, paramContent]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -104,6 +108,7 @@ const Post = () => {
           placeholder="질문은 35자 이내로 작성해주세요"
           maxLength={35}
           onChange={onChangeTitle}
+          value={title}
         ></input>
         <hr />
         <div className="flex mt-4">
@@ -122,6 +127,7 @@ const Post = () => {
           placeholder="답변을 입력해주세요"
           maxLength={1000}
           onChange={onChangeContent}
+          value={content}
         ></textarea>
         <p className="text-right text-body9 text-gray-300 mb-[30px]">
           {contentCount} / 1000
