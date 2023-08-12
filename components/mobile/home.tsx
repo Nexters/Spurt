@@ -1,4 +1,6 @@
-import fetchQuestion, { Question } from '@/apis/Questions/fetchQuestion';
+import fetchQuestion, {
+  QuestionResponse,
+} from '@/apis/Questions/fetchQuestion';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
 import Pin from '@/img/mobile-pin-red-24.svg';
@@ -31,7 +33,7 @@ export default function MobileHome() {
     useRecoilState(keywordVisibleState);
   const { data: session } = useSession();
 
-  const [myNotes, setMyNotes] = useRecoilState<Question[]>(myNotesState);
+  const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
 
   useEffect(() => {
     async function call() {
@@ -88,15 +90,15 @@ export default function MobileHome() {
       <div className="flex flex-col pt-[20px] pl-[16px] pb-[20px] rounded-[20px] bg-white mt-[20px] mb-[18px]">
         <div className="flex">
           <span className="text-caption5">총&nbsp;</span>
-          <span className="text-caption4">{myNotes.length}</span>
+          <span className="text-caption4">{myNotes.questions.length}</span>
           <span className="text-caption5">개</span>
         </div>
         <div className="flex mt-[20px]">
           <Swiper spaceBetween={12} slidesPerView={2} slidesOffsetAfter={40}>
-            {myNotes.length === 0 ? (
+            {myNotes.questions.length === 0 ? (
               <>아무것도 없지롱</>
             ) : (
-              myNotes.map((value, index) => {
+              myNotes.questions.map((value, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <TenMinuteCard
@@ -105,6 +107,7 @@ export default function MobileHome() {
                       text={value.subject}
                       onClick={setSelectedCardIndex}
                       isPc={false}
+                      questionId={value.questionId}
                       isPinned={true}
                     ></TenMinuteCard>
                   </SwiperSlide>
@@ -119,30 +122,32 @@ export default function MobileHome() {
       </div>
       <div className="mt-[20px]">
         {isKeyword ? (
-          !myNotes[selectedCardIndex] ||
-          myNotes[selectedCardIndex].keyWordList.length === 0 ? (
+          !myNotes.questions[selectedCardIndex] ||
+          myNotes.questions[selectedCardIndex].keyWordList.length === 0 ? (
             <Keyword
               text="작성된 키워드가 없어요."
               isVisible={isKeywordVisible}
               isPc={true}
             ></Keyword>
           ) : (
-            myNotes[selectedCardIndex].keyWordList.map((value, index) => {
-              return (
-                <Keyword
-                  key={index}
-                  text={value}
-                  isVisible={isKeywordVisible}
-                  isPc={true}
-                ></Keyword>
-              );
-            })
+            myNotes.questions[selectedCardIndex].keyWordList.map(
+              (value, index) => {
+                return (
+                  <Keyword
+                    key={index}
+                    text={value}
+                    isVisible={isKeywordVisible}
+                    isPc={true}
+                  ></Keyword>
+                );
+              },
+            )
           )
         ) : (
           <>
             <p className="text-content_body2 whitespace-pre-line">
-              {myNotes[selectedCardIndex]
-                ? myNotes[selectedCardIndex].mainText
+              {myNotes.questions[selectedCardIndex]
+                ? myNotes.questions[selectedCardIndex].mainText
                 : ''}
             </p>
           </>

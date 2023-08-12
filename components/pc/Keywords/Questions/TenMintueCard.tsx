@@ -1,5 +1,12 @@
+import fetchQuestion, {
+  QuestionResponse,
+} from '@/apis/Questions/fetchQuestion';
+import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
+import { noteCategory } from '@/const/categories';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
+import { myNotesState, selectedNoteCategoriesState } from '@/status/NoteStatus';
+import { useRecoilState } from 'recoil';
 
 interface CardProp {
   index: number;
@@ -7,6 +14,7 @@ interface CardProp {
   text: string;
   onClick: (value: number) => void;
   isPc: boolean;
+  questionId: number;
   isPinned: boolean;
 }
 
@@ -16,8 +24,29 @@ const TenMinuteCard = ({
   text,
   onClick,
   isPc,
+  questionId,
   isPinned,
 }: CardProp) => {
+  const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
+  const [selectedCategory, setSelectedCategory] = useRecoilState(
+    selectedNoteCategoriesState,
+  );
+
+  const handlePin = async () => {
+    await updatePost({
+      questionId: questionId,
+      pinIndicator: !isPinned,
+    } as UpdatePostParam);
+
+    const result = await fetchQuestion({
+      category: noteCategory[selectedCategory].code,
+      jobGroup: 'DEVELOPER',
+      myQuestionIndicator: true,
+      size: 20,
+    });
+    setMyNotes(result);
+  };
+
   return (
     <>
       {isPc ? (
@@ -31,7 +60,7 @@ const TenMinuteCard = ({
         >
           <div className="text-heading2 h-[152px]">{text}</div>
           <div className="flex justify-end mt-[14px]">
-            <button>
+            <button onClick={handlePin}>
               {isPinned ? <PinFill></PinFill> : <PinStroke></PinStroke>}
             </button>
           </div>
