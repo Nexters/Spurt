@@ -32,14 +32,13 @@ export default function Home(props: any) {
   const [myPost, setMyPost] = useState<QuestionResponse>();
   const [random, setRandom] = useState<RandomQuestion[]>([]);
   const handleData = () => {
-    //const data = fetchQuestionByJob();
-    // fetchQuestion();
-    // fetchQuestionByJob();
+    async function getRandomQuestion() {
+      const result = await fetchQuestionByJob();
+      setRandom(result);
+    }
+    getRandomQuestion();
   };
   useEffect(() => {
-    // fetchQuestionByJob().then((v) => {
-
-    //  })
     async function getRandomQuestion() {
       const result = await fetchQuestionByJob();
       setRandom(result);
@@ -145,10 +144,10 @@ export default function Home(props: any) {
         setCategory={setSelectedOthersCategory}
       ></Carousel>
 
-      <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] px-[30px] mb-[100px]">
-        <div className="flex flex-row justify-around gap-3">
-          {random.map((item) => {
-            return <QuestionCard key={item.subject} subject={item.subject} />;
+      <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px]">
+        <div className="flex flex-row justify-around gap-3 px-[30px]">
+          {random.map((item, index) => {
+            return <QuestionCard key={index} subject={item.subject} />;
           })}
         </div>
         <div className="flex justify-center my-[30px]">
