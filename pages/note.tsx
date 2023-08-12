@@ -1,4 +1,6 @@
-import fetchQuestion, { Question } from '@/apis/Questions/fetchQuestion';
+import fetchQuestion, {
+  QuestionResponse,
+} from '@/apis/Questions/fetchQuestion';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import VisibleBtn from '@/components/pc/Keywords/Buttons/visibleBtn';
@@ -41,29 +43,19 @@ export default function TenMinuteNote() {
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedNoteCategoriesState,
   );
-  const [myNotes, setMyNotes] = useRecoilState<Question[]>(myNotesState);
+  const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
   const { data: session } = useSession();
 
   useEffect(() => {
     async function call() {
-      if (noteCategory[selectedCategory].code == 'ALL') {
-        const result = await fetchQuestion({
-          jobGroup: 'DEVELOPER',
-          myQuestionIndicator: true,
-          size: 20,
-        });
-        setMyNotes(result);
-        setSelectedCardIndex(0);
-      } else {
-        const result = await fetchQuestion({
-          category: noteCategory[selectedCategory].code,
-          jobGroup: 'DEVELOPER',
-          myQuestionIndicator: true,
-          size: 20,
-        });
-        setMyNotes(result);
-        setSelectedCardIndex(0);
-      }
+      const result = await fetchQuestion({
+        category: noteCategory[selectedCategory].code,
+        jobGroup: 'DEVELOPER',
+        myQuestionIndicator: true,
+        size: 20,
+      });
+      setMyNotes(result);
+      setSelectedCardIndex(0);
     }
     if (session?.user) {
       call();
@@ -115,7 +107,7 @@ export default function TenMinuteNote() {
       </div>
       <div className="flex flex-col pt-[30px] pl-[30px] pb-[30px] rounded-[20px] bg-white mt-[20px]">
         <div className="flex justify-end mr-[30px]">
-          <p className="text-body2">총 {myNotes.length}개</p>
+          <p className="text-body2">총 {myNotes.questions.length}개</p>
         </div>
         <div className="mt-[20px]">
           <Swiper
@@ -130,10 +122,10 @@ export default function TenMinuteNote() {
               },
             }}
           >
-            {myNotes.length === 0 ? (
+            {myNotes.questions.length === 0 ? (
               <>아무것도 없지롱</>
             ) : (
-              myNotes.map((value, index) => {
+              myNotes.questions.map((value, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <TenMinuteCard
@@ -142,7 +134,7 @@ export default function TenMinuteNote() {
                       text={value.subject}
                       onClick={setSelectedCardIndex}
                       isPc={true}
-                      isPinned={false}
+                      isPinned={value.pinIndicator}
                     ></TenMinuteCard>
                   </SwiperSlide>
                 );
@@ -161,24 +153,26 @@ export default function TenMinuteNote() {
               ></VisibleBtn>
             </div>
             <div className="mt-[20px]">
-              {!myNotes[selectedCardIndex] ||
-              myNotes[selectedCardIndex].keyWordList.length === 0 ? (
+              {!myNotes.questions[selectedCardIndex] ||
+              myNotes.questions[selectedCardIndex].keyWordList.length === 0 ? (
                 <Keyword
                   text="작성된 키워드가 없어요."
                   isVisible={isKeywordVisible}
                   isPc={true}
                 ></Keyword>
               ) : (
-                myNotes[selectedCardIndex].keyWordList.map((value, index) => {
-                  return (
-                    <Keyword
-                      key={index}
-                      text={value}
-                      isVisible={isKeywordVisible}
-                      isPc={true}
-                    ></Keyword>
-                  );
-                })
+                myNotes.questions[selectedCardIndex].keyWordList.map(
+                  (value, index) => {
+                    return (
+                      <Keyword
+                        key={index}
+                        text={value}
+                        isVisible={isKeywordVisible}
+                        isPc={true}
+                      ></Keyword>
+                    );
+                  },
+                )
               )}
             </div>
           </div>
@@ -200,8 +194,8 @@ export default function TenMinuteNote() {
                   : 'whitespace-pre-line blur'
               }
             >
-              {myNotes[selectedCardIndex]
-                ? myNotes[selectedCardIndex].mainText
+              {myNotes.questions[selectedCardIndex]
+                ? myNotes.questions[selectedCardIndex].mainText
                 : ''}
             </div>
           </div>
@@ -210,10 +204,12 @@ export default function TenMinuteNote() {
           <CTA4
             onClick={() =>
               handleEdit({
-                paramQuestionId: myNotes[selectedCardIndex].questionId,
-                paramTitle: myNotes[selectedCardIndex].subject,
-                paramContent: myNotes[selectedCardIndex].mainText,
-                paramCategories: myNotes[selectedCardIndex].categoryList,
+                paramQuestionId:
+                  myNotes.questions[selectedCardIndex].questionId,
+                paramTitle: myNotes.questions[selectedCardIndex].subject,
+                paramContent: myNotes.questions[selectedCardIndex].mainText,
+                paramCategories:
+                  myNotes.questions[selectedCardIndex].categoryList,
               })
             }
           >

@@ -1,4 +1,4 @@
-import { Question } from '@/apis/Questions/fetchQuestion';
+import { QuestionResponse } from '@/apis/Questions/fetchQuestion';
 import { atom } from 'recoil';
 
 export const keywordVisibleState = atom({
@@ -23,5 +23,11 @@ export const selectedNoteCategoriesState = atom({
 
 export const myNotesState = atom({
   key: 'myNotes',
-  default: [] as Question[],
+  default: {
+    questions: [],
+    meta: {
+      totalCount: 0,
+      totalPage: 0,
+    },
+  } as QuestionResponse,
 });
