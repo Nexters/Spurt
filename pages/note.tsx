@@ -192,7 +192,13 @@ export default function TenMinuteNote() {
                 setVisibility={setAnswerVisibility}
               ></VisibleBtn>
             </div>
-            <div className={isAnswerVisible ? '' : 'blur'}>
+            <div
+              className={
+                isAnswerVisible
+                  ? 'whitespace-pre-line'
+                  : 'whitespace-pre-line blur'
+              }
+            >
               {myNotes[selectedCardIndex]
                 ? myNotes[selectedCardIndex].mainText
                 : ''}
