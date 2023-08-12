@@ -17,7 +17,7 @@ const ModalTest = () => {
     setShowSave(!showSave);
   };
   return (
-    <>
+    <div className="flex flex-col justify-center items-center">
       <button onClick={showModal}>PinGuide Modal</button>
       <br />
       모달 테스트 중이에영ㅂ
@@ -46,7 +46,7 @@ const ModalTest = () => {
           }}
         ></SaveGuide>
       )}
-    </>
+    </div>
   );
 };
 

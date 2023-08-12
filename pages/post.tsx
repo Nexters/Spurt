@@ -4,6 +4,9 @@ import SumKeyWord, {
   InputItem,
 } from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
+import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
+import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
+import { postCategory } from '@/const/categories';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import SaveIcon from '@/img/check-16.svg';
@@ -24,6 +27,7 @@ const Post = () => {
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
   const [project, setProject] = useState('');
+  const [showSave, setShowSave] = useState(false);
 
   useEffect(() => {
     if (exp) setProject(exp as string);
@@ -44,6 +48,10 @@ const Post = () => {
     );
   };
 
+  const showModal = () => {
+    setShowSave(!showSave);
+  };
+
   const handlePost = () => {
     if (!exp) {
       issuePost({
@@ -59,7 +67,11 @@ const Post = () => {
   };
 
   const goBack = () => {
-    router.back();
+    if (!title && !content) {
+      router.back();
+    } else {
+      showModal();
+    }
   };
 
   const [inputItems, setInputItems] = useState<InputItem[]>([]);
@@ -169,6 +181,13 @@ const Post = () => {
           </CTA4>
         )}
       </div>
+      {showSave && (
+        <SaveGuide
+          setShow={() => {
+            showModal();
+          }}
+        />
+      )}
     </>
   );
 };
