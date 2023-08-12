@@ -14,6 +14,7 @@ export interface Question {
   subject: string;
   mainText: string;
   categoryList: string[];
+  keyWordList: string[];
 }
 
 const fetchQuestion = async (param: Params) => {

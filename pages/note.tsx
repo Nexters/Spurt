@@ -110,17 +110,16 @@ export default function TenMinuteNote() {
         <div className="flex justify-end mr-[30px]">
           <p className="text-body2">총 {myNotes.length}개</p>
         </div>
-        <div className="flex mt-[20px]">
+        <div className="mt-[20px]">
           <Swiper
             spaceBetween={12}
-            slidesPerView={4}
-            slidesOffsetAfter={200}
+            slidesPerView={2}
             breakpoints={{
-              766: {
-                slidesOffsetAfter: 880,
+              750: {
+                slidesPerView: 2,
               },
               1025: {
-                slidesOffsetAfter: 470,
+                slidesPerView: 3,
               },
             }}
           >
@@ -154,31 +153,24 @@ export default function TenMinuteNote() {
               ></VisibleBtn>
             </div>
             <div className="mt-[20px]">
-              <Keyword
-                text="개발자 협업 : 넥스터즈"
-                isVisible={isKeywordVisible}
-                isPc={true}
-              ></Keyword>
-              <Keyword
-                text="면접을 준비하는 취업준비생을 위한 서비스"
-                isVisible={isKeywordVisible}
-                isPc={true}
-              ></Keyword>
-              <Keyword
-                text="개발자와 협업하며 프론트엔드에 매력"
-                isVisible={isKeywordVisible}
-                isPc={true}
-              ></Keyword>
-              <Keyword
-                text="독학으로 개발을 공부해 6개월 만에 포트폴리오 홈페이지 홈페이지"
-                isVisible={isKeywordVisible}
-                isPc={true}
-              ></Keyword>
-              <Keyword
-                text="이후 개발자로서 커리어를 쌓기 위해"
-                isVisible={isKeywordVisible}
-                isPc={true}
-              ></Keyword>
+              {myNotes[selectedCardIndex].keyWordList.length === 0 ? (
+                <Keyword
+                  text="작성된 키워드가 없어요."
+                  isVisible={isKeywordVisible}
+                  isPc={true}
+                ></Keyword>
+              ) : (
+                myNotes[selectedCardIndex].keyWordList.map((value, index) => {
+                  return (
+                    <Keyword
+                      key={index}
+                      text={value}
+                      isVisible={isKeywordVisible}
+                      isPc={true}
+                    ></Keyword>
+                  );
+                })
+              )}
             </div>
           </div>
           <div className="flex">

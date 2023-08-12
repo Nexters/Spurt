@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from 'react';
 import DeleteIcon from '@/img/delete-16.svg';
+import { ChangeEvent, useState } from 'react';
 
 export interface InputItem {
   id: number;
@@ -31,6 +31,7 @@ const SumKeyWord = ({ deleteInput, id }: KeywordProps) => {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
+              setInputValue(inputValue);
               setFocus(false);
             }
           }}

@@ -4,10 +4,8 @@ import SumKeyWord, {
   InputItem,
 } from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
-import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
-import { postCategory } from '@/const/categories';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
+import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import SaveIcon from '@/img/check-16.svg';
 import PlusIcon from '@/img/plus-16.svg';
@@ -58,12 +56,15 @@ const Post = () => {
         subject: title,
         mainText: content,
         keyWordList: ['keyword1', 'keyword2'],
-        categoryList: ['CONFLICT'],
+        categoryList: postCategories
+          .filter((value) => value.isSelected)
+          .map((value) => value.category.code),
         jobGroup: 'DEVELOPER',
       });
     } else {
       //TD: 프로젝트 관련 질문답변일 때
     }
+    router.back();
   };
 
   const goBack = () => {
