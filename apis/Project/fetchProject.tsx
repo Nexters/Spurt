@@ -12,7 +12,9 @@ export interface Experience {
   startDate: string;
   endDate: string;
   link: string;
-  questionList: Question[];
+  questionList: {
+    questionList: Question[];
+  };
 }
 
 const fetchProject = async () => {

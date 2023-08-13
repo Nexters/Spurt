@@ -5,14 +5,14 @@ interface PostProps {
   mainText: string;
   keyWordList: string[];
   categoryList: string[];
-  jobGroup: string;
+  experienceId?: string;
 }
 export default function issuePost({
   subject,
   mainText,
   keyWordList,
   categoryList,
-  jobGroup,
+  experienceId,
 }: PostProps) {
   return new Promise((resolve) => {
     ApiClient.post<PostProps>(`/v1/question`, {
@@ -20,7 +20,7 @@ export default function issuePost({
       mainText,
       keyWordList,
       categoryList,
-      jobGroup, //jobGroup: jobGroup
+      experienceId,
     })
       .then((res) => {
         resolve(res);

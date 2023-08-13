@@ -2,6 +2,7 @@ import fetchProject, { Experience } from '@/apis/Project/fetchProject';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import ProjectCard from '@/components/pc/Keywords/Project/ProjectCard';
+import ProjectQuestionCard from '@/components/pc/Keywords/Project/ProjectQuestionCard';
 import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';
 import ProjectIlust from '@/img/myproject.png';
@@ -19,6 +20,8 @@ const Project = () => {
 
   const [exp, setExp] = useState('');
 
+  const [experienceId, setExperienceId] = useState(0);
+
   const [content, setContent] = useState('');
 
   const [projects, setProjects] = useState<Experience[]>([]);
@@ -35,7 +38,7 @@ const Project = () => {
   const handleQuestion = () => {
     router.push({
       pathname: '/post',
-      query: { exp },
+      query: { exp, experienceId },
     });
   };
 
@@ -43,6 +46,8 @@ const Project = () => {
 
   const onClickCard = (index: number) => {
     setSelectedCardIndex(index);
+    setExp(projects[index].title);
+    setExperienceId(projects[index].experienceId);
   };
 
   useEffect(() => {
@@ -50,6 +55,8 @@ const Project = () => {
       const result = await fetchProject();
       if (result) {
         setProjects(result.experienceList);
+        setExp(result.experienceList[0].title);
+        setExperienceId(result.experienceList[0].experienceId);
       }
 
       setSelectedCardIndex(0);
@@ -143,8 +150,28 @@ const Project = () => {
           >
             <PlusIcon />
           </button>
-          <div className="h-[244px] w-[226px] bg-main-100 rounded-2xl">
-            캐러셀 들어갈 곳
+          <div>
+            <Swiper spaceBetween={12} slidesPerView={3}>
+              {!projects[selectedCardIndex] ||
+              !projects[selectedCardIndex].questionList ||
+              projects[selectedCardIndex].questionList.questionList.length ===
+                0 ? (
+                <>아무것도 없지롱</>
+              ) : (
+                projects[selectedCardIndex].questionList.questionList.map(
+                  (value, index) => {
+                    return (
+                      <SwiperSlide key={index}>
+                        <ProjectQuestionCard
+                          title={value.subject}
+                          index={index}
+                        ></ProjectQuestionCard>
+                      </SwiperSlide>
+                    );
+                  },
+                )
+              )}
+            </Swiper>
           </div>
         </div>
       </div>
