@@ -12,5 +12,5 @@ export const selectedMainOthersCategoriesState = atom({
 
 export const PageState = atom({
   key: 'pageState',
-  default: 0,
+  default: 1,
 });

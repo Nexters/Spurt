@@ -55,7 +55,7 @@ export default function Home(props: any) {
         offset: page,
         myQuestionIndicator: true,
         jobGroup: 'DEVELOPER',
-        size: 10,
+        size: 8,
       });
       setMyPost(result);
     }

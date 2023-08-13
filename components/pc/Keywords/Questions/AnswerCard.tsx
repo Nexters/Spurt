@@ -2,6 +2,7 @@ import { allCategoryMaps } from '@/const/categories';
 import PinFilledIcon from '@/img/pin-fill-42.svg';
 import PinStrokeIcon from '@/img/pin-stroke-42.svg';
 import CircleIcon from '@/img/question-circle-4.svg';
+import { useRouter } from 'next/router';
 
 interface AnswerCardProps {
   questionId: number;
@@ -18,11 +19,16 @@ const AnswerCard = ({
   categoryList,
   createTimestamp,
 }: AnswerCardProps) => {
-  console.log('얍 ', allCategoryMaps.get(categoryList[0]));
+  const router = useRouter();
   return (
     <div
       className="flex flex-col border border-gray_line rounded-[20px] mb-2"
-      onClick={() => console.log('read페이지로 이동')}
+      onClick={() => {
+        router.push({
+          pathname: '/read',
+          query: { questionId },
+        });
+      }}
     >
       <div className="flex flex-1 p-4 max-w-[464px] h-[135px]  bg-main-100 rounded-t-[20px]">
         <div className="flex flex-col w-[366px] px-1 pt-2 pb-1">
