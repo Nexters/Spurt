@@ -35,14 +35,18 @@ export default function Home(props: any) {
   const [random, setRandom] = useState<RandomQuestion[]>([]);
   const handleData = () => {
     async function getRandomQuestion() {
-      const result = await fetchQuestionByJob();
+      const result = await fetchQuestionByJob(
+        mainOtherCategory[selectedOthersCategory].code,
+      );
       setRandom(result);
     }
     getRandomQuestion();
   };
   useEffect(() => {
     async function getRandomQuestion() {
-      const result = await fetchQuestionByJob();
+      const result = await fetchQuestionByJob(
+        mainOtherCategory[selectedOthersCategory].code,
+      );
       setRandom(result);
     }
     async function getMyQuestion() {
@@ -51,13 +55,13 @@ export default function Home(props: any) {
         offset: page,
         myQuestionIndicator: true,
         jobGroup: 'DEVELOPER',
-        size: 10,
+        size: 6,
       });
       setMyPost(result);
     }
     getMyQuestion();
     getRandomQuestion();
-  }, [selectedMyCategory, page]);
+  }, [selectedMyCategory, selectedOthersCategory, page]);
 
   return (
     <>
@@ -91,7 +95,7 @@ export default function Home(props: any) {
       <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
         <div className="flex mb-5 items-center justify-between">
           <p className="text-body2 w-full text-right text-gray-700">
-            총 {myPost?.questions.length}개
+            총 {myPost?.meta.totalCount}개
           </p>
         </div>
         {!session ? (

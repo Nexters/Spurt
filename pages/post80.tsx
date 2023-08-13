@@ -41,12 +41,10 @@ const Post = () => {
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
   const [project, setProject] = useState('');
-  const [experienceId, setExperienceId] = useState('');
   const [showSave, setShowSave] = useState(false);
 
   useEffect(() => {
     if (exp) setProject(exp as string);
-    if (experienceId) setProject(experienceId as string);
     if (paramQuestionId) setQuestionId(paramQuestionId as string);
     if (paramTitle) setTitle(paramTitle as string);
     if (paramContent) setContent(paramContent as string);
@@ -90,6 +88,7 @@ const Post = () => {
 
   const handlePost = () => {
     if (!exp) {
+      console.log(inputItems);
       issuePost({
         subject: title,
         mainText: content,
@@ -97,17 +96,10 @@ const Post = () => {
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
+        jobGroup: 'DEVELOPER',
       });
     } else {
-      issuePost({
-        subject: title,
-        mainText: content,
-        keyWordList: inputItems,
-        categoryList: postCategories
-          .filter((value) => value.isSelected)
-          .map((value) => value.category.code),
-        experienceId: experienceId,
-      });
+      //TD: 프로젝트 관련 질문답변일 때
     }
     router.back();
   };
@@ -161,29 +153,31 @@ const Post = () => {
 
   return (
     <>
-      <div className="flex justify-start h-[100px]">
+      <div className="flex justify-start mt-[20px]">
         <button onClick={goBack}>
           <ArrowRightIcon />
         </button>
       </div>
-      <div className="flex flex-row mt-[60px] mb-5 items-center">
-        <p className="text-title1 mr-[16px]">질문-답변 만들기</p>
+      <div className="flex flex-row mt-[64px] mb-4 items-center">
+        <p className="text-title7 mr-[16px]">질문-답변 만들기</p>
         {exp && (
           <p className="pl-[12px] text-heading3 text-gray-600 border-l-2 border-l-main-300">
             {project}
           </p>
         )}
       </div>
-      <div className="border border-gray-300 flex flex-col items-start rounded-2xl bg-white px-6 pt-[14px] pb-4 mb-3">
-        <input
-          className="text-heading3 text-gray-600 w-full  placeholder:text-heading3 mb-[14px] placeholder:text-gray-300 outline-none"
-          placeholder="질문은 35자 이내로 작성해주세요"
-          maxLength={35}
-          onChange={onChangeTitle}
-          value={title}
-        ></input>
+      <div className="w-[800px] border border-gray-300 flex flex-col items-start rounded-2xl bg-white px-6 pt-[12px] pb-[12px] mb-[10px]">
+        <div className="w-full mb-[12px]">
+          <input
+            className="text-heading5 text-gray-700 w-full placeholder:text-heading5  placeholder:text-gray-300 outline-none"
+            placeholder="질문은 35자 이내로 작성해주세요"
+            maxLength={35}
+            onChange={onChangeTitle}
+            value={title}
+          ></input>
+        </div>
         <hr />
-        <div className="flex mt-4">
+        <div className="flex">
           <PostCarousel
             postCateogries={postCategories}
             setPostCategories={handleCategories}
@@ -191,9 +185,9 @@ const Post = () => {
         </div>
       </div>
 
-      <div className="p-[30px] min-h-[476px] w-full border border-gray-300 rounded-[20px] bg-white">
+      <div className="p-[30px] min-h-[444px] w-[800px] border border-gray-300 rounded-[20px] bg-white">
         <textarea
-          className="min-h-[360px] w-full text-body3 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300 outline-none"
+          className="min-h-[280px] w-[280px] text-heading5 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300 outline-none"
           placeholder="답변을 입력해주세요"
           maxLength={1000}
           onChange={onChangeContent}
@@ -204,8 +198,8 @@ const Post = () => {
         </p>
         <hr />
         <div className="flex items-center mt-[30px] mb-[20px] gap-[10px]">
-          <p className="text-body1 text-gray-600">Keyword</p>
-          <p className="text-caption2 text-gray-300">
+          <p className="text-body8 text-gray-600">Keyword</p>
+          <p className="text-body10 text-gray-300">
             키워드는 최대 20개까지 가능해요
           </p>
         </div>

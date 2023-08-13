@@ -5,10 +5,11 @@ export interface RandomQuestion {
   jobGroup?: string;
 }
 
-const fetchQuestionByJob = async () => {
+const fetchQuestionByJob = async (category: string) => {
   try {
     const res = await ApiClient.get(`/v1/question/random`, {
       params: {
+        category: category,
         offset: 4,
       },
     });

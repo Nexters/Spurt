@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 const QuestionCard = ({ subject }: RandomQuestion) => {
   const router = useRouter();
   return (
-    <div className="flex flex-col">
-      <div className="text-heading2 text-gray-700 w-[226px] h-[169px] py-[22px] px-[20px] flex items-center bg-gray-100 border border-gray_line rounded-t-2xl">
+    <div className="flex flex-col lg:w-[226px] md:w-[168px] sm:w-[138px]">
+      <div className="text-heading2 text-gray-700  h-[169px] py-[22px] px-[20px] flex bg-gray-100 border border-gray_line rounded-t-2xl">
         <p className="line-clamp-4">{subject}</p>
       </div>
       <button

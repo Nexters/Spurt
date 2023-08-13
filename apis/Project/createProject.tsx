@@ -16,7 +16,7 @@ const createProject = async (param: ProjectParam) => {
     }
     console.log(res.data.code);
   } catch (error) {
-    console.log('fetchQuestion 에러 ', error);
+    console.log('createProject 에러 ', error);
   }
 };
 
