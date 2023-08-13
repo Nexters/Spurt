@@ -27,14 +27,16 @@ const ReadPost = () => {
       .then((v) => {
         console.log('삭제 성공');
       })
-      .then((v) => goBack);
+      .then((v) => goBack());
   };
 
   useEffect(() => {
+    setQId(questionId as string);
     async function getPostById() {
-      setQId(questionId as string);
-      const result = await fetchQuestionById(qId);
-      if (result !== null) setMyPost(result);
+      if (qId) {
+        const result = await fetchQuestionById(qId);
+        if (result !== null) setMyPost(result);
+      }
     }
     getPostById();
   }, [qId, questionId]);
