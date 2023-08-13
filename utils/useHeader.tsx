@@ -10,6 +10,7 @@ export default function useHeader(): boolean {
     '/read',
     '/waiting',
     '/experience',
+    '/post80',
   ];
 
   return invisiblePages.includes(router.pathname);

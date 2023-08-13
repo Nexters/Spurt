@@ -8,30 +8,36 @@ import { useEffect, useState } from 'react';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
 import { Question } from '@/apis/Questions/fetchQuestion';
 import { allCategoryMaps } from '@/const/categories';
+import deleteQuestion from '@/apis/Questions/deleteQuestion';
 
 const ReadPost = () => {
   const router = useRouter();
   const { questionId } = router.query;
 
   const [project, setProject] = useState(false);
-  const [qId, setQId] = useState<number>(0);
+  const [qId, setQId] = useState<string>('');
   const [myPost, setMyPost] = useState<Question>();
 
   const goBack = () => {
     router.back();
   };
 
+  const handleDelete = () => {
+    deleteQuestion(qId)
+      .then((v) => {
+        console.log('삭제 성공');
+      })
+      .then((v) => goBack);
+  };
+
   useEffect(() => {
     async function getPostById() {
-      if (questionId && !Array.isArray(questionId)) {
-        setQId(parseInt(questionId, 10));
-
-        const result = await fetchQuestionById(qId);
-        if (result !== null) setMyPost(result);
-      }
+      setQId(questionId as string);
+      const result = await fetchQuestionById(qId);
+      if (result !== null) setMyPost(result);
     }
     getPostById();
-  }, [qId]);
+  }, [qId, questionId]);
 
   return (
     <>
@@ -109,7 +115,10 @@ const ReadPost = () => {
           </p>
         </div>
         <div className="mb-[150px] flex w-full justify-end gap-[10px]">
-          <CTA4 className="gap-1 text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] flex justify-center items-center rounded-[12px] border-gray_line border">
+          <CTA4
+            className="gap-1 text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] flex justify-center items-center rounded-[12px] border-gray_line border"
+            onClick={handleDelete}
+          >
             삭제하기 <DelIcon />
           </CTA4>
           <CTA4>

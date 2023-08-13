@@ -1,7 +1,7 @@
 import ApiClient from '@/apis/client';
 import { Question } from './fetchQuestion';
 
-const fetchQuestionById = async (questionId: number) => {
+const fetchQuestionById = async (questionId: string) => {
   try {
     const res = await ApiClient.get(`/v1/question/${questionId}`);
     if (res.data.code === 2000) {
