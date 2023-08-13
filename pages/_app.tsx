@@ -25,7 +25,7 @@ export default function App({
           </div>
         ) : (
           <div className="container">
-            {!headerVisible && <Header />}
+            {/* {!headerVisible && <Header />} */}
             <Component {...pageProps} />
           </div>
         )}
