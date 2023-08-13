@@ -1,12 +1,14 @@
+import fetchQuestion, {
+  QuestionResponse,
+} from '@/apis/Questions/fetchQuestion';
+import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
 import { allCategoryMaps, mainMyCategory } from '@/const/categories';
-import CircleIcon from '@/img/question-circle-4.svg';
-import { useRouter } from 'next/router';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
-import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
-import fetchQuestion, { QuestionResponse } from '@/apis/Questions/fetchQuestion';
-import { useRecoilState } from 'recoil';
+import CircleIcon from '@/img/question-circle-4.svg';
 import { selectedMainMyCategoriesState } from '@/status/MainStatus';
+import { useRouter } from 'next/router';
+import { useRecoilState } from 'recoil';
 
 interface AnswerCardProps {
   questionId: number;
@@ -15,7 +17,7 @@ interface AnswerCardProps {
   categoryList: string[];
   createTimestamp: string;
   isPinned: boolean;
-  onClickPin: (response: QuestionResponse) => void
+  onClickPin: (response: QuestionResponse) => void;
 }
 
 const AnswerCard = ({
@@ -28,9 +30,9 @@ const AnswerCard = ({
   onClickPin,
 }: AnswerCardProps) => {
   const router = useRouter();
-    const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
-      selectedMainMyCategoriesState,
-    );
+  const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
+    selectedMainMyCategoriesState,
+  );
 
   const handlePin = async () => {
     await updatePost({

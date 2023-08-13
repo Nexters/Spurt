@@ -7,9 +7,10 @@ import VisibleBtn from '@/components/pc/Keywords/Buttons/visibleBtn';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import Keyword from '@/components/pc/Keywords/Keyword';
 import TenMinuteCard from '@/components/pc/Keywords/Questions/TenMintueCard';
+import Header from '@/components/pc/Keywords/header';
 import { noteCategory } from '@/const/categories';
+import Illust from '@/img/Illust_summaryNote.png';
 import EditIcon from '@/img/edit-16.svg';
-import Illust from '@/img/Illust_SummaryNote.png';
 import Pin from '@/img/pc-pin-red-24.svg';
 import {
   answerVisibleState,
@@ -26,7 +27,6 @@ import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Header from '@/components/pc/Keywords/header';
 
 interface EditParam {
   paramQuestionId: number;

@@ -1,29 +1,29 @@
-import fetchQuestionByJob, {
-  RandomQuestion,
-} from '@/apis/Questions/fetchQuestionByJob';
 import fetchQuestion, {
   QuestionResponse,
 } from '@/apis/Questions/fetchQuestion';
+import fetchQuestionByJob, {
+  RandomQuestion,
+} from '@/apis/Questions/fetchQuestionByJob';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import Paging from '@/components/pc/Keywords/Paging/Paging';
 import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
+import Header from '@/components/pc/Keywords/header';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
+import Illust from '@/img/Illust_questions.png';
 import RotateIcon from '@/img/rotate-24.svg';
-import Illust from '@/img/Illust_Questions.png';
 import {
   PageState,
   selectedMainMyCategoriesState,
   selectedMainOthersCategoriesState,
 } from '@/status/MainStatus';
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import Header from '@/components/pc/Keywords/header';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export default function Home(props: any) {
   const { data: session } = useSession();

@@ -3,9 +3,10 @@ import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import ProjectCard from '@/components/pc/Keywords/Project/ProjectCard';
 import ProjectQuestionCard from '@/components/pc/Keywords/Project/ProjectQuestionCard';
+import Header from '@/components/pc/Keywords/header';
+import Illust from '@/img/Illust_myProject.png';
 import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';
-import Illust from '@/img/Illust_myProject.png';
 import PlusIcon from '@/img/plus-20.svg';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -14,7 +15,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Header from '@/components/pc/Keywords/header';
 
 const Project = () => {
   const router = useRouter();
@@ -88,38 +88,9 @@ const Project = () => {
         </div>
 
         <Image src={Illust} alt="MyProject" />
-
-        <div>
-          <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
-          <div className="mb-[20px]">
-            <Swiper spaceBetween={12} slidesPerView={2}>
-              {projects.length === 0 ? (
-                <>아무것도 없지롱</>
-              ) : (
-                projects.map((value, index) => {
-                  return (
-                    <SwiperSlide key={index}>
-                      <ProjectCard
-                        title={value.title}
-                        index={index}
-                        selectedIndex={selectedCardIndex}
-                        onClickCard={onClickCard}
-                      ></ProjectCard>
-                    </SwiperSlide>
-                  );
-                })
-              )}
-            </Swiper>
-          </div>
-        </div>
-        <div className="flex items-end">
-          <Link href={'/experience'}>
-            <ButtonS>경험 정리하기</ButtonS>
-          </Link>
-        </div>
       </div>
       <div className="h-[360px] mb-[100px]">÷</div>
-      <div>
+      <div className="mt-[300px]">
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
         <div className="mb-[20px]">
           <Swiper spaceBetween={12} slidesPerView={2}>
@@ -175,7 +146,10 @@ const Project = () => {
         <hr />
         <div className="flex justify-between items-center my-[20px]">
           <p className="text-heading1 text-gray-700">예상질문</p>
-          <p className="text-body2 text-gray700">총 {'10'}개</p>
+          <p className="text-body2 text-gray700">
+            총 {projects[selectedCardIndex]?.questionList?.questionList?.length}
+            개
+          </p>
         </div>
         <div className="flex gap-3">
           <button
@@ -190,7 +164,7 @@ const Project = () => {
               !projects[selectedCardIndex].questionList ||
               projects[selectedCardIndex].questionList.questionList.length ===
                 0 ? (
-                <>아무것도 없지롱</>
+                <></>
               ) : (
                 projects[selectedCardIndex].questionList.questionList.map(
                   (value, index) => {
