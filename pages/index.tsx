@@ -63,6 +63,10 @@ export default function Home(props: any) {
     getRandomQuestion();
   }, [selectedMyCategory, selectedOthersCategory, page]);
 
+  const handleClickPin = (post: QuestionResponse) => {
+    setMyPost(post);
+  };
+
   return (
     <>
       <div className="text-title1 text-gray-700 flex justify-between mt-[60px]">
@@ -124,6 +128,8 @@ export default function Home(props: any) {
                     mainText={item.mainText}
                     categoryList={item.categoryList}
                     createTimestamp={item.createTime}
+                    isPinned={item.pinIndicator}
+                    onClickPin={handleClickPin}
                   />
                 );
               })}

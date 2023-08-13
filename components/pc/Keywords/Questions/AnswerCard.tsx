@@ -1,8 +1,12 @@
-import { allCategoryMaps } from '@/const/categories';
-import PinFilledIcon from '@/img/pin-fill-42.svg';
-import PinStrokeIcon from '@/img/pin-stroke-42.svg';
+import { allCategoryMaps, mainMyCategory } from '@/const/categories';
 import CircleIcon from '@/img/question-circle-4.svg';
 import { useRouter } from 'next/router';
+import PinFill from '@/img/pin-fill-42.svg';
+import PinStroke from '@/img/pin-stroke-42.svg';
+import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
+import fetchQuestion, { QuestionResponse } from '@/apis/Questions/fetchQuestion';
+import { useRecoilState } from 'recoil';
+import { selectedMainMyCategoriesState } from '@/status/MainStatus';
 
 interface AnswerCardProps {
   questionId: number;
@@ -10,6 +14,8 @@ interface AnswerCardProps {
   mainText: string;
   categoryList: string[];
   createTimestamp: string;
+  isPinned: boolean;
+  onClickPin: (response: QuestionResponse) => void
 }
 
 const AnswerCard = ({
@@ -18,8 +24,29 @@ const AnswerCard = ({
   mainText,
   categoryList,
   createTimestamp,
+  isPinned,
+  onClickPin,
 }: AnswerCardProps) => {
   const router = useRouter();
+    const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
+      selectedMainMyCategoriesState,
+    );
+
+  const handlePin = async () => {
+    await updatePost({
+      questionId: questionId,
+      pinIndicator: !isPinned,
+    } as UpdatePostParam);
+
+    const result = await fetchQuestion({
+      category: mainMyCategory[selectedMyCategory].code,
+      jobGroup: 'DEVELOPER',
+      myQuestionIndicator: true,
+      size: 20,
+    });
+    onClickPin(result);
+  };
+
   return (
     <div
       className="flex flex-col border border-gray_line rounded-[20px] mb-2"
@@ -53,7 +80,9 @@ const AnswerCard = ({
           <p className="text-heading2 text-gray-700 line-clamp-2 ">{subject}</p>
         </div>
         <div className="h-[103px] w-[42px] ml-6">
-          <PinFilledIcon />
+          <button onClick={handlePin}>
+            {isPinned ? <PinFill></PinFill> : <PinStroke></PinStroke>}
+          </button>
         </div>
       </div>
       <div className="flex flex-1 flex-col maw-w-[464px] h-[82px] p-5">

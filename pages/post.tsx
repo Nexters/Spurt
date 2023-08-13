@@ -65,6 +65,7 @@ const Post = () => {
     if (subject) setTitle(subject as string);
   }, [
     exp,
+    experienceId,
     paramQuestionId,
     paramTitle,
     paramContent,

@@ -96,7 +96,6 @@ const Post = () => {
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
-        jobGroup: 'DEVELOPER',
       });
     } else {
       //TD: 프로젝트 관련 질문답변일 때
