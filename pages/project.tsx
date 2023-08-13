@@ -5,7 +5,7 @@ import ProjectCard from '@/components/pc/Keywords/Project/ProjectCard';
 import ProjectQuestionCard from '@/components/pc/Keywords/Project/ProjectQuestionCard';
 import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';
-import ProjectIlust from '@/img/myproject.png';
+import Illust from '@/img/Illust_myProject.png';
 import PlusIcon from '@/img/plus-20.svg';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Header from '@/components/pc/Keywords/header';
 
 const Project = () => {
   const router = useRouter();
@@ -68,13 +69,48 @@ const Project = () => {
 
   return (
     <>
-      <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[30px]">
+      <div className="absolute top-[0px] left-0 bottom-0 bg-main-100 w-full h-[580px]"></div>
+      <div className="absolute w-[1000px]">
+        <Header />
+        <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[28px]">
+          <div>
+            <span className="underline underline-offset-8 decoration-main-400 decoration-4">
+              나만의 답변
+            </span>
+            <span>을 위한</span>
+            <p>경험에 대한 예상질문을 정리해요</p>
+          </div>
+          <div className="flex items-center">
+            <Link href={'/experience'}>
+              <ButtonS>경험 정리하기</ButtonS>
+            </Link>
+          </div>
+        </div>
+
+        <Image src={Illust} alt="MyProject" />
+
         <div>
-          <span className="underline underline-offset-8 decoration-main-400 decoration-4">
-            면접 직전, 핀으로
-          </span>
-          <span> 고정한</span>
-          <p>질문과 답변을 확인해요</p>
+          <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
+          <div className="mb-[20px]">
+            <Swiper spaceBetween={12} slidesPerView={2}>
+              {projects.length === 0 ? (
+                <>아무것도 없지롱</>
+              ) : (
+                projects.map((value, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <ProjectCard
+                        title={value.title}
+                        index={index}
+                        selectedIndex={selectedCardIndex}
+                        onClickCard={onClickCard}
+                      ></ProjectCard>
+                    </SwiperSlide>
+                  );
+                })
+              )}
+            </Swiper>
+          </div>
         </div>
         <div className="flex items-end">
           <Link href={'/experience'}>
@@ -82,9 +118,7 @@ const Project = () => {
           </Link>
         </div>
       </div>
-      <div className="h-[360px] mb-[100px]">
-        <Image src={ProjectIlust} alt="MyProject"></Image>
-      </div>
+      <div className="h-[360px] mb-[100px]">÷</div>
       <div>
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
         <div className="mb-[20px]">
