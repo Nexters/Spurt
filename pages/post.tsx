@@ -61,7 +61,14 @@ const Post = () => {
       handleCategories(categories);
     }
     if (subject) setTitle(subject as string);
-  }, [exp, paramQuestionId, paramTitle, paramContent, paramCategories]);
+  }, [
+    exp,
+    paramQuestionId,
+    paramTitle,
+    paramContent,
+    paramCategories,
+    subject,
+  ]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
