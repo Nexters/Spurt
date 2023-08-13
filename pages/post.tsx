@@ -41,10 +41,12 @@ const Post = () => {
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
   const [project, setProject] = useState('');
+  const [experienceId, setExperienceId] = useState('');
   const [showSave, setShowSave] = useState(false);
 
   useEffect(() => {
     if (exp) setProject(exp as string);
+    if (experienceId) setProject(experienceId as string);
     if (paramQuestionId) setQuestionId(paramQuestionId as string);
     if (paramTitle) setTitle(paramTitle as string);
     if (paramContent) setContent(paramContent as string);
@@ -88,7 +90,6 @@ const Post = () => {
 
   const handlePost = () => {
     if (!exp) {
-      console.log(inputItems);
       issuePost({
         subject: title,
         mainText: content,
@@ -96,10 +97,17 @@ const Post = () => {
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
-        jobGroup: 'DEVELOPER',
       });
     } else {
-      //TD: 프로젝트 관련 질문답변일 때
+      issuePost({
+        subject: title,
+        mainText: content,
+        keyWordList: inputItems,
+        categoryList: postCategories
+          .filter((value) => value.isSelected)
+          .map((value) => value.category.code),
+        experienceId: experienceId,
+      });
     }
     router.back();
   };
