@@ -1,6 +1,7 @@
-import { useSession } from 'next-auth/react';
 import Logo from '@/img/logo-mobile.svg';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import CTA3 from './CTA3';
 
 export default function MobileHeader() {
   const { data: session } = useSession();
@@ -20,7 +21,9 @@ export default function MobileHeader() {
             alt="프로필 사진"
           ></Image>
         ) : (
-          '네?'
+          <div onClick={() => signIn('google', { callbackUrl: '/note' })}>
+            <CTA3 text="로그인"></CTA3>
+          </div>
         )}
       </div>
     </div>

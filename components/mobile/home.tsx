@@ -145,7 +145,7 @@ export default function MobileHome() {
           )
         ) : (
           <>
-            <p className="text-content_body2 whitespace-pre-line">
+            <p className="text-content_body2 whitespace-pre-line ">
               {myNotes.questions[selectedCardIndex]
                 ? myNotes.questions[selectedCardIndex].mainText
                 : ''}
