@@ -7,6 +7,7 @@ import ExperienceCard from '@/components/pc/Keywords/Experience/ExperienceCard';
 import ExperienceQuestionCard from '@/components/pc/Keywords/Experience/ExperienceQuestionCard';
 import Header from '@/components/pc/Keywords/header';
 import Illust from '@/img/Illust_myProject.png';
+import IllustSvg from '@/img/Illust_myProject.svg';
 import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';
 import PlusIcon from '@/img/plus-20.svg';
@@ -78,7 +79,7 @@ const ExperienceHome = () => {
       <div className="absolute top-[0px] left-0 bottom-0 bg-main-100 w-full h-[580px]"></div>
       <div className="absolute w-[1000px]">
         <Header />
-        <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[28px]">
+        <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[32px]">
           <div>
             <span className="underline underline-offset-8 decoration-main-400 decoration-4">
               나만의 답변
@@ -86,16 +87,16 @@ const ExperienceHome = () => {
             <span>을 위한</span>
             <p>경험에 대한 예상질문을 정리해요</p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-end">
             <Link href={'/experienceCreation'}>
               <ButtonS>경험 정리하기</ButtonS>
             </Link>
           </div>
         </div>
-
+        {/* <IllustSvg /> */}
         <Image src={Illust} alt="MyProject" />
       </div>
-      <div className="h-[360px] mb-[100px]">÷</div>
+      <div className="h-[360px] mb-[100px]">???÷</div>
       <div className="mt-[300px]">
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
         <div className="mb-[20px]">
