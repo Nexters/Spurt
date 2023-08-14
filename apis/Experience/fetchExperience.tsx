@@ -1,7 +1,7 @@
 import ApiClient from '@/apis/client';
 import { Question } from '../Questions/fetchQuestion';
 
-interface ExperienceResponse {
+export interface ExperienceResponse {
   experienceList: Experience[];
 }
 
@@ -17,7 +17,7 @@ export interface Experience {
   };
 }
 
-const fetchProject = async () => {
+const fetchExperience = async () => {
   try {
     const res = await ApiClient.get(`/v1/experience`);
     if (res.data.code === 2000) {
@@ -34,4 +34,4 @@ const fetchProject = async () => {
   }
 };
 
-export default fetchProject;
+export default fetchExperience;

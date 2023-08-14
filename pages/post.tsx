@@ -1,4 +1,4 @@
-import issuePost from '@/apis/Questions/issuePost';
+import createPost from '@/apis/Questions/createPost';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
@@ -101,7 +101,7 @@ const Post = () => {
   const callPostCreationApi = async () => {
     var result = false;
     if (!exp) {
-      result = await issuePost({
+      result = await createPost({
         subject: title,
         mainText: content,
         keyWordList: inputItems,
@@ -111,7 +111,7 @@ const Post = () => {
       });
     } else {
       console.log(+experienceId);
-      result = await issuePost({
+      result = await createPost({
         subject: title,
         mainText: content,
         keyWordList: inputItems,

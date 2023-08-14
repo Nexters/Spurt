@@ -1,4 +1,6 @@
 import createExperience from '@/apis/Experience/createExperience';
+import getExperience from '@/apis/Experience/getExperience';
+import updateExperience from '@/apis/Experience/updateExperience';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
 import BackIcon from '@/img/arrow-right-circle-54.svg';
@@ -13,12 +15,6 @@ const ExperienceCreation = () => {
   const router = useRouter();
 
   const { paramExperienceId } = router.query;
-
-  useEffect(() => {
-    if (paramExperienceId) {
-      setExperienceId(+paramExperienceId);
-    }
-  }, [paramExperienceId]);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -81,7 +77,7 @@ const ExperienceCreation = () => {
     const startDate = startY + '-' + startM;
     const endDate = proceeding ? null : startY + '-' + startM;
     var result = false;
-    if (!experienceId) {
+    if (!paramExperienceId) {
       result = await createExperience({
         title: title,
         content: content,
@@ -90,6 +86,14 @@ const ExperienceCreation = () => {
         link: link,
       });
     } else {
+      result = await updateExperience({
+        experienceId: experienceId,
+        title: title,
+        content: content,
+        startDate: startDate,
+        endDate: endDate,
+        link: link,
+      });
     }
     return result;
   };
@@ -97,6 +101,33 @@ const ExperienceCreation = () => {
   const goBack = () => {
     router.back();
   };
+
+  useEffect(() => {
+    async function fillExperienceContent() {
+      if (experienceId) {
+        const response = await getExperience(experienceId);
+        if (response !== null) {
+          setTitle(response.title);
+          setContent(response.content);
+          setLink(response.link);
+          const startDates = response.startDate.split('-');
+          setStartY(startDates[0]);
+          setStartM(startDates[1]);
+          if (response.endDate !== null) {
+            const endDates = response.endDate.split('-');
+            setEndY(endDates[0]);
+            setEndM(endDates[1]);
+            setProceeding(false);
+          }
+        }
+      }
+    }
+    if (paramExperienceId) {
+      fillExperienceContent();
+
+      setExperienceId(+paramExperienceId);
+    }
+  }, [experienceId, paramExperienceId]);
 
   return (
     <>
@@ -112,6 +143,7 @@ const ExperienceCreation = () => {
             placeholder="제목은 30자 이내로 작성해주세요"
             maxLength={30}
             onChange={onChangeTitle}
+            value={title}
           ></input>
         </div>
         <hr />
@@ -183,6 +215,7 @@ const ExperienceCreation = () => {
             className="text-body7 text-gray-500 ml-[20px] w-[400px] placeholder:text-gray-300 outline-none"
             placeholder="링크를 첨부해주세요"
             onChange={onChangeLink}
+            value={link}
           ></input>
         </div>
       </div>

@@ -7,7 +7,7 @@ interface PostProps {
   categoryList: string[];
   experienceId?: number;
 }
-const issuePost = async ({
+const createPost = async ({
   subject,
   mainText,
   keyWordList,
@@ -33,4 +33,4 @@ const issuePost = async ({
   return false;
 };
 
-export default issuePost;
+export default createPost;

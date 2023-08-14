@@ -1,4 +1,4 @@
-import fetchProject, {
+import fetchExperience, {
   Experience as ExperienceHome,
 } from '@/apis/Experience/fetchExperience';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
@@ -55,7 +55,7 @@ const ExperienceHome = () => {
 
   useEffect(() => {
     async function call() {
-      const result = await fetchProject();
+      const result = await fetchExperience();
       if (result) {
         setExperience(result.experienceList);
         setExp(result.experienceList[0].title);
@@ -131,7 +131,7 @@ const ExperienceHome = () => {
               : experience[selectedCardIndex]?.endDate}
           </p>
         </div>
-        <div className="text-content_body1 text-gray-600 mb-[20px]">
+        <div className="text-content_body1 text-gray-600 mb-[20px] whitespace-pre-line">
           {experience[selectedCardIndex]?.content}
         </div>
         <div className="flex items-center gap-[10px] text-body7 text-gray-500 mb-[20px]">

@@ -1,4 +1,4 @@
-import issuePost from '@/apis/Questions/issuePost';
+import createPost from '@/apis/Questions/createPost';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
@@ -89,7 +89,7 @@ const Post = () => {
   const handlePost = () => {
     if (!exp) {
       console.log(inputItems);
-      issuePost({
+      createPost({
         subject: title,
         mainText: content,
         keyWordList: inputItems,
