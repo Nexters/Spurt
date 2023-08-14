@@ -29,6 +29,7 @@ const Post = () => {
   const router = useRouter();
   const {
     exp,
+    paramExperienceId,
     paramQuestionId,
     paramTitle,
     paramContent,
@@ -46,7 +47,7 @@ const Post = () => {
 
   useEffect(() => {
     if (exp) setProject(exp as string);
-    if (experienceId) setProject(experienceId as string);
+    if (paramExperienceId) setExperienceId(paramExperienceId as string);
     if (paramQuestionId) setQuestionId(paramQuestionId as string);
     if (paramTitle) setTitle(paramTitle as string);
     if (paramContent) setContent(paramContent as string);
@@ -89,9 +90,18 @@ const Post = () => {
     setShowSave(!showSave);
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
+    const isSuccess = await callPostCreationApi();
+
+    if (isSuccess) {
+      router.back();
+    }
+  };
+
+  const callPostCreationApi = async () => {
+    var result = false;
     if (!exp) {
-      issuePost({
+      result = await issuePost({
         subject: title,
         mainText: content,
         keyWordList: inputItems,
@@ -100,17 +110,18 @@ const Post = () => {
           .map((value) => value.category.code),
       });
     } else {
-      issuePost({
+      console.log(+experienceId);
+      result = await issuePost({
         subject: title,
         mainText: content,
         keyWordList: inputItems,
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
-        experienceId: experienceId,
+        experienceId: +experienceId,
       });
     }
-    router.back();
+    return result;
   };
 
   const goBack = () => {

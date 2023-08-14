@@ -1,14 +1,14 @@
+import deleteQuestion from '@/apis/Questions/deleteQuestion';
+import { Question } from '@/apis/Questions/fetchQuestion';
+import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import EditIcon from '@/img/edit-16.svg';
-import DelIcon from '@/img/trash-16.svg';
-import CircleIcon from '@/img/question-circle-4.svg';
+import { allCategoryMaps } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
+import EditIcon from '@/img/edit-16.svg';
+import CircleIcon from '@/img/question-circle-4.svg';
+import DelIcon from '@/img/trash-16.svg';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
-import { Question } from '@/apis/Questions/fetchQuestion';
-import { allCategoryMaps } from '@/const/categories';
-import deleteQuestion from '@/apis/Questions/deleteQuestion';
 
 const ReadPost = () => {
   const router = useRouter();
@@ -81,23 +81,6 @@ const ReadPost = () => {
 
         <div className="mt-[110px] mb-[30px] text-gray-600">
           {myPost?.mainText}
-          {/* <p className="text-title7">지원동기</p>
-          <p className="text-body3">
-            애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는
-            올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이
-            포함됩니다. 특히 스탠바이(StandBy)와 네임드롭(Name Drop)이 이번에
-            포함되었습니다. iOS 17 베타 버전은 애플 개발자 센터에서 내려받을 수
-            있습니다.
-          </p>
-          <br></br>
-          <p className="text-title7">기여하고자 하는 것</p>
-          <p className="text-body3">
-            애플이 iOS 17 베타 버전을 공개했습니다. iOS 17 정식 버전 업데이트는
-            올 가을입니다. 이번 배포에는 iMessage, 암호 공유 기능 등이
-            포함됩니다. 특히 스탠바이(StandBy)와 네임드롭(Name Drop)이 이번에
-            포함되었습니다. iOS 17 베타 버전은 애플 개발자 센터에서 내려받을 수
-            있습니다.
-          </p> */}
         </div>
         <div className="flex gap-2 flex-wrap mb-[40px]">
           {myPost?.keyWordList?.map((item, index) => {

@@ -5,30 +5,32 @@ interface PostProps {
   mainText: string;
   keyWordList: string[];
   categoryList: string[];
-  experienceId?: string;
+  experienceId?: number;
 }
-export default function issuePost({
+const issuePost = async ({
   subject,
   mainText,
   keyWordList,
   categoryList,
   experienceId,
-}: PostProps) {
-  return new Promise((resolve) => {
-    ApiClient.post<PostProps>(`/v1/question`, {
+}: PostProps) => {
+  try {
+    const result = await ApiClient.post(`/v1/question`, {
       subject,
       mainText,
       keyWordList,
       categoryList,
       experienceId,
-    })
-      .then((res) => {
-        resolve(res);
-        console.log(res);
-        console.log('성공');
-      })
-      .catch((error) => {
-        console.log('issuePost 에러 ', error);
-      });
-  });
-}
+    });
+    console.log(result);
+    if (result && result.data && result.data.code === 0) {
+      return true;
+    }
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+  return false;
+};
+
+export default issuePost;

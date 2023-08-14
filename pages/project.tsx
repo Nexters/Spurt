@@ -39,7 +39,7 @@ const Project = () => {
   const handleQuestion = () => {
     router.push({
       pathname: '/post',
-      query: { exp, experienceId },
+      query: { exp, paramExperienceId: experienceId },
     });
   };
 
