@@ -1,4 +1,4 @@
-import createProject from '@/apis/Project/createProject';
+import createExperience from '@/apis/Project/createProject';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
 import BackIcon from '@/img/arrow-right-circle-54.svg';
@@ -12,11 +12,11 @@ import { useEffect, useState } from 'react';
 const Experience = () => {
   const router = useRouter();
 
-  const { content: paraamContent } = router.query;
+  const { paramExperienceId } = router.query;
 
   useEffect(() => {
-    if (paraamContent) setContent(paraamContent as string);
-  }, [paraamContent]);
+    if (paramExperienceId) setExperienceId(+paramExperienceId);
+  }, [paramExperienceId]);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -27,6 +27,7 @@ const Experience = () => {
   const [endM, setEndM] = useState('');
   const [link, setLink] = useState('');
   const [proceeding, setProceeding] = useState(true);
+  const [experienceId, setExperienceId] = useState(0);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -69,7 +70,7 @@ const Experience = () => {
   const handleSave = async () => {
     const startDate = startY + '-' + startM;
     const endDate = proceeding ? null : startY + '-' + startM;
-    await createProject({
+    await createExperience({
       title: title,
       content: content,
       startDate: startDate,
