@@ -50,17 +50,17 @@ const AnswerCard = ({
   };
 
   return (
-    <div
-      className="flex flex-col border border-gray_line rounded-[20px] mb-2"
-      onClick={() => {
-        router.push({
-          pathname: '/read',
-          query: { questionId },
-        });
-      }}
-    >
+    <div className="flex flex-col border border-gray_line rounded-[20px] mb-2">
       <div className="flex flex-1 p-4 max-w-[464px] h-[135px]  bg-main-100 rounded-t-[20px]">
-        <div className="flex flex-col w-[366px] px-1 pt-2 pb-1">
+        <div
+          className="flex flex-col w-[366px] px-1 pt-2 pb-1 cursor-pointer"
+          onClick={() => {
+            router.push({
+              pathname: '/read',
+              query: { questionId },
+            });
+          }}
+        >
           <div className="text-heading5 mb-[10px] text-main-500">
             {categoryList.length === 2 ? (
               <div className="flex flex-row items-center gap-2">
@@ -87,7 +87,15 @@ const AnswerCard = ({
           </button>
         </div>
       </div>
-      <div className="flex flex-1 flex-col maw-w-[464px] h-[82px] p-5">
+      <div
+        className="flex flex-1 flex-col maw-w-[464px] h-[82px] p-5 cursor-pointer"
+        onClick={() => {
+          router.push({
+            pathname: '/read',
+            query: { questionId },
+          });
+        }}
+      >
         <p className="text-body3 text-gray-600 mb-[10px] min-h-[52px] line-clamp-3">
           {mainText}
         </p>
