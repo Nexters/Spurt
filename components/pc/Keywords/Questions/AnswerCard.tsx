@@ -54,7 +54,7 @@ const AnswerCard = ({
   const onClickCard = () => {
     router.push({
       pathname: '/read',
-      query: { questionId },
+      query: { postId: questionId },
     });
   };
 
@@ -96,7 +96,7 @@ const AnswerCard = ({
         onClick={() => {
           router.push({
             pathname: '/read',
-            query: { questionId },
+            query: { postId: questionId },
           });
         }}
       >
