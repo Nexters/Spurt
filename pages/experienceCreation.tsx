@@ -9,7 +9,7 @@ import LinkIcon from '@/img/link-yellow-18.svg';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-const Experience = () => {
+const ExperienceCreation = () => {
   const router = useRouter();
 
   const { paramExperienceId } = router.query;
@@ -195,4 +195,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default ExperienceCreation;
