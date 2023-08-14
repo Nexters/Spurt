@@ -32,7 +32,7 @@ const ExperienceQuestionCard = ({
   const onClickCard = (questionId: number) => {
     router.push({
       pathname: '/read',
-      query: { questionId },
+      query: { postId: questionId },
     });
   };
 
