@@ -74,7 +74,7 @@ export default function SummaryNoteHome() {
     paramCategories,
   }: EditParam) => {
     router.push({
-      pathname: '/post',
+      pathname: session ? '/post' : '/signin',
       query: { paramQuestionId, paramTitle, paramContent, paramCategories },
     });
   };

@@ -88,7 +88,7 @@ const ExperienceHome = () => {
             <p>경험에 대한 예상질문을 정리해요</p>
           </div>
           <div className="flex items-end">
-            <Link href={'/experienceCreation'}>
+            <Link href={session ? '/experienceCreation' : '/signin'}>
               <ButtonS>경험 정리하기</ButtonS>
             </Link>
           </div>
