@@ -56,6 +56,7 @@ export default function TenMinuteNote() {
         jobGroup: 'DEVELOPER',
         myQuestionIndicator: true,
         size: 20,
+        pinIndicator: true,
       });
       setMyNotes(result);
       setSelectedCardIndex(0);

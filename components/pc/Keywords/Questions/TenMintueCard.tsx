@@ -42,6 +42,7 @@ const TenMinuteCard = ({
       category: noteCategory[selectedCategory].code,
       jobGroup: 'DEVELOPER',
       myQuestionIndicator: true,
+      pinIndicator: true,
       size: 20,
     });
     setMyNotes(result);
