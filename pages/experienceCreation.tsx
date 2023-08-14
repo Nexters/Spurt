@@ -1,4 +1,4 @@
-import createExperience from '@/apis/Project/createProject';
+import createExperience from '@/apis/Experience/createExperience';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
 import BackIcon from '@/img/arrow-right-circle-54.svg';
@@ -15,7 +15,9 @@ const ExperienceCreation = () => {
   const { paramExperienceId } = router.query;
 
   useEffect(() => {
-    if (paramExperienceId) setExperienceId(+paramExperienceId);
+    if (paramExperienceId) {
+      setExperienceId(+paramExperienceId);
+    }
   }, [paramExperienceId]);
 
   const [title, setTitle] = useState('');
@@ -68,21 +70,34 @@ const ExperienceCreation = () => {
   };
 
   const handleSave = async () => {
+    const isSuccess = await callExperienceCreationApi();
+
+    if (isSuccess) {
+      router.back();
+    }
+  };
+
+  const callExperienceCreationApi = async () => {
     const startDate = startY + '-' + startM;
     const endDate = proceeding ? null : startY + '-' + startM;
-    await createExperience({
-      title: title,
-      content: content,
-      startDate: startDate,
-      endDate: endDate,
-      link: link,
-    });
-    router.back();
+    var result = false;
+    if (!experienceId) {
+      result = await createExperience({
+        title: title,
+        content: content,
+        startDate: startDate,
+        endDate: endDate,
+        link: link,
+      });
+    } else {
+    }
+    return result;
   };
 
   const goBack = () => {
     router.back();
   };
+
   return (
     <>
       <button className="mt-[24px] mb-[82px]" onClick={goBack}>

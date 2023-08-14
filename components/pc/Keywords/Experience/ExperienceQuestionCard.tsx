@@ -1,4 +1,4 @@
-import fetchExperience, { Experience } from '@/apis/Project/fetchProject';
+import fetchExperience, { Experience } from '@/apis/Experience/fetchExperience';
 import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';

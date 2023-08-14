@@ -1,6 +1,6 @@
 import fetchProject, {
   Experience as ExperienceHome,
-} from '@/apis/Project/fetchProject';
+} from '@/apis/Experience/fetchExperience';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import ExperienceCard from '@/components/pc/Keywords/Experience/ExperienceCard';
@@ -34,7 +34,7 @@ const ExperienceHome = () => {
   const handleEdit = () => {
     router.push({
       pathname: '/experienceCreation',
-      query: { content },
+      query: { paramExperienceId: experienceId },
     });
   };
 
