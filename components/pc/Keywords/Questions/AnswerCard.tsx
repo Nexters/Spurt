@@ -6,9 +6,9 @@ import { allCategoryMaps, mainMyCategory } from '@/const/categories';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
 import CircleIcon from '@/img/question-circle-4.svg';
-import { selectedMainMyCategoriesState } from '@/status/MainStatus';
+import { PageState, selectedMainMyCategoriesState } from '@/status/MainStatus';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface AnswerCardProps {
   questionId: number;
@@ -33,6 +33,7 @@ const AnswerCard = ({
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
     selectedMainMyCategoriesState,
   );
+  const page = useRecoilValue(PageState);
 
   const handlePin = async () => {
     await updatePost({
@@ -42,9 +43,10 @@ const AnswerCard = ({
 
     const result = await fetchQuestion({
       category: mainMyCategory[selectedMyCategory].code,
+      offset: page,
       jobGroup: 'DEVELOPER',
       myQuestionIndicator: true,
-      size: 20,
+      size: 6,
     });
     onClickPin(result);
   };
