@@ -1,197 +1,208 @@
-import createProject from '@/apis/Project/createProject';
+import fetchProject, {
+  Experience as ExperienceHome,
+} from '@/apis/Project/fetchProject';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
-import BackIcon from '@/img/arrow-right-circle-54.svg';
-import NonCheckIcon from '@/img/check box-off-gray-24.svg';
-import CheckIcon from '@/img/check box-on-yellow - 24.svg';
-import SaveIcon from '@/img/check-16.svg';
+import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
+import ExperienceCard from '@/components/pc/Keywords/Experience/ExperienceCard';
+import ExperienceQuestionCard from '@/components/pc/Keywords/Experience/ExperienceQuestionCard';
+import Header from '@/components/pc/Keywords/header';
+import Illust from '@/img/Illust_myProject.png';
+import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';
+import PlusIcon from '@/img/plus-20.svg';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-const Experience = () => {
+const ExperienceHome = () => {
   const router = useRouter();
 
-  const { content: paraamContent } = router.query;
+  const [exp, setExp] = useState('');
+
+  const [experienceId, setExperienceId] = useState(0);
+
+  const [content, setContent] = useState('');
+
+  const [experience, setExperience] = useState<ExperienceHome[]>([]);
+
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
+
+  const handleEdit = () => {
+    router.push({
+      pathname: '/experienceCreation',
+      query: { content },
+    });
+  };
+
+  const handleQuestion = () => {
+    router.push({
+      pathname: '/post',
+      query: { exp, paramExperienceId: experienceId },
+    });
+  };
+
+  const { data: session } = useSession();
+
+  const onClickCard = (index: number) => {
+    setSelectedCardIndex(index);
+    setExp(experience[index].title);
+    setExperienceId(experience[index].experienceId);
+  };
 
   useEffect(() => {
-    if (paraamContent) setContent(paraamContent as string);
-  }, [paraamContent]);
+    async function call() {
+      const result = await fetchProject();
+      if (result) {
+        setExperience(result.experienceList);
+        setExp(result.experienceList[0].title);
+        setExperienceId(result.experienceList[0].experienceId);
+      }
 
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [contentCount, setContentCount] = useState(0);
-  const [startY, setStartY] = useState('');
-  const [startM, setStartM] = useState('');
-  const [endY, setEndY] = useState('');
-  const [endM, setEndM] = useState('');
-  const [link, setLink] = useState('');
-  const [proceeding, setProceeding] = useState(true);
+      setSelectedCardIndex(0);
+    }
+    if (session?.user) {
+      call();
+    }
+  }, [session]);
 
-  const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  const updateExperience = (experience: ExperienceHome[]) => {
+    setExperience(experience);
   };
 
-  const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
-    setContentCount(
-      event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
-        .length,
-    );
-  };
-
-  const onChangeStartY = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStartY(event.target.value.replace(/[^0-9]/g, ''));
-  };
-
-  const onChangeStartM = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setStartM(event.target.value.replace(/[^0-9]/g, ''));
-  };
-
-  const onChangeEndY = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEndY(event.target.value.replace(/[^0-9]/g, ''));
-  };
-
-  const onChangeEndM = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEndM(event.target.value.replace(/[^0-9]/g, ''));
-  };
-
-  const onChangeLink = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(event.target.value);
-  };
-
-  const handleProceeding = () => {
-    setProceeding(!proceeding);
-    setEndY('');
-    setEndM('');
-  };
-
-  const handleSave = async () => {
-    const startDate = startY + '-' + startM;
-    const endDate = proceeding ? null : startY + '-' + startM;
-    await createProject({
-      title: title,
-      content: content,
-      startDate: startDate,
-      endDate: endDate,
-      link: link,
-    });
-    router.back();
-  };
-
-  const goBack = () => {
-    router.back();
-  };
   return (
     <>
-      <button className="mt-[24px] mb-[82px]" onClick={goBack}>
-        <BackIcon />
-      </button>
-      <p className="text-title1 text-gray-700 mb-[20px]">경험 정리</p>
-
-      <div className="border border-gray-300 flex flex-col rounded-2xl bg-white px-6 pt-[14px] pb-4 mb-3">
-        <div>
-          <input
-            className="text-heading1 text-gray-600 w-full placeholder:text-heading3 mb-[14px] placeholder:text-gray-300 outline-none"
-            placeholder="제목은 30자 이내로 작성해주세요"
-            maxLength={30}
-            onChange={onChangeTitle}
-          ></input>
+      <div className="absolute top-[0px] left-0 bottom-0 bg-main-100 w-full h-[580px]"></div>
+      <div className="absolute w-[1000px]">
+        <Header />
+        <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[28px]">
+          <div>
+            <span className="underline underline-offset-8 decoration-main-400 decoration-4">
+              나만의 답변
+            </span>
+            <span>을 위한</span>
+            <p>경험에 대한 예상질문을 정리해요</p>
+          </div>
+          <div className="flex items-center">
+            <Link href={'/experienceCreation'}>
+              <ButtonS>경험 정리하기</ButtonS>
+            </Link>
+          </div>
         </div>
-        <hr />
 
-        <div className="flex items-center gap-[10px] pt-4">
-          <InputDate
-            placeholder="시작년도"
-            value={startY}
-            maxLength={4}
-            onChange={onChangeStartY}
-          />
-          <InputDate
-            placeholder="월"
-            value={startM}
-            maxLength={2}
-            onChange={onChangeStartM}
-          />
-
-          <p className="mx-[10px]">-</p>
-          <InputDate
-            placeholder="종료년도"
-            value={endY}
-            maxLength={4}
-            onChange={onChangeEndY}
-            proceeding={proceeding}
-          />
-          <InputDate
-            placeholder="월"
-            value={endM}
-            maxLength={2}
-            onChange={onChangeEndM}
-            proceeding={proceeding}
-          />
-
-          <p className="text-body2 text-gray-400 ml-[10px] mr-[3px]">진행중</p>
-          {proceeding ? (
-            <button onClick={handleProceeding}>
-              <CheckIcon />
-            </button>
-          ) : (
-            <button onClick={handleProceeding}>
-              <NonCheckIcon />
-            </button>
-          )}
+        <Image src={Illust} alt="MyProject" />
+      </div>
+      <div className="h-[360px] mb-[100px]">÷</div>
+      <div className="mt-[300px]">
+        <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
+        <div className="mb-[20px]">
+          <Swiper spaceBetween={12} slidesPerView={2.7}>
+            {experience.length === 0 ? (
+              <>아무것도 없지롱</>
+            ) : (
+              experience.map((value, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <ExperienceCard
+                      title={value.title}
+                      index={index}
+                      selectedIndex={selectedCardIndex}
+                      onClickCard={onClickCard}
+                    ></ExperienceCard>
+                  </SwiperSlide>
+                );
+              })
+            )}
+          </Swiper>
         </div>
       </div>
-      <div className="mb-[30px] px-6 pt-[30px] pb-[20px] flex flex-col gap-[20px] bg-white border border-gray-300 rounded-[20px]">
-        <p className="text-heading2 text-gray-600 border-l-2 border-l-main-300 pl-[10px]">
-          경험 소개
-        </p>
-        <div>
-          <textarea
-            className="text-body3 text-gray-600 w-full resize-none h-[180px] outline-none placeholder:text-gray-300"
-            placeholder="해당 프로젝트에 대해 설명해주세요"
-            maxLength={300}
-            onChange={onChangeContent}
-            value={content}
-          ></textarea>
-          <p className="text-body9 text-gray-300 text-right">
-            {contentCount}/300
+      <div className="p-[30px] rounded-[20px] bg-white mb-[150px]">
+        <div className="flex justify-between items-center mb-[20px]">
+          <p className="text-heading2 text-gray-600 border-l-2 border-l-main-300 pl-[10px]">
+            경험 소개
+          </p>
+          <p className="text-body6 text-gray-400">
+            {experience[selectedCardIndex]?.startDate.replace('-', '.')} -{' '}
+            {experience[selectedCardIndex]?.endDate === null
+              ? '진행 중'
+              : experience[selectedCardIndex]?.endDate}
           </p>
         </div>
-        <hr />
-        <div className="flex flex-row">
-          <div className="flex flex-row items-center gap-[10px] text-body6 text-gray-400 pr-[20px] border-r-[2px] border-r-gray_line">
-            <LinkIcon /> 링크 첨부
-          </div>
-          <input
-            className="text-body7 text-gray-500 ml-[20px] w-[400px] placeholder:text-gray-300 outline-none"
-            placeholder="링크를 첨부해주세요"
-            onChange={onChangeLink}
-          ></input>
+        <div className="text-content_body1 text-gray-600 mb-[20px]">
+          {experience[selectedCardIndex]?.content}
         </div>
-      </div>
-      <div className="flex justify-end mb-[150px]">
-        {title.length > 0 && content.length > 0 ? (
-          <CTA4 onClick={handleSave}>
-            저장하기
-            <SaveIcon />
-          </CTA4>
-        ) : (
-          <CTA4
-            style={{
-              backgroundColor: '#E9E9E9',
-              color: '#A7A7A7',
-              border: '1px solid #00000017',
-            }}
-            disabled={true}
+        <div className="flex items-center gap-[10px] text-body7 text-gray-500 mb-[20px]">
+          <LinkIcon />
+          <a
+            href="https://www.pinterest.co.kr/pin/122793527321162632/"
+            target="_blank"
           >
-            저장하기
-            <SaveIcon />
+            {experience[selectedCardIndex]?.link}
+          </a>
+        </div>
+        <div className="flex justify-end mb-[30px]">
+          <CTA4 onClick={handleEdit}>
+            수정하기
+            <ModifyIcon />
           </CTA4>
-        )}
+        </div>
+        <hr />
+        <div className="flex justify-between items-center my-[20px]">
+          <p className="text-heading1 text-gray-700">예상질문</p>
+          <p className="text-body2 text-gray700">
+            총{' '}
+            {experience[selectedCardIndex]?.questionList?.questionList?.length}
+            개
+          </p>
+        </div>
+        <div className="flex gap-3">
+          <button
+            className="flex items-center py-[70px] px-[30px] bg-gray-100 rounded-2xl h-[244px]"
+            onClick={handleQuestion}
+          >
+            <PlusIcon />
+          </button>
+          <Swiper
+            spaceBetween={12}
+            slidesPerView={3.5}
+            breakpoints={{
+              700: {
+                slidesPerView: 2,
+              },
+              1025: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {!experience[selectedCardIndex] ||
+            !experience[selectedCardIndex].questionList ||
+            experience[selectedCardIndex].questionList.questionList.length ===
+              0 ? (
+              <></>
+            ) : (
+              experience[selectedCardIndex].questionList.questionList.map(
+                (value, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <ExperienceQuestionCard
+                        title={value.subject}
+                        questionId={value.questionId}
+                        isPinned={value.pinIndicator}
+                        updateExperience={updateExperience}
+                      ></ExperienceQuestionCard>
+                    </SwiperSlide>
+                  );
+                },
+              )
+            )}
+          </Swiper>
+        </div>
       </div>
     </>
   );
 };
 
-export default Experience;
+export default ExperienceHome;

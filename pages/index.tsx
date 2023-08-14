@@ -25,7 +25,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-export default function Home(props: any) {
+export default function MainHome(props: any) {
   const { data: session } = useSession();
   const page = useRecoilValue(PageState);
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(

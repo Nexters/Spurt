@@ -1,22 +1,22 @@
-import fetchProject, { Experience } from '@/apis/Project/fetchProject';
+import fetchExperience, { Experience } from '@/apis/Project/fetchProject';
 import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
 import { useRouter } from 'next/router';
 
-interface ProjectQuestionCardProps {
+interface ExperienceQuestionCardProps {
   questionId: number;
   title: string;
   isPinned: boolean;
   updateExperience: (items: Experience[]) => void;
 }
 
-const ProjectQuestionCard = ({
+const ExperienceQuestionCard = ({
   questionId,
   title,
   isPinned,
   updateExperience,
-}: ProjectQuestionCardProps) => {
+}: ExperienceQuestionCardProps) => {
   const router = useRouter();
 
   const handlePin = async () => {
@@ -25,7 +25,7 @@ const ProjectQuestionCard = ({
       pinIndicator: !isPinned,
     } as UpdatePostParam);
 
-    const result = await fetchProject();
+    const result = await fetchExperience();
     updateExperience(result.experienceList);
   };
 
@@ -55,4 +55,4 @@ const ProjectQuestionCard = ({
   );
 };
 
-export default ProjectQuestionCard;
+export default ExperienceQuestionCard;

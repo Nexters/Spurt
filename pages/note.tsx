@@ -35,7 +35,7 @@ interface EditParam {
   paramCategories: string[];
 }
 
-export default function TenMinuteNote() {
+export default function SummaryNoteHome() {
   const router = useRouter();
   const [isKeywordVisible, setKeywordVisibility] =
     useRecoilState(keywordVisibleState);

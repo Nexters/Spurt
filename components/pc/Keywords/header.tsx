@@ -34,9 +34,9 @@ export default function Header() {
               요약 노트
             </Link>
             <Link
-              href="/project"
+              href="/experience"
               className={`${
-                router.pathname === '/project'
+                router.pathname === '/experience'
                   ? 'text-heading1'
                   : 'text-heading4'
               }`}

@@ -1,16 +1,16 @@
-interface ProjectCardProps {
+interface ExperienceCardProps {
   index: number;
   selectedIndex: number;
   title: string;
   onClickCard: (value: number) => void;
 }
 
-const ProjectCard = ({
+const ExperienceCard = ({
   index,
   selectedIndex,
   title,
   onClickCard,
-}: ProjectCardProps) => {
+}: ExperienceCardProps) => {
   return (
     <div
       className={
@@ -25,4 +25,4 @@ const ProjectCard = ({
   );
 };
 
-export default ProjectCard;
+export default ExperienceCard;
