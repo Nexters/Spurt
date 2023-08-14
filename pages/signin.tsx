@@ -1,7 +1,6 @@
-import Image from 'next/image';
-import IllustSignIn from '@/img/Illust_Signin.png';
-import Test from '@/img/first page new.png';
 import GoogleSignInButton from '@/components/pc/Keywords/GoogleSignInButton';
+import IllustSignIn from '@/img/Illust_signIn.png';
+import Image from 'next/image';
 
 export default function Signin() {
   return (
