@@ -77,13 +77,19 @@ export default function MainHome() {
         <Header />
         <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[12px]">
           <div>
-            <p className="underline underline-offset-8 decoration-main-400 decoration-4">
-              {session?.user?.name}님 안녕하세요
-            </p>
+            {session?.user === undefined ? (
+              <p className="decoration-main-400 decoration-4">안녕하세요</p>
+            ) : (
+              <>
+                <p className="underline underline-offset-8 decoration-main-400 decoration-4">
+                  {session?.user?.name}님 안녕하세요
+                </p>
+              </>
+            )}
             <p>오늘도 마지막까지 화이팅!</p>
           </div>
           <div className="flex items-end">
-            <Link href={'/post'}>
+            <Link href={session ? '/post' : '/signin'}>
               <ButtonS>질문-답변 만들기</ButtonS>
             </Link>
           </div>
@@ -104,11 +110,6 @@ export default function MainHome() {
         )}
 
         <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
-          <div className="flex mb-5 items-center justify-between">
-            <p className="text-body2 w-full text-right text-gray-700">
-              총 {myPost?.meta.totalCount}개
-            </p>
-          </div>
           {!session ? (
             <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
               <div className="flex flex-col mb-8 items-center">
@@ -119,12 +120,17 @@ export default function MainHome() {
                   아직 등록한 질문-답변이 없어요
                 </p>
               </div>
-              <Link href={'/post'}>
+              <Link href={session ? '/post' : '/signin'}>
                 <ButtonS>첫 질문-답변 만들기</ButtonS>
               </Link>
             </div>
           ) : (
             <>
+              <div className="flex mb-5 items-center justify-between">
+                <p className="text-body2 w-full text-right text-gray-700">
+                  총 {myPost?.meta.totalCount}개
+                </p>
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 {myPost?.questions.map((item) => {
                   return (
