@@ -109,21 +109,29 @@ export default function MainHome() {
           ></Carousel>
         )}
 
-        <div className="flex flex-col bg-white mt-5 mb-[100px] px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
+        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] ">
           {!session ? (
-            <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
-              <div className="flex flex-col mb-8 items-center">
-                <p className="text-body7 text-gray-600 mb-[6px]">
-                  예상 질문을 만들고 답하러 가볼까요?
-                </p>
-                <p className="text-heading1 text-gray-700">
-                  아직 등록한 질문-답변이 없어요
+            <>
+              <div className="flex mb-5 items-center justify-between">
+                <p className="text-body2 w-full text-right text-gray-700">
+                  총 0개
                 </p>
               </div>
-              <Link href={session ? '/post' : '/signin'}>
-                <ButtonS>첫 질문-답변 만들기</ButtonS>
-              </Link>
-            </div>
+              <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
+                <div className="flex flex-col mb-6 items-center">
+                  <p className="text-body7 text-gray-600 mb-[6px]">
+                    예상 질문을 만들고 답하러 가볼까요?
+                  </p>
+                  <p className="text-heading1 text-gray-700">
+                    아직 등록한 질문-답변이 없어요
+                  </p>
+                </div>
+
+                <Link href={session ? '/post' : '/signin'}>
+                  <ButtonS>첫 질문-답변 만들기</ButtonS>
+                </Link>
+              </div>
+            </>
           ) : (
             <>
               <div className="flex mb-5 items-center justify-between">
@@ -147,11 +155,12 @@ export default function MainHome() {
                   );
                 })}
               </div>
-
-              <Paging
-                totalCount={myPost?.meta.totalCount}
-                totalPage={myPost?.meta.totalPage}
-              />
+              <div className="mb-[50px]">
+                <Paging
+                  totalCount={myPost?.meta.totalCount}
+                  totalPage={myPost?.meta.totalPage}
+                />
+              </div>
             </>
           )}
         </div>

@@ -49,8 +49,8 @@ export default function Header() {
           {user ? (
             <Image
               src={user.image!}
-              width="61"
-              height="61"
+              width="50"
+              height="50"
               className="rounded-full"
               alt="프로필 사진"
             ></Image>
