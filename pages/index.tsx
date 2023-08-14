@@ -62,7 +62,7 @@ export default function MainHome(props: any) {
       });
       setMyPost(result);
     }
-    getMyQuestion();
+    if (session) getMyQuestion();
     getRandomQuestion();
   }, [selectedMyCategory, selectedOthersCategory, page]);
 
