@@ -25,7 +25,7 @@ const Project = () => {
 
   const [content, setContent] = useState('');
 
-  const [projects, setProjects] = useState<Experience[]>([]);
+  const [experience, setExperience] = useState<Experience[]>([]);
 
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
 
@@ -47,15 +47,15 @@ const Project = () => {
 
   const onClickCard = (index: number) => {
     setSelectedCardIndex(index);
-    setExp(projects[index].title);
-    setExperienceId(projects[index].experienceId);
+    setExp(experience[index].title);
+    setExperienceId(experience[index].experienceId);
   };
 
   useEffect(() => {
     async function call() {
       const result = await fetchProject();
       if (result) {
-        setProjects(result.experienceList);
+        setExperience(result.experienceList);
         setExp(result.experienceList[0].title);
         setExperienceId(result.experienceList[0].experienceId);
       }
@@ -66,6 +66,10 @@ const Project = () => {
       call();
     }
   }, [session]);
+
+  const updateExperience = (experience: Experience[]) => {
+    setExperience(experience);
+  };
 
   return (
     <>
@@ -93,11 +97,11 @@ const Project = () => {
       <div className="mt-[300px]">
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
         <div className="mb-[20px]">
-          <Swiper spaceBetween={12} slidesPerView={2}>
-            {projects.length === 0 ? (
+          <Swiper spaceBetween={12} slidesPerView={2.7}>
+            {experience.length === 0 ? (
               <>아무것도 없지롱</>
             ) : (
-              projects.map((value, index) => {
+              experience.map((value, index) => {
                 return (
                   <SwiperSlide key={index}>
                     <ProjectCard
@@ -119,14 +123,14 @@ const Project = () => {
             경험 소개
           </p>
           <p className="text-body6 text-gray-400">
-            {projects[selectedCardIndex]?.startDate.replace('-', '.')} -{' '}
-            {projects[selectedCardIndex]?.endDate === null
+            {experience[selectedCardIndex]?.startDate.replace('-', '.')} -{' '}
+            {experience[selectedCardIndex]?.endDate === null
               ? '진행 중'
-              : projects[selectedCardIndex]?.endDate}
+              : experience[selectedCardIndex]?.endDate}
           </p>
         </div>
         <div className="text-content_body1 text-gray-600 mb-[20px]">
-          {projects[selectedCardIndex]?.content}
+          {experience[selectedCardIndex]?.content}
         </div>
         <div className="flex items-center gap-[10px] text-body7 text-gray-500 mb-[20px]">
           <LinkIcon />
@@ -134,7 +138,7 @@ const Project = () => {
             href="https://www.pinterest.co.kr/pin/122793527321162632/"
             target="_blank"
           >
-            {projects[selectedCardIndex]?.link}
+            {experience[selectedCardIndex]?.link}
           </a>
         </div>
         <div className="flex justify-end mb-[30px]">
@@ -147,7 +151,8 @@ const Project = () => {
         <div className="flex justify-between items-center my-[20px]">
           <p className="text-heading1 text-gray-700">예상질문</p>
           <p className="text-body2 text-gray700">
-            총 {projects[selectedCardIndex]?.questionList?.questionList?.length}
+            총{' '}
+            {experience[selectedCardIndex]?.questionList?.questionList?.length}
             개
           </p>
         </div>
@@ -158,29 +163,40 @@ const Project = () => {
           >
             <PlusIcon />
           </button>
-          <div>
-            <Swiper spaceBetween={12} slidesPerView={3}>
-              {!projects[selectedCardIndex] ||
-              !projects[selectedCardIndex].questionList ||
-              projects[selectedCardIndex].questionList.questionList.length ===
-                0 ? (
-                <></>
-              ) : (
-                projects[selectedCardIndex].questionList.questionList.map(
-                  (value, index) => {
-                    return (
-                      <SwiperSlide key={index}>
-                        <ProjectQuestionCard
-                          title={value.subject}
-                          index={index}
-                        ></ProjectQuestionCard>
-                      </SwiperSlide>
-                    );
-                  },
-                )
-              )}
-            </Swiper>
-          </div>
+          <Swiper
+            spaceBetween={12}
+            slidesPerView={3.5}
+            breakpoints={{
+              700: {
+                slidesPerView: 2,
+              },
+              1025: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+            {!experience[selectedCardIndex] ||
+            !experience[selectedCardIndex].questionList ||
+            experience[selectedCardIndex].questionList.questionList.length ===
+              0 ? (
+              <></>
+            ) : (
+              experience[selectedCardIndex].questionList.questionList.map(
+                (value, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <ProjectQuestionCard
+                        title={value.subject}
+                        questionId={value.questionId}
+                        isPinned={value.pinIndicator}
+                        updateExperience={updateExperience}
+                      ></ProjectQuestionCard>
+                    </SwiperSlide>
+                  );
+                },
+              )
+            )}
+          </Swiper>
         </div>
       </div>
     </>

@@ -78,7 +78,7 @@ export default function Home(props: any) {
         <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[12px]">
           <div>
             <p className="underline underline-offset-8 decoration-main-400 decoration-4">
-              꽁지님 안녕하세요
+              {session?.user?.name}님 안녕하세요
             </p>
             <p>오늘도 마지막까지 화이팅!</p>
           </div>

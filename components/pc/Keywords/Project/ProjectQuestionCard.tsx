@@ -1,18 +1,56 @@
+import fetchProject, { Experience } from '@/apis/Project/fetchProject';
+import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
+import PinFill from '@/img/pin-fill-42.svg';
+import PinStroke from '@/img/pin-stroke-42.svg';
+import { useRouter } from 'next/router';
+
 interface ProjectQuestionCardProps {
-  index: number;
+  questionId: number;
   title: string;
+  isPinned: boolean;
+  updateExperience: (items: Experience[]) => void;
 }
 
 const ProjectQuestionCard = ({
-  index,
+  questionId,
   title,
+  isPinned,
+  updateExperience,
 }: ProjectQuestionCardProps) => {
+  const router = useRouter();
+
+  const handlePin = async () => {
+    await updatePost({
+      questionId: questionId,
+      pinIndicator: !isPinned,
+    } as UpdatePostParam);
+
+    const result = await fetchProject();
+    updateExperience(result.experienceList);
+  };
+
+  const onClickCard = (questionId: number) => {
+    router.push({
+      pathname: '/read',
+      query: { questionId },
+    });
+  };
+
   return (
     <div
-      className={`flex flex-col p-[16px] bg-main-100 rounded-[16px] cursor-pointer min-w-[226px] max-w-[226px]`}
-      //   onClick={() => onClickCard(index)}
+      className={`flex flex-col p-[16px] bg-main-100 rounded-[16px] min-w-[226px] max-w-[226px]`}
     >
-      <div className="text-title8 h-[58px]">{title}</div>
+      <div
+        className="text-heading2 h-[152px] cursor-pointer "
+        onClick={() => onClickCard(questionId)}
+      >
+        {title}
+      </div>
+      <div className="flex justify-end mt-[14px]">
+        <button onClick={handlePin}>
+          {isPinned ? <PinFill></PinFill> : <PinStroke></PinStroke>}
+        </button>
+      </div>
     </div>
   );
 };

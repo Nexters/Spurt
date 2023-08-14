@@ -64,7 +64,7 @@ export default function MobileHome() {
   return (
     <div>
       <div className="mt-[40px] text-title8">
-        <p>꽁지님! 내가 저장한</p>
+        <p>{session?.user?.name}님! 내가 저장한</p>
         <span className="underline underline-offset-8 decoration-4 decoration-main-400">
           질문과 답변
         </span>
@@ -94,7 +94,7 @@ export default function MobileHome() {
           <span className="text-caption5">개</span>
         </div>
         <div className="flex mt-[20px]">
-          <Swiper spaceBetween={12} slidesPerView={2} slidesOffsetAfter={40}>
+          <Swiper spaceBetween={12} slidesPerView={1.3} slidesOffsetAfter={40}>
             {myNotes.questions.length === 0 ? (
               <>아무것도 없지롱</>
             ) : (

@@ -49,17 +49,19 @@ const AnswerCard = ({
     onClickPin(result);
   };
 
+  const onClickCard = () => {
+    router.push({
+      pathname: '/read',
+      query: { questionId },
+    });
+  };
+
   return (
     <div className="flex flex-col border border-gray_line rounded-[20px] mb-2">
       <div className="flex flex-1 p-4 max-w-[464px] h-[135px]  bg-main-100 rounded-t-[20px]">
         <div
           className="flex flex-col w-[366px] px-1 pt-2 pb-1 cursor-pointer"
-          onClick={() => {
-            router.push({
-              pathname: '/read',
-              query: { questionId },
-            });
-          }}
+          onClick={onClickCard}
         >
           <div className="text-heading5 mb-[10px] text-main-500">
             {categoryList.length === 2 ? (
