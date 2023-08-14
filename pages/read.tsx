@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 const ReadPost = () => {
   const router = useRouter();
-  const { questionId } = router.query;
+  const { postId } = router.query;
 
   const [project, setProject] = useState(false);
   const [qId, setQId] = useState<string>('');
@@ -31,11 +31,11 @@ const ReadPost = () => {
   };
 
   const handleEdit = () => {
-    router.push({ pathname: '/post', query: { paramQuestionId: questionId } });
+    router.push({ pathname: '/post', query: { paramQuestionId: postId } });
   };
 
   useEffect(() => {
-    setQId(questionId as string);
+    setQId(postId as string);
     async function getPostById() {
       if (qId) {
         const result = await fetchQuestionById(qId);
@@ -43,7 +43,7 @@ const ReadPost = () => {
       }
     }
     getPostById();
-  }, [qId, questionId]);
+  }, [qId, postId]);
 
   return (
     <>

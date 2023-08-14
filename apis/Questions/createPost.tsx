@@ -22,9 +22,13 @@ const createPost = async ({
       categoryList,
       experienceId,
     });
-    console.log(result);
     if (result && result.data && result.data.code === 0) {
-      return true;
+      if (result.data.data.questionId) {
+        return result.data.data.questionId;
+      } else {
+        return result.data.data.experienceId;
+      }
+      console.log(result.data.data);
     }
   } catch (e) {
     console.log(e);

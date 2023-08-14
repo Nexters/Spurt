@@ -55,15 +55,21 @@ const Post = () => {
   };
 
   const handlePost = async () => {
-    const isSuccess = await callPostCreationApi();
+    await callPostCreationApi().then((v) => {
+      router.push({
+        pathname: '/read',
+        query: { postId: v },
+      });
+    });
+    //.then(() => router.back());
 
-    if (isSuccess) {
-      router.back();
-    }
+    // if (isSuccess) {
+    //   //router.back();
+    // }
   };
 
   const callPostCreationApi = async () => {
-    var result = false;
+    var result = '';
     if (!exp) {
       result = await createPost({
         subject: title,
