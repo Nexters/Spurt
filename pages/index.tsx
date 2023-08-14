@@ -25,7 +25,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
-export default function MainHome(props: any) {
+export default function MainHome() {
   const { data: session } = useSession();
   const page = useRecoilValue(PageState);
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
@@ -64,7 +64,7 @@ export default function MainHome(props: any) {
     }
     if (session) getMyQuestion();
     getRandomQuestion();
-  }, [selectedMyCategory, selectedOthersCategory, page]);
+  }, [selectedMyCategory, selectedOthersCategory, page, session]);
 
   const handleClickPin = (post: QuestionResponse) => {
     setMyPost(post);

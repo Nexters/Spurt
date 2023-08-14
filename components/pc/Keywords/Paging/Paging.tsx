@@ -20,7 +20,7 @@ const Paging = ({ totalCount, totalPage }: Meta) => {
         <div className="flex justify-center mt-[40px]">
           <Pagination
             activePage={page}
-            itemsCountPerPage={8}
+            itemsCountPerPage={6}
             totalItemsCount={totalCount} //총 아이템 개수
             pageRangeDisplayed={5}
             firstPageText={''}
