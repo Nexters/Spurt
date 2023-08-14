@@ -4,14 +4,20 @@ import { ChangeEvent, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 interface KeywordProps {
+  defaultKeywordName: string;
   fixInput: (index: number) => void;
   deleteInput: (index: number) => void;
   index: number;
 }
 
-const SumKeyWord = ({ fixInput, deleteInput, index }: KeywordProps) => {
-  const [focus, setFocus] = useState(true);
-  const [inputValue, setInputValue] = useState('');
+const SumKeyWord = ({
+  defaultKeywordName,
+  fixInput,
+  deleteInput,
+  index,
+}: KeywordProps) => {
+  const [focus, setFocus] = useState(defaultKeywordName ? false : true);
+  const [inputValue, setInputValue] = useState(defaultKeywordName);
   const [keyword, setKeyword] = useRecoilState(keywordState);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

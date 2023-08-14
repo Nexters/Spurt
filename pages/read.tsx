@@ -30,6 +30,10 @@ const ReadPost = () => {
       .then((v) => goBack());
   };
 
+  const handleEdit = () => {
+    router.push({ pathname: '/post', query: { paramQuestionId: questionId } });
+  };
+
   useEffect(() => {
     setQId(questionId as string);
     async function getPostById() {
@@ -106,7 +110,7 @@ const ReadPost = () => {
           >
             삭제하기 <DelIcon />
           </CTA4>
-          <CTA4>
+          <CTA4 onClick={handleEdit}>
             수정하기 <EditIcon />
           </CTA4>
         </div>

@@ -1,10 +1,11 @@
 import createPost from '@/apis/Questions/createPost';
+import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
 import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
-import { Category, allCategoryList, postCategory } from '@/const/categories';
+import { Category, postCategory } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
 import SaveIcon from '@/img/check-16.svg';
 import PlusIcon from '@/img/plus-16.svg';
@@ -27,15 +28,7 @@ export class PostCategory implements IPostCategory {
 
 const Post = () => {
   const router = useRouter();
-  const {
-    exp,
-    paramExperienceId,
-    paramQuestionId,
-    paramTitle,
-    paramContent,
-    paramCategories,
-    subject,
-  } = router.query;
+  const { exp, paramExperienceId, paramQuestionId } = router.query;
 
   const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
@@ -44,35 +37,6 @@ const Post = () => {
   const [project, setProject] = useState('');
   const [experienceId, setExperienceId] = useState('');
   const [showSave, setShowSave] = useState(false);
-
-  useEffect(() => {
-    if (exp) setProject(exp as string);
-    if (paramExperienceId) setExperienceId(paramExperienceId as string);
-    if (paramQuestionId) setQuestionId(paramQuestionId as string);
-    if (paramTitle) setTitle(paramTitle as string);
-    if (paramContent) setContent(paramContent as string);
-    if (paramCategories) {
-      const categoryNames = paramCategories as string[];
-      const categories = allCategoryList.map((value) => {
-        if (categoryNames.includes(value.code)) {
-          return new PostCategory(value, true);
-        } else {
-          return new PostCategory(value, false);
-        }
-      });
-
-      handleCategories(categories);
-    }
-    if (subject) setTitle(subject as string);
-  }, [
-    exp,
-    experienceId,
-    paramQuestionId,
-    paramTitle,
-    paramContent,
-    paramCategories,
-    subject,
-  ]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -110,7 +74,6 @@ const Post = () => {
           .map((value) => value.category.code),
       });
     } else {
-      console.log(+experienceId);
       result = await createPost({
         subject: title,
         mainText: content,
@@ -171,6 +134,38 @@ const Post = () => {
     setPostCategories(categories);
   };
 
+  useEffect(() => {
+    async function fillContent() {
+      if (questionId) {
+        const res = await fetchQuestionById(questionId);
+        if (res !== null) {
+          setTitle(res.subject);
+          setContent(res.mainText);
+          setContentCount(
+            res.mainText.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
+              .length,
+          );
+          setInputItems(res.keyWordList);
+          const postCategories = postCategory.map((category) => {
+            const categories = res.categoryList;
+            const isSelected = categories.includes(category.code)
+              ? true
+              : false;
+            return new PostCategory(category, isSelected);
+          });
+          setPostCategories(postCategories);
+        }
+      }
+    }
+
+    if (exp) setProject(exp as string);
+    if (paramExperienceId) setExperienceId(paramExperienceId as string);
+    if (paramQuestionId) {
+      fillContent();
+      setQuestionId(paramQuestionId as string);
+    }
+  }, [exp, experienceId, paramExperienceId, paramQuestionId, questionId]);
+
   return (
     <>
       <div className="flex justify-start h-[100px]">
@@ -226,6 +221,7 @@ const Post = () => {
             {inputItems.map((item, index) => (
               <SumKeyWord
                 key={index}
+                defaultKeywordName={item}
                 fixInput={() => fixInput(index)}
                 deleteInput={() => deleteInput(index)}
                 index={index}

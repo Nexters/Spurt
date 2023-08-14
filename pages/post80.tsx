@@ -207,6 +207,7 @@ const Post = () => {
             {inputItems.map((item, index) => (
               <SumKeyWord
                 key={index}
+                defaultKeywordName={item}
                 fixInput={() => fixInput(index)}
                 deleteInput={() => deleteInput(index)}
                 index={index}

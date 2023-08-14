@@ -12,6 +12,7 @@ const fetchQuestionById = async (questionId: string) => {
     return res.data.data as Question;
   } catch (error) {
     console.log('fetchQuestionById 에러 ', error);
+    return {} as Question
   }
 };
 
