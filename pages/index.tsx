@@ -12,7 +12,7 @@ import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
 import Header from '@/components/pc/Keywords/header';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
-import Illust from '@/img/Illust_questions.png';
+import Illust from '@/img/Illust_question.png';
 import RotateIcon from '@/img/rotate-24.svg';
 import {
   PageState,
@@ -77,7 +77,7 @@ export default function MainHome() {
         <Header />
         <div className="text-title1 text-gray-700 flex justify-between mt-[60px] mb-[12px]">
           <div>
-            {session?.user === undefined ? (
+            {!session ? (
               <p className="decoration-main-400 decoration-4">안녕하세요</p>
             ) : (
               <>
@@ -112,11 +112,6 @@ export default function MainHome() {
         <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] ">
           {!session ? (
             <>
-              <div className="flex mb-5 items-center justify-between">
-                <p className="text-body2 w-full text-right text-gray-700">
-                  총 0개
-                </p>
-              </div>
               <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
                 <div className="flex flex-col mb-6 items-center">
                   <p className="text-body7 text-gray-600 mb-[6px]">
@@ -164,12 +159,12 @@ export default function MainHome() {
             </>
           )}
         </div>
-        <div className="text-gray-700 mb-5">
+        <div className="text-title2 text-gray-700 mb-5">
           <p>
-            <span className="text-title2">{'같은 직군의'} 사람들</span>
-            <span className="text-title3">이</span>
+            <span>{session ? '같은 직군의' : ''} 사람들</span>
+            <span>이</span>
           </p>
-          <p className="text-title3">최근에 올린 질문이에요</p>
+          <p>최근에 올린 질문</p>
         </div>
         <Carousel
           categories={mainOtherCategory}

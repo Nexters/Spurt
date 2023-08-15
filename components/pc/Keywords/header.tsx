@@ -14,7 +14,10 @@ export default function Header() {
     <>
       <div className="flex flex-row h-[100px] justify-between">
         <div className="flex content-center items-center">
-          <Logo></Logo>
+          <button onClick={() => router.push('/')}>
+            <Logo></Logo>
+          </button>
+          {/* <Logo /> */}
 
           <div className="flex justify-between ml-[130px]">
             <Link
