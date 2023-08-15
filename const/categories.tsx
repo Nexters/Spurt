@@ -59,14 +59,22 @@ export const allCategoryList = [
 ];
 
 export const mainOtherCategory = [
+  major,
+  practical,
+  collaboration,
+  persandcons,
+  conflict,
+  etc,
+];
+
+export const mainMyCategory = [
   all,
   major,
   practical,
   collaboration,
   conflict,
+  etc,
 ];
-
-export const mainMyCategory = [all, major, practical, collaboration, conflict];
 
 export const noteCategory = [
   all,
@@ -75,6 +83,7 @@ export const noteCategory = [
   collaboration,
   persandcons,
   conflict,
+  etc,
 ];
 
 export const postCategory = [

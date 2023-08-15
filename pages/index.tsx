@@ -101,10 +101,12 @@ export default function MainHome() {
             </Link>
           </div>
         </div>
-        <Image src={Illust} alt="Questions"></Image>
+
+        <Image src={Illust} alt="Questions" />
         <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
-          <p>나의 질문 모아보기</p>
+          <p>나의 질문 모음</p>
         </div>
+
         {!session ? (
           <></>
         ) : (
@@ -116,7 +118,7 @@ export default function MainHome() {
           ></Carousel>
         )}
 
-        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] ">
+        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
           {!session ? (
             <>
               <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
@@ -157,7 +159,7 @@ export default function MainHome() {
                   );
                 })}
               </div>
-              <div className="mb-[50px]">
+              <div className="">
                 <Paging
                   totalCount={myPost?.meta.totalCount}
                   totalPage={myPost?.meta.totalPage}
@@ -166,6 +168,7 @@ export default function MainHome() {
             </>
           )}
         </div>
+
         <div className="text-title2 text-gray-700 mb-5">
           <p>
             <span>{session ? '같은 직군의' : ''} 사람들</span>

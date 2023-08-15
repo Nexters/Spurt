@@ -86,9 +86,9 @@ export default function SummaryNoteHome() {
       <div className="absolute top-[0px] left-0 bottom-0 bg-main-100 w-full h-[580px]"></div>
       <div className="absolute w-[1000px]">
         <Header />
-        <div className="text-title1 flex justify-between mt-[60px]">
+        <div className="text-title1 text-gray-700 flex justify-between mt-[60px]">
           <div>
-            <p>내가 저장한</p>
+            <p>면접 직전, 핀으로 고정한</p>
 
             <span className="underline underline-offset-8 decoration-4 decoration-main-400">
               질문과 답변
@@ -107,7 +107,9 @@ export default function SummaryNoteHome() {
         <div className="mt-[46px]">
           <div className="flex items-center">
             <Pin></Pin>
-            <span className="text-title2 ml-[10px]">요약 노트</span>
+            <span className="text-gray-700 text-title2 ml-[10px]">
+              요약 노트
+            </span>
           </div>
         </div>
         {session ? (
@@ -128,7 +130,7 @@ export default function SummaryNoteHome() {
                     <div className="text-body7 text-gray-500 mb-[6px]">
                       예상 질문을 만들고 답하러 가볼까요?
                     </div>
-                    <div className="text-heading1 mb-[24px]">
+                    <div className="text-heading1 text-gray-600 mb-[24px]">
                       아직 등록한 질문-답변이 없어요
                     </div>
                     <Link href={'/post'}>
