@@ -14,6 +14,7 @@ import Header from '@/components/pc/Keywords/header';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
 import Illust from '@/img/Illust_question.png';
 import RotateIcon from '@/img/rotate-24.svg';
+import { jobState } from '@/status/JobStatus';
 import {
   PageState,
   selectedMainMyCategoriesState,
@@ -34,6 +35,7 @@ export default function MainHome() {
   const [selectedOthersCategory, setSelectedOthersCategory] = useRecoilState(
     selectedMainOthersCategoriesState,
   );
+  const myJob = useRecoilValue(jobState);
   const [myPost, setMyPost] = useState<QuestionResponse>();
   const [random, setRandom] = useState<RandomQuestion[]>([]);
   const handleData = () => {
@@ -60,7 +62,7 @@ export default function MainHome() {
         category: mainMyCategory[selectedMyCategory].code,
         offset: page,
         myQuestionIndicator: true,
-        jobGroup: 'DEVELOPER',
+        jobGroup: myJob,
         size: 6,
       });
       setMyPost(result);

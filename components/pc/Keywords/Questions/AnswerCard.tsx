@@ -6,6 +6,7 @@ import { allCategoryMaps, mainMyCategory } from '@/const/categories';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
 import CircleIcon from '@/img/question-circle-4.svg';
+import { jobState } from '@/status/JobStatus';
 import { PageState, selectedMainMyCategoriesState } from '@/status/MainStatus';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -34,6 +35,7 @@ const AnswerCard = ({
     selectedMainMyCategoriesState,
   );
   const page = useRecoilValue(PageState);
+  const myJob = useRecoilValue(jobState);
 
   const handlePin = async () => {
     await updatePost({
@@ -44,7 +46,7 @@ const AnswerCard = ({
     const result = await fetchQuestion({
       category: mainMyCategory[selectedMyCategory].code,
       offset: page,
-      jobGroup: 'DEVELOPER',
+      jobGroup: myJob,
       myQuestionIndicator: true,
       size: 6,
     });

@@ -15,12 +15,13 @@ import {
 } from '@/status/NoteStatus';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Keyword from '../pc/Keywords/Keyword';
 import TenMinuteCard from '../pc/Keywords/Questions/TenMintueCard';
 import Toggle from './toggle';
+import { jobState } from '@/status/JobStatus';
 
 export default function MobileHome() {
   const [selectedCardIndex, setSelectedCardIndex] =
@@ -34,12 +35,12 @@ export default function MobileHome() {
   const { data: session } = useSession();
 
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
-
+  const myJob = useRecoilValue(jobState);
   useEffect(() => {
     async function call() {
       if (noteCategory[selectedCategory].code == 'ALL') {
         const result = await fetchQuestion({
-          jobGroup: 'DEVELOPER',
+          jobGroup: myJob,
           myQuestionIndicator: true,
           size: 20,
         });
@@ -48,7 +49,7 @@ export default function MobileHome() {
       } else {
         const result = await fetchQuestion({
           category: noteCategory[selectedCategory].code,
-          jobGroup: 'DEVELOPER',
+          jobGroup: myJob,
           myQuestionIndicator: true,
           size: 20,
         });

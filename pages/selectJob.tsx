@@ -1,29 +1,33 @@
 import signup from '@/apis/Questions/signup';
 import ButtonXl from '@/components/pc/Keywords/Buttons/button-xl';
 import JobBtn from '@/components/pc/Keywords/Buttons/jobBtn';
+import { allJobGroupList, allJobGroupMap } from '@/const/jobGroups';
+import { jobState } from '@/status/JobStatus';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 const SelectJob = () => {
   const router = useRouter();
-  const jobValue = ['DEVELOPER', '디자인', '마케팅', '그 외 직군'];
-  const [job, setJob] = useState('');
+  const { data: session } = useSession();
+  const [job, setJob] = useRecoilState(jobState);
 
   const handleClick = (type: string) => {
     setJob(type);
   };
   const handleSignUp = (job: string) => {
-    signup(job);
+    signup(allJobGroupMap.get(job)?.name as string);
     router.push({ pathname: '/' });
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <div className="text-title1 text-center mb-[40px]">
-        <p>{'꽁지'}님은 어떤 직군 면접을</p>
+        <p>{session?.user?.name}님은 어떤 직군 면접을</p>
         <p>준비하나요?</p>
       </div>
       <div className="flex-col gap-[10px] mb-[80px] grid grid-cols-2">
-        {jobValue.map((item) => {
+        {allJobGroupList.map((item) => {
           //console.log(item);
           return (
             <JobBtn

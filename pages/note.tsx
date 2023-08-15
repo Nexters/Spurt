@@ -13,6 +13,7 @@ import { noteCategory } from '@/const/categories';
 import Illust from '@/img/Illust_summaryNote.png';
 import EditIcon from '@/img/edit-16.svg';
 import Pin from '@/img/pc-pin-red-24.svg';
+import { jobState } from '@/status/JobStatus';
 import {
   answerVisibleState,
   keywordVisibleState,
@@ -25,7 +26,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -48,13 +49,14 @@ export default function SummaryNoteHome() {
     selectedNoteCategoriesState,
   );
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
+  const myJob = useRecoilValue(jobState);
   const { data: session } = useSession();
 
   useEffect(() => {
     async function call() {
       const result = await fetchQuestion({
         category: noteCategory[selectedCategory].code,
-        jobGroup: 'DEVELOPER',
+        jobGroup: myJob,
         myQuestionIndicator: true,
         size: 20,
         pinIndicator: true,
