@@ -10,27 +10,27 @@ const DeleteGuide = ({ setShow, option }: DeleteModalProps) => {
   const router = useRouter();
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-70 flex flex-col justify-center items-center">
-      <div className="text-center w-[460px] h-[246px] rounded-[20px] bg-white">
+      <div className="text-center w-[460px] h-[161px] rounded-t-[30px] bg-white">
         <p className="mt-[50px] mb-1 text-title4 text-gray-600">
           정말로 삭제하시겠어요?
         </p>
         <p className="text-heading3 text-gray-500 mb-[66px]">
           한 번 삭제하면 이 글의 핀도 사라져요
         </p>
-        <div className="flex w-[460px] rounded-b-[20px] bg-white">
-          <button
-            className="flex justify-center items-center w-[230px] text-heading2 text-gray-500"
-            onClick={() => setShow()}
-          >
-            취소하기
-          </button>
-          <button
-            className="flex justify-center items-center w-[230px] text-heading1 text-red"
-            onClick={() => option()}
-          >
-            삭제하기
-          </button>
-        </div>
+      </div>
+      <div className="flex w-[460px] h-[89px] border-t-[1px] rounded-b-[30px] bg-white">
+        <button
+          className="flex justify-center items-center border-r-[1px] w-[230px] text-heading2 text-gray-500"
+          onClick={() => setShow()}
+        >
+          취소하기
+        </button>
+        <button
+          className="flex justify-center items-center w-[230px] text-heading1 text-red"
+          onClick={() => option()}
+        >
+          삭제하기
+        </button>
       </div>
     </div>
   );
