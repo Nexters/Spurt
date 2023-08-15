@@ -30,9 +30,9 @@ const practical: Category = {
   code: 'PRACTICAL',
 };
 
-const undertanding: Category = {
-  name: '직무이해도',
-  code: 'UNDERSTANIDNG',
+const etc: Category = {
+  name: '기타',
+  code: 'ETC',
 };
 
 const major: Category = {
@@ -45,7 +45,7 @@ export const allCategoryMaps = new Map<string, Category>([
   [persandcons.code, persandcons],
   [conflict.code, conflict],
   [practical.code, practical],
-  [undertanding.code, undertanding],
+  [etc.code, etc],
   [major.code, major],
 ]);
 
@@ -54,7 +54,7 @@ export const allCategoryList = [
   persandcons,
   conflict,
   practical,
-  undertanding,
+  etc,
   major,
 ];
 

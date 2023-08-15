@@ -38,6 +38,7 @@ export default function MainHome() {
   const myJob = useRecoilValue(jobState);
   const [myPost, setMyPost] = useState<QuestionResponse>();
   const [random, setRandom] = useState<RandomQuestion[]>([]);
+
   const handleData = () => {
     async function getRandomQuestion() {
       const result = await fetchQuestionByJob(
@@ -47,6 +48,7 @@ export default function MainHome() {
     }
     getRandomQuestion();
   };
+
   useEffect(() => {
     async function getRandomQuestion() {
       const result = await fetchQuestionByJob(
@@ -56,6 +58,7 @@ export default function MainHome() {
     }
     getRandomQuestion();
   }, [selectedOthersCategory]);
+
   useEffect(() => {
     async function getMyQuestion() {
       const result = await fetchQuestion({
@@ -68,7 +71,7 @@ export default function MainHome() {
       setMyPost(result);
     }
     if (session) getMyQuestion();
-  }, [selectedMyCategory, page, session]);
+  }, [selectedMyCategory, page, session, myJob]);
 
   const handleClickPin = (post: QuestionResponse) => {
     setMyPost(post);
