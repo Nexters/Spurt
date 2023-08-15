@@ -1,3 +1,5 @@
+import BackGuide from '@/components/pc/Keywords/Modals/BackGuide';
+import DeleteGuide from '@/components/pc/Keywords/Modals/DeleteGuide';
 import EditGuide from '@/components/pc/Keywords/Modals/EditGuide';
 import PinGuide from '@/components/pc/Keywords/Modals/PinGuide';
 import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
@@ -7,6 +9,9 @@ const ModalTest = () => {
   const [showPin, setShowPin] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showSave, setShowSave] = useState(false);
+  const [showDel, setShowDel] = useState(false);
+  const [showBack, setShowBack] = useState(false);
+
   const showModal = () => {
     setShowPin(!showPin);
   };
@@ -15,6 +20,12 @@ const ModalTest = () => {
   };
   const showModal3 = () => {
     setShowSave(!showSave);
+  };
+  const showModal4 = () => {
+    setShowDel(!showDel);
+  };
+  const showModal5 = () => {
+    setShowBack(!showBack);
   };
   return (
     <div className="flex flex-col justify-center items-center">
@@ -25,6 +36,10 @@ const ModalTest = () => {
       <button onClick={showModal2}>EditGuide Modal</button>
       <br />
       <button onClick={showModal3}>SaveGuide Modal</button>
+      <br />
+      <button onClick={showModal4}>DeleteGuide Modal</button>
+      <br />
+      <button onClick={showModal5}>BackGuide Modal</button>
       {showPin && (
         <PinGuide
           setShow={() => {
@@ -45,6 +60,23 @@ const ModalTest = () => {
             showModal3();
           }}
         ></SaveGuide>
+      )}
+      {showDel && (
+        <DeleteGuide
+          setShow={() => {
+            showModal4();
+          }}
+          option={() => {
+            showModal4();
+          }}
+        ></DeleteGuide>
+      )}
+      {showBack && (
+        <BackGuide
+          setShow={() => {
+            showModal5();
+          }}
+        ></BackGuide>
       )}
     </div>
   );

@@ -2,6 +2,7 @@ import deleteQuestion from '@/apis/Questions/deleteQuestion';
 import { Question } from '@/apis/Questions/fetchQuestion';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
+import DeleteGuide from '@/components/pc/Keywords/Modals/DeleteGuide';
 import { allCategoryMaps } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
 import EditIcon from '@/img/edit-16.svg';
@@ -17,6 +18,11 @@ const ReadPost = () => {
   const [project, setProject] = useState(false);
   const [qId, setQId] = useState<string>('');
   const [myPost, setMyPost] = useState<Question>();
+  const [showDel, setShowDel] = useState(false);
+
+  const showModal = () => {
+    setShowDel(!showDel);
+  };
 
   const goBack = () => {
     router.back();
@@ -24,7 +30,7 @@ const ReadPost = () => {
 
   const handleDelete = () => {
     deleteQuestion(qId)
-      .then((v) => {
+      .then(() => {
         console.log('삭제 성공');
       })
       .then((v) => goBack());
@@ -63,7 +69,7 @@ const ReadPost = () => {
             </p>
           )}
 
-          {myPost?.categoryList.length === 2 ? (
+          {myPost?.categoryList?.length === 2 ? (
             <div className="flex flex-row items-center gap-2">
               {myPost?.categoryList[0] && myPost?.categoryList[1]
                 ? allCategoryMaps.get(myPost?.categoryList[0])?.name
@@ -106,7 +112,7 @@ const ReadPost = () => {
         <div className="mb-[150px] flex w-full justify-end gap-[10px]">
           <CTA4
             className="gap-1 text-body2 bg-white text-gray-500 py-[10px] pl-[16px] pr-[14px] flex justify-center items-center rounded-[12px] border-gray_line border"
-            onClick={handleDelete}
+            onClick={showModal}
           >
             삭제하기 <DelIcon />
           </CTA4>
@@ -128,6 +134,16 @@ const ReadPost = () => {
           </div>
         )}
       </div>
+      {showDel && (
+        <DeleteGuide
+          setShow={() => {
+            showModal();
+          }}
+          option={() => {
+            handleDelete();
+          }}
+        ></DeleteGuide>
+      )}
     </>
   );
 };

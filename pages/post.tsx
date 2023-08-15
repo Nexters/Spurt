@@ -1,9 +1,11 @@
 import createPost from '@/apis/Questions/createPost';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
+import updateQuestionById from '@/apis/Questions/updateQuestionById';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
+import BackGuide from '@/components/pc/Keywords/Modals/BackGuide';
 import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
 import { Category, postCategory } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
@@ -37,6 +39,7 @@ const Post = () => {
   const [project, setProject] = useState('');
   const [experienceId, setExperienceId] = useState('');
   const [showSave, setShowSave] = useState(false);
+  const [showBack, setShowBack] = useState(false);
   const [categoryCount, setCategoryCount] = useState(0);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,15 +54,23 @@ const Post = () => {
     );
   };
 
-  const showModal = () => {
+  const showSaveModal = () => {
     setShowSave(!showSave);
+  };
+  const showBackModal = () => {
+    setShowBack(!showBack);
   };
 
   const handlePost = async () => {
-    await callPostCreationApi().then(() => {
-      //모달
-      router.back();
-    });
+    if (!paramQuestionId) {
+      await callPostCreationApi().then(() => {
+        showSaveModal();
+      });
+    } else {
+      await callPostEditApi().then(() => {
+        showSaveModal();
+      });
+    }
     //.then(() => router.back());
 
     // if (isSuccess) {
@@ -92,11 +103,23 @@ const Post = () => {
     return result;
   };
 
+  const callPostEditApi = async () => {
+    await updateQuestionById({
+      questionId: paramQuestionId as string,
+      subject: title,
+      mainText: content,
+      keyWordList: inputItems,
+      categoryList: postCategories
+        .filter((value) => value.isSelected)
+        .map((value) => value.category.code),
+    });
+  };
+
   const goBack = () => {
     if (!title && !content) {
       router.back();
     } else {
-      showModal();
+      showBackModal(); // 뒤로가기 눌렀을 때 모달 (바꿔양함)
     }
   };
 
@@ -138,7 +161,6 @@ const Post = () => {
   const handleCategories = (categories: PostCategory[]) => {
     setCategoryCount(0);
     setPostCategories(categories);
-    console.log(categories);
     categories.map((item) => {
       if (item.isSelected !== false) {
         setCategoryCount(categoryCount + 1);
@@ -250,7 +272,8 @@ const Post = () => {
       </div>
 
       <div className="flex justify-end mt-[30px] mb-[150px]">
-        {title.length > 0 && content.length > 0 && categoryCount > 0 ? (
+        {(title.length > 0 && content.length > 0 && categoryCount > 0) ||
+        paramQuestionId ? (
           <CTA4 onClick={handlePost}>
             저장하기
             <SaveIcon />
@@ -269,13 +292,8 @@ const Post = () => {
           </CTA4>
         )}
       </div>
-      {showSave && (
-        <SaveGuide
-          setShow={() => {
-            showModal();
-          }}
-        />
-      )}
+      {showSave && <SaveGuide setShow={() => showSaveModal()} />}
+      {showBack && <BackGuide setShow={() => showBackModal()} />}
     </>
   );
 };

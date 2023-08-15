@@ -5,21 +5,21 @@ const SaveGuide = ({ setShow }: ModalProps) => {
   const router = useRouter();
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-70 flex flex-col justify-center items-center">
-      <div className="w-[460px] h-[163px] rounded-t-[20px] bg-white">
-        ?????????? ???????????
-      </div>
-      <div className="flex w-[460px] h-[83px] rounded-b-[20px] border-t-[1px] bg-white">
+      <div className="text-center w-[460px] h-[246px] rounded-[20px] bg-white">
+        <p className="mt-[50px] mb-1 text-title4 text-gray-600">
+          질문-답변이 저장되었어요!
+        </p>
+        <p className="text-heading3 text-gray-500 mb-[66px]">
+          질문모음 화면에서 나의 답변을 확인해보세요
+        </p>
         <button
-          className="flex justify-center items-center w-[230px] border-r-[1px] text-heading1 text-gray-600"
-          onClick={() => setShow()}
+          className="flex justify-center items-center w-[460px] text-heading2 text-gray-500"
+          onClick={() => {
+            setShow();
+            router.back();
+          }}
         >
-          페이지 유지하기
-        </button>
-        <button
-          className="flex justify-center items-center w-[230px] text-heading1 text-red"
-          onClick={() => router.back()}
-        >
-          나가기
+          확인하기
         </button>
       </div>
     </div>
