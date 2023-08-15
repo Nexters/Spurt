@@ -1,7 +1,11 @@
 import signup from '@/apis/Questions/signup';
 import ButtonXl from '@/components/pc/Keywords/Buttons/button-xl';
 import JobBtn from '@/components/pc/Keywords/Buttons/jobBtn';
-import { allJobGroupList, allJobGroupMap } from '@/const/jobGroups';
+import {
+  allJobGroupList,
+  allJobGroupMap,
+  allJobGroupMapEn,
+} from '@/const/jobGroups';
 import { jobState } from '@/status/JobStatus';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -14,11 +18,14 @@ const SelectJob = () => {
   const [job, setJob] = useRecoilState(jobState);
 
   const handleClick = (type: string) => {
-    setJob(type);
+    setJob(allJobGroupMap.get(type)?.name as string);
+    //console.log(allJobGroupMap.get(type)?.name as string);
   };
   const handleSignUp = (job: string) => {
-    signup(allJobGroupMap.get(job)?.name as string);
-    router.push({ pathname: '/' });
+    signup(job).then(() => {
+      router.push({ pathname: '/' });
+    });
+    //onsole.log(job);
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -36,7 +43,7 @@ const SelectJob = () => {
                 handleClick(item);
               }}
               style={
-                item === job
+                item === allJobGroupMapEn.get(job)?.code
                   ? {
                       backgroundColor: '#FFF4CE',
                       border: '1px solid #FEC20C',

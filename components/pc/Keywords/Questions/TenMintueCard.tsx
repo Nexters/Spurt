@@ -5,8 +5,9 @@ import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
 import { noteCategory } from '@/const/categories';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
+import { jobState } from '@/status/JobStatus';
 import { myNotesState, selectedNoteCategoriesState } from '@/status/NoteStatus';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 interface CardProp {
   index: number;
@@ -31,6 +32,7 @@ const TenMinuteCard = ({
   const [selectedCategory, setSelectedCategory] = useRecoilState(
     selectedNoteCategoriesState,
   );
+  const myJob = useRecoilValue(jobState);
 
   const handlePin = async () => {
     await updatePost({
@@ -40,7 +42,7 @@ const TenMinuteCard = ({
 
     const result = await fetchQuestion({
       category: noteCategory[selectedCategory].code,
-      jobGroup: 'DEVELOPER',
+      jobGroup: myJob,
       myQuestionIndicator: true,
       pinIndicator: true,
       size: 20,

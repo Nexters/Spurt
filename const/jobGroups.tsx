@@ -27,4 +27,11 @@ export const allJobGroupMap = new Map<string, JobGroup>([
   [etc.code, etc],
 ]);
 
+export const allJobGroupMapEn = new Map<string, JobGroup>([
+  [developer.name, developer],
+  [designer.name, designer],
+  [marketer.name, marketer],
+  [etc.name, etc],
+]);
+
 export const allJobGroupList = ['개발', '디자인', '마케팅', '그 외 직군'];
