@@ -52,6 +52,9 @@ export default function MainHome() {
       );
       setRandom(result);
     }
+    getRandomQuestion();
+  }, [selectedOthersCategory]);
+  useEffect(() => {
     async function getMyQuestion() {
       const result = await fetchQuestion({
         category: mainMyCategory[selectedMyCategory].code,
@@ -63,8 +66,7 @@ export default function MainHome() {
       setMyPost(result);
     }
     if (session) getMyQuestion();
-    getRandomQuestion();
-  }, [selectedMyCategory, selectedOthersCategory, page, session]);
+  }, [selectedMyCategory, page, session]);
 
   const handleClickPin = (post: QuestionResponse) => {
     setMyPost(post);
