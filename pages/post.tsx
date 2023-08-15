@@ -37,6 +37,7 @@ const Post = () => {
   const [project, setProject] = useState('');
   const [experienceId, setExperienceId] = useState('');
   const [showSave, setShowSave] = useState(false);
+  const [categoryCount, setCategoryCount] = useState(0);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -55,11 +56,9 @@ const Post = () => {
   };
 
   const handlePost = async () => {
-    await callPostCreationApi().then((v) => {
-      router.push({
-        pathname: '/read',
-        query: { postId: v },
-      });
+    await callPostCreationApi().then(() => {
+      //모달
+      router.back();
     });
     //.then(() => router.back());
 
@@ -137,7 +136,14 @@ const Post = () => {
   };
 
   const handleCategories = (categories: PostCategory[]) => {
+    setCategoryCount(0);
     setPostCategories(categories);
+    console.log(categories);
+    categories.map((item) => {
+      if (item.isSelected !== false) {
+        setCategoryCount(categoryCount + 1);
+      }
+    });
   };
 
   useEffect(() => {
@@ -244,7 +250,7 @@ const Post = () => {
       </div>
 
       <div className="flex justify-end mt-[30px] mb-[150px]">
-        {title.length > 0 && content.length > 0 ? (
+        {title.length > 0 && content.length > 0 && categoryCount > 0 ? (
           <CTA4 onClick={handlePost}>
             저장하기
             <SaveIcon />
