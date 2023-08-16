@@ -3,6 +3,8 @@ import getExperience from '@/apis/Experience/getExperience';
 import updateExperience from '@/apis/Experience/updateExperience';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
+import BackGuide from '@/components/pc/Keywords/Modals/BackGuide';
+import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
 import BackIcon from '@/img/arrow-right-circle-54.svg';
 import NonCheckIcon from '@/img/check box-off-gray-24.svg';
 import CheckIcon from '@/img/check box-on-yellow - 24.svg';
@@ -27,16 +29,23 @@ const ExperienceCreation = () => {
   const [proceeding, setProceeding] = useState(true);
   const [experienceId, setExperienceId] = useState(0);
 
+  const [showSave, setShowSave] = useState(false);
+  const [showBack, setShowBack] = useState(false);
+
+  const showSaveModal = () => {
+    setShowSave(!showSave);
+  };
+  const showBackModal = () => {
+    setShowBack(!showBack);
+  };
+
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
   };
 
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-    setContentCount(
-      event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
-        .length,
-    );
+    setContentCount(event.target.value.length);
   };
 
   const onChangeStartY = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,11 +75,9 @@ const ExperienceCreation = () => {
   };
 
   const handleSave = async () => {
-    const isSuccess = await callExperienceCreationApi();
-
-    if (isSuccess) {
-      router.back();
-    }
+    await callExperienceCreationApi().then(() => {
+      showSaveModal();
+    });
   };
 
   const callExperienceCreationApi = async () => {
@@ -96,10 +103,6 @@ const ExperienceCreation = () => {
       });
     }
     return result;
-  };
-
-  const goBack = () => {
-    router.back();
   };
 
   useEffect(() => {
@@ -131,7 +134,7 @@ const ExperienceCreation = () => {
 
   return (
     <>
-      <button className="mt-[24px] mb-[82px]" onClick={goBack}>
+      <button className="mt-[24px] mb-[82px]" onClick={showBackModal}>
         <BackIcon />
       </button>
       <p className="text-title1 text-gray-700 mb-[20px]">경험 정리</p>
@@ -239,6 +242,8 @@ const ExperienceCreation = () => {
           </CTA4>
         )}
       </div>
+      {showSave && <SaveGuide setShow={() => showSaveModal()} />}
+      {showBack && <BackGuide setShow={() => showBackModal()} />}
     </>
   );
 };

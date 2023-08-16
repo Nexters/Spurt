@@ -135,10 +135,7 @@ const ExperienceHome = () => {
             </div>
             <div className="flex items-center gap-[10px] text-body7 text-gray-500 mb-[20px]">
               <LinkIcon />
-              <a
-                href="https://www.pinterest.co.kr/pin/122793527321162632/"
-                target="_blank"
-              >
+              <a href={experience[selectedCardIndex]?.link} target="_blank">
                 {experience[selectedCardIndex]?.link}
               </a>
             </div>
