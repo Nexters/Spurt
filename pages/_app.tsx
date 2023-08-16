@@ -3,6 +3,7 @@ import MobileHome from '@/components/mobile/home';
 import { useIsMobile } from '@/components/responsive';
 import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 import '../styles/globals.css';
 
@@ -14,6 +15,9 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
+      <Head>
+        <title>Spurt!</title>
+      </Head>
       <RecoilRoot>
         {isMobile ? (
           <div>
