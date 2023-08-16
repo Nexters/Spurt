@@ -11,11 +11,11 @@ const VisibleBtn = ({ isVisible, setVisibility: setVisible }: VisibleProps) => {
     <>
       {isVisible == true ? (
         <button onClick={() => setVisible(!isVisible)}>
-          <VisibleIcon></VisibleIcon>
+          <InVisibleIcon></InVisibleIcon>
         </button>
       ) : (
         <button onClick={() => setVisible(!isVisible)}>
-          <InVisibleIcon></InVisibleIcon>
+          <VisibleIcon></VisibleIcon>
         </button>
       )}
     </>
