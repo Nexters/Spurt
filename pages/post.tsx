@@ -48,10 +48,7 @@ const Post = () => {
 
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
-    setContentCount(
-      event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
-        .length,
-    );
+    setContentCount(event.target.value.length);
   };
 
   const showSaveModal = () => {
@@ -119,7 +116,7 @@ const Post = () => {
     if (!title && !content) {
       router.back();
     } else {
-      showBackModal(); // 뒤로가기 눌렀을 때 모달 (바꿔양함)
+      showBackModal();
     }
   };
 
@@ -175,10 +172,7 @@ const Post = () => {
         if (res !== null) {
           setTitle(res.subject);
           setContent(res.mainText);
-          setContentCount(
-            res.mainText.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2')
-              .length,
-          );
+          setContentCount(res.mainText.length);
           setInputItems(res.keyWordList);
           const postCategories = postCategory.map((category) => {
             const categories = res.categoryList;
