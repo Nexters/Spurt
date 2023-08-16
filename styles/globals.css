@@ -9,6 +9,7 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+  font-family: Pretendard;
 }
 
 .container {
@@ -27,4 +28,32 @@ body {
 
 .swiper-slide {
   width: auto !important;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/fonts/Pretendard-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  font-style: normal;
+  src: url('/fonts/Pretendard-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 600;
+  font-style: normal;
+  src: url('/fonts/Pretendard-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/fonts/Pretendard-Bold.ttf') format('truetype');
 }
