@@ -20,8 +20,8 @@ const QuickEditor = ({ text, setText, addKeyword }: EditorProps) => {
             font-size: 18px;
             font-weight: 400;
             line-height: 140%;
-    color: #d3d3d3;
-    opacity: 1;
+            color: #d3d3d3;
+            opacity: 1;
     }
     `,
         quickbars_selection_toolbar: 'bold italic | formatselect | addKeyword',
