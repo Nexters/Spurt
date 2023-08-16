@@ -57,3 +57,7 @@ body {
   font-style: normal;
   src: url('/fonts/Pretendard-Bold.ttf') format('truetype');
 }
+
+.tox-tinymce {
+  border: none !important;
+}
