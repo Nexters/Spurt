@@ -8,6 +8,7 @@ import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
 import EditIcon from '@/img/edit-16.svg';
 import CircleIcon from '@/img/question-circle-4.svg';
 import DelIcon from '@/img/trash-16.svg';
+import ArrowIcon from '@/img/experience-arrow-gray- 16.svg';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -63,11 +64,12 @@ const ReadPost = () => {
           </button>
         </div>
 
-        <div className="flex flex-row mt-[82px] mb-[10px] text-heading1 text-main-500">
+        <div className="flex flex-row gap-[6px] items-center mt-[82px] mb-[10px] text-heading1 text-main-500">
           {project && (
-            <p className="text-heading1 text-gray-500">
-              {project} {'>'}&nbsp;{' '}
-            </p>
+            <>
+              <p className="text-heading1 text-gray-500">{project}</p>
+              <ArrowIcon />
+            </>
           )}
 
           {myPost?.categoryList?.length === 2 ? (
