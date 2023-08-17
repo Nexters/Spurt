@@ -3,7 +3,7 @@ import fetchQuestion, {
 } from '@/apis/Questions/fetchQuestion';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
-import Illust from '@/img/Illust_mobileOnBoarding.png';
+import Illust from '@/img/Illust_mobileOnBoarding1.png';
 import Pin from '@/img/mobile-pin-red-24.svg';
 import { jobState } from '@/status/JobStatus';
 import {

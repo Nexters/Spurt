@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import ApiClient from '../apis/client';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import Landing from '@/img/landing.png';
 
 export default function Waiting() {
   const router = useRouter();
@@ -20,5 +22,11 @@ export default function Waiting() {
       call();
     }, 1000);
   }, [router]);
-  return <div className="flex"> </div>;
+  return (
+    <>
+      <div className="flex justify-center items-center h-screen">
+        <Image src={Landing} alt="landing..." width={212} height={210} />
+      </div>
+    </>
+  );
 }
