@@ -22,6 +22,7 @@ export interface Question {
   createTime: string;
   pinIndicator: boolean;
   experienceId?: number;
+  experienceTitle?: string;
 }
 
 export interface Meta {

@@ -51,14 +51,19 @@ const ExperienceHome = () => {
   const handleEdit = () => {
     router.push({
       pathname: '/experienceCreation',
-      query: { paramExperienceId: experienceId },
+      query: {
+        paramExperienceId: experienceId,
+      },
     });
   };
 
   const handleQuestion = () => {
     router.push({
       pathname: '/post',
-      query: { paramExperienceId: experienceId },
+      query: {
+        paramExperienceId: experience[selectedCardIndex].experienceId,
+        paramExperienceTitle: experience[selectedCardIndex].title,
+      },
     });
   };
 

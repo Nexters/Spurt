@@ -15,7 +15,7 @@ const ReadPost = () => {
   const router = useRouter();
   const { postId } = router.query;
 
-  const [project, setProject] = useState(false);
+  const [project, setProject] = useState('');
   const [qId, setQId] = useState<string>('');
   const [myPost, setMyPost] = useState<Question>();
   const [showDel, setShowDel] = useState(false);
@@ -46,6 +46,7 @@ const ReadPost = () => {
       if (qId) {
         const result = await fetchQuestionById(qId);
         if (result !== null) setMyPost(result);
+        if (result.experienceTitle) setProject(result.experienceTitle);
       }
     }
     getPostById();
@@ -65,7 +66,7 @@ const ReadPost = () => {
         <div className="flex flex-row mt-[82px] mb-[10px] text-heading1 text-main-500">
           {project && (
             <p className="text-heading1 text-gray-500">
-              사이드 프로젝트 : SPURT {'>'}&nbsp;{' '}
+              {project} {'>'}&nbsp;{' '}
             </p>
           )}
 
@@ -120,7 +121,7 @@ const ReadPost = () => {
             수정하기 <EditIcon />
           </CTA4>
         </div>
-        {project && (
+        {/* {project && (
           <div className="mt-[-100px] mb-[150px]">
             <hr />
             <div className="flex flex-row justify-between mt-[30px]">
@@ -132,7 +133,7 @@ const ReadPost = () => {
             <p className="text-title8 text-gray-700 mb-[30px]">다른 예상질문</p>
             <div className="border border-red h-[192px]">캐러셀 자리</div>
           </div>
-        )}
+        )} */}
       </div>
       {showDel && (
         <DeleteGuide
