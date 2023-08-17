@@ -62,7 +62,6 @@ const ExperienceHome = () => {
       pathname: '/post',
       query: {
         paramExperienceId: experience[selectedCardIndex].experienceId,
-        paramExperienceTitle: experience[selectedCardIndex].title,
       },
     });
   };

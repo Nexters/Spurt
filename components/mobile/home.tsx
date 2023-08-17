@@ -3,7 +3,9 @@ import fetchQuestion, {
 } from '@/apis/Questions/fetchQuestion';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
+import Illust from '@/img/Illust_mobileOnBoarding.png';
 import Pin from '@/img/mobile-pin-red-24.svg';
+import { jobState } from '@/status/JobStatus';
 import {
   contentToggleState,
   selectedMobileNoteCategoriesState,
@@ -14,18 +16,16 @@ import {
   selectedCardState,
 } from '@/status/NoteStatus';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import VisibleBtn from '../pc/Keywords/Buttons/visibleBtn';
 import Keyword from '../pc/Keywords/Keyword';
 import TenMinuteCard from '../pc/Keywords/Questions/TenMintueCard';
-import Toggle from './toggle';
-import { jobState } from '@/status/JobStatus';
-import Image from 'next/image';
-import Illust from '@/img/Illust_mobileOnBoarding.png';
 import SigninBtn from './SigninBtn';
-import VisibleBtn from '../pc/Keywords/Buttons/visibleBtn';
+import Toggle from './toggle';
 
 export default function MobileHome() {
   const [selectedCardIndex, setSelectedCardIndex] =
@@ -43,24 +43,15 @@ export default function MobileHome() {
   const myJob = useRecoilValue(jobState);
   useEffect(() => {
     async function call() {
-      if (noteCategory[selectedCategory].code == 'ALL') {
-        const result = await fetchQuestion({
-          jobGroup: myJob,
-          myQuestionIndicator: true,
-          size: 20,
-        });
-        setMyNotes(result);
-        setSelectedCardIndex(0);
-      } else {
-        const result = await fetchQuestion({
-          category: noteCategory[selectedCategory].code,
-          jobGroup: myJob,
-          myQuestionIndicator: true,
-          size: 20,
-        });
-        setMyNotes(result);
-        setSelectedCardIndex(0);
-      }
+      const result = await fetchQuestion({
+        category: noteCategory[selectedCategory].code,
+        jobGroup: myJob,
+        myQuestionIndicator: true,
+        pinIndicator: true,
+        size: 20,
+      });
+      setMyNotes(result);
+      setSelectedCardIndex(0);
     }
     if (session?.user) {
       call();

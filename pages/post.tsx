@@ -1,3 +1,4 @@
+import fetchExperienceById from '@/apis/Experience/fetchExperienceById';
 import createPost from '@/apis/Questions/createPost';
 import { Question } from '@/apis/Questions/fetchQuestion';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
@@ -38,12 +39,12 @@ const Post = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentCount, setContentCount] = useState(0);
-  const [project, setProject] = useState('');
+  const [experienceTitle, setExperienceTitle] = useState('');
   const [experienceId, setExperienceId] = useState('');
   const [showSave, setShowSave] = useState(false);
   const [showBack, setShowBack] = useState(false);
   const [categoryCount, setCategoryCount] = useState(0);
-  const [inputItems, setInputItems] = useState<string[]>([]);
+  const [keywords, setKeywords] = useState<string[]>([]);
 
   const [myEdit, setMyEdit] = useState<Question>();
 
@@ -55,15 +56,21 @@ const Post = () => {
 
   const [keyword, setKeyword] = useRecoilState(keywordState);
 
+  const [quesiton, setQuesiton] = useState<Question>();
+
   useEffect(() => {
     async function fillContent() {
       if (questionId) {
+        if (quesiton) {
+          return;
+        }
         const res = await fetchQuestionById(questionId);
         if (res !== null) {
+          setQuesiton(res);
           setTitle(res.subject);
           setContent(res.mainText);
           setContentCount(res.mainText.length);
-          setInputItems(res.keyWordList);
+          setKeywords(res.keyWordList);
           const postCategories = postCategory.map((category) => {
             const categories = res.categoryList;
             const isSelected = categories.includes(category.code)
@@ -76,28 +83,35 @@ const Post = () => {
       }
     }
 
+    async function fillExperienceName() {
+      const res = await fetchExperienceById(+experienceId);
+      if (res) {
+        setExperienceTitle(res.title);
+      }
+    }
+
     if (paramTitle) {
       setTitle(paramTitle as string);
     }
 
     if (paramExperienceId) {
-      //setProject(exp as string);
-      console.log(paramExperienceId);
+      fillExperienceName();
+      setExperienceId(paramExperienceId as string);
     }
-    if (paramExperienceId) setExperienceId(paramExperienceId as string);
     if (paramQuestionId) {
       fillContent();
       setQuestionId(paramQuestionId as string);
     }
 
-    localStorage.setItem('keywords', JSON.stringify(inputItems));
+    localStorage.setItem('keywords', JSON.stringify(keywords));
   }, [
     experienceId,
     paramExperienceId,
     paramQuestionId,
     questionId,
-    inputItems,
+    keywords,
     paramTitle,
+    quesiton,
   ]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,7 +161,7 @@ const Post = () => {
       result = await createPost({
         subject: title,
         mainText: content,
-        keyWordList: inputItems,
+        keyWordList: keywords,
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
@@ -156,7 +170,7 @@ const Post = () => {
       result = await createPost({
         subject: title,
         mainText: content,
-        keyWordList: inputItems,
+        keyWordList: keywords,
         categoryList: postCategories
           .filter((value) => value.isSelected)
           .map((value) => value.category.code),
@@ -172,7 +186,7 @@ const Post = () => {
       questionId: paramQuestionId as string,
       subject: title,
       mainText: content,
-      keyWordList: inputItems,
+      keyWordList: keywords,
       categoryList: postCategories
         .filter((value) => value.isSelected)
         .map((value) => value.category.code),
@@ -188,14 +202,14 @@ const Post = () => {
   };
 
   const addInput = () => {
-    const hasEmptyKeyword = inputItems.find((value) => value === '');
-    if (hasEmptyKeyword !== undefined || inputItems.length === 20) {
+    const hasEmptyKeyword = keywords.find((value) => value === '');
+    if (hasEmptyKeyword !== undefined || keywords.length === 20) {
       return;
     }
 
-    const items = [...inputItems, keyword];
+    const items = [...keywords, keyword];
 
-    setInputItems(items);
+    setKeywords(items);
   };
 
   const addKeyword = (selectedText: string) => {
@@ -203,12 +217,12 @@ const Post = () => {
     if (obj !== null) {
       const keywords = [...(JSON.parse(obj) as string[]), selectedText];
       localStorage.setItem('keywords', JSON.stringify(keywords));
-      setInputItems(keywords);
+      setKeywords(keywords);
     }
   };
 
   const fixInput = (fixedIndex: number) => {
-    const newInputItems = inputItems.map((value, index) => {
+    const newInputItems = keywords.map((value, index) => {
       if (fixedIndex === index) {
         return keyword;
       } else {
@@ -216,12 +230,12 @@ const Post = () => {
       }
     });
 
-    setInputItems(newInputItems);
+    setKeywords(newInputItems);
   };
 
   const deleteInput = (deletedIndex: number) => {
-    const test = inputItems.filter((item, index) => index !== deletedIndex);
-    setInputItems(test);
+    const test = keywords.filter((item, index) => index !== deletedIndex);
+    setKeywords(test);
   };
 
   return (
@@ -233,9 +247,9 @@ const Post = () => {
       </div>
       <div className="flex flex-row mt-[60px] mb-5 items-center">
         <p className="text-title1 mr-[16px]">질문-답변 만들기</p>
-        {paramExperienceId && (
+        {experienceTitle && (
           <p className="pl-[12px] text-heading3 text-gray-600 border-l-2 border-l-main-300">
-            {project}
+            {experienceTitle}
           </p>
         )}
       </div>
@@ -272,9 +286,9 @@ const Post = () => {
             키워드는 최대 20개까지 가능해요
           </p>
         </div>
-        {inputItems.length > 0 && (
+        {keywords.length > 0 && (
           <div className="flex mb-[12px] gap-[6px] flex-wrap">
-            {inputItems.map((item, index) => (
+            {keywords.map((item, index) => (
               <SumKeyWord
                 key={item}
                 defaultKeywordName={item}

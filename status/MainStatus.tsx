@@ -1,16 +1,17 @@
 import { atom } from 'recoil';
+import { v1 } from 'uuid';
 
 export const selectedMainMyCategoriesState = atom({
-  key: 'selectedMainMyCateogries',
+  key: `selectedMainMyCateogries/${v1()}`,
   default: 0,
 });
 
 export const selectedMainOthersCategoriesState = atom({
-  key: 'selectedMainOthersCateogries',
+  key: `selectedMainOthersCateogries/${v1()}`,
   default: 0,
 });
 
 export const PageState = atom({
-  key: 'pageState',
+  key: `pageState/${v1()}`,
   default: 1,
 });

@@ -35,6 +35,7 @@
    },
    "devDependencies": {
       "@svgr/webpack": "^8.0.1",
+      "@types/uuid": "^9.0.2",
       "prettier": "^3.0.0"
    }
 }
