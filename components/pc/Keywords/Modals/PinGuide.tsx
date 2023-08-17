@@ -24,7 +24,7 @@ const PinGuide = ({ setShow }: ModalProps) => {
           <p>방금 내가 누른 핀은</p>
           <p>요약 노트에서 볼 수 있어요!</p>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-[24px]">
           <Image src={Guide} alt="pinGuide" width={491} height={340} />
         </div>
       </div>

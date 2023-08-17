@@ -3,11 +3,9 @@ import fetchQuestion, {
 } from '@/apis/Questions/fetchQuestion';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
-
 import Illust1 from '@/img/Illust_mobileOnBoarding1.png';
 import Illust2 from '@/img/Illust_mobileOnBoarding2.png';
 import Illust3 from '@/img/Illust_mobileOnBoarding3.png';
-
 import Pin from '@/img/mobile-pin-red-24.svg';
 import { jobState } from '@/status/JobStatus';
 import {
