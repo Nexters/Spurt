@@ -120,7 +120,7 @@ const Post = () => {
 
   const onChangeContent = (text: string) => {
     setContent(text);
-    setContentCount(text.length);
+    setContentCount(text.replace(/<[^>]*>?/g, '').length);
   };
 
   const showSaveModal = () => {

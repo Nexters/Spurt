@@ -24,7 +24,7 @@ const QuickEditor = ({ text, setText, addKeyword }: EditorProps) => {
             opacity: 1;
     }
     `,
-        quickbars_selection_toolbar: 'bold italic | formatselect | addKeyword',
+        quickbars_selection_toolbar: 'bold | formatselect | addKeyword',
         quickbars_insert_toolbar: false,
         quickbars_image_toolbar: false,
         statusbar: false,
@@ -32,11 +32,14 @@ const QuickEditor = ({ text, setText, addKeyword }: EditorProps) => {
         toolbar: false,
         setup: (editor) => {
           editor.ui.registry.addButton('addKeyword', {
-            text: 'K',
+            text: 'Keyword',
             onAction: (_) => {
               const selectedText = editor.selection.getContent({
                 format: 'text',
               });
+              if (selectedText.length > 20) {
+                return;
+              }
               addKeyword(selectedText);
             },
           });
