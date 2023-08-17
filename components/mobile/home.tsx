@@ -3,7 +3,9 @@ import fetchQuestion, {
 } from '@/apis/Questions/fetchQuestion';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
-import Illust from '@/img/Illust_mobileOnBoarding.png';
+import Illust1 from '@/img/Illust_mobileOnBoarding1.png';
+import Illust2 from '@/img/Illust_mobileOnBoarding2.png';
+import Illust3 from '@/img/Illust_mobileOnBoarding3.png';
 import Pin from '@/img/mobile-pin-red-24.svg';
 import { jobState } from '@/status/JobStatus';
 import {
@@ -17,14 +19,15 @@ import {
 } from '@/status/NoteStatus';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import VisibleBtn from '../pc/Keywords/Buttons/visibleBtn';
 import Keyword from '../pc/Keywords/Keyword';
 import TenMinuteCard from '../pc/Keywords/Questions/TenMintueCard';
-import SigninBtn from './SigninBtn';
 import Toggle from './toggle';
 
 export default function MobileHome() {
@@ -41,6 +44,9 @@ export default function MobileHome() {
 
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
   const myJob = useRecoilValue(jobState);
+
+  const [guideActiveIndex, setGuideActiveIndex] = useState(0);
+
   useEffect(() => {
     async function call() {
       const result = await fetchQuestion({
@@ -58,24 +64,62 @@ export default function MobileHome() {
     }
   }, [session, selectedCategory]);
 
+  const guide = (index: number) => {
+    if (index === 0) {
+      return (
+        <div className="flex flex-col text-center">
+          <p className="text-body4 text-main-500">SPURT TIP 01</p>
+          <div className="text-body4 mt-[8px]">
+            <p className="text-gray-700">들어가기 직전,</p>
+            <p className="text-gray-700">요약노트를 보며 면접을 준비해요</p>
+          </div>
+        </div>
+      );
+    } else if (index === 1) {
+      return (
+        <div className="flex flex-col text-center">
+          <p className="text-body4 text-main-500">SPURT TIP 02</p>
+          <div className="text-body4 mt-[8px]">
+            <p className="text-gray-700">PC에서 질문을 핀 고정하면</p>
+            <p className="text-gray-700">
+              요약노트에서 빠르게 모아볼 수 있어요
+            </p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col text-center">
+          <p className="text-body4 text-main-500">SPURT TIP 03</p>
+          <div className="text-body4 mt-[8px]">
+            <p className="text-gray-700">예상 질문 및 경험은</p>
+            <p className="text-gray-700">PC에서만 작성 가능해요</p>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <>
       <div className="bg-main-100 py-[40px]">
-        <div className="mb-[15px] text-title8 p-[16px]">
-          {session ? (
-            <p>{session.user?.name}님! 내가 저장한</p>
-          ) : (
-            <p>내가 저장한</p>
-          )}
-          <span className="underline underline-offset-8 decoration-4 decoration-main-400">
-            질문과 답변
-          </span>
-          <span>을 확인해요</span>
+        <div className="p-[16px]">
+          <div className="mb-[15px] text-title8">
+            {session ? (
+              <p>{session.user?.name}님! 내가 저장한</p>
+            ) : (
+              <p>내가 저장한</p>
+            )}
+            <span className="underline underline-offset-8 decoration-4 decoration-main-400">
+              질문과 답변
+            </span>
+            <span>을 확인해요</span>
+          </div>
+          <p className="text-caption3 text-gray-500">
+            {session &&
+              '질문 모음, 나의 프로젝트를 보고 싶다면 pc 버전으로 가주세요'}
+          </p>
         </div>
-        <p className="text-caption3 text-gray-500">
-          {session &&
-            '질문 모음, 나의 프로젝트를 보고 싶다면 pc 버전으로 가주세요'}
-        </p>
       </div>
 
       <div className="p-[16px]">
@@ -182,22 +226,33 @@ export default function MobileHome() {
           </>
         ) : (
           <>
-            <div className="bg-white rounded-[20px] mt-[30px] py-[32px] px-[23px]">
-              <div className="flex flex-col text-center">
-                <p className="text-body4 text-main-500">SPURT TIP 01</p>
-                <p className="text-body4 mt-[8px]">
-                  <p className="text-gray-700">들어가기 직전,</p>
-                  <p className="text-gray-700">
-                    요약노트를 보며 면접을 준비해요
-                  </p>
-                </p>
-              </div>
-              <div className="flex justify-center">
-                <Image src={Illust} alt="onBoarding" />
-              </div>
-              <div className="flex justify-center">
-                <SigninBtn />
-              </div>
+            <div className="bg-white rounded-[20px] mt-[30px] py-[32px] px-[23px] select-none">
+              {guide(guideActiveIndex)}
+              <Swiper
+                style={{ width: '300px', height: '400px' }}
+                pagination={true}
+                modules={[Pagination]}
+                onActiveIndexChange={(swiper) =>
+                  setGuideActiveIndex(swiper.activeIndex)
+                }
+                speed={500}
+              >
+                <SwiperSlide
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Image src={Illust1} alt="onBoarding" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image src={Illust2} alt="onBoarding" />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Image src={Illust3} alt="onBoarding" />
+                </SwiperSlide>
+              </Swiper>
             </div>
           </>
         )}
