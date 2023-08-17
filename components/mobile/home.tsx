@@ -22,6 +22,10 @@ import Keyword from '../pc/Keywords/Keyword';
 import TenMinuteCard from '../pc/Keywords/Questions/TenMintueCard';
 import Toggle from './toggle';
 import { jobState } from '@/status/JobStatus';
+import Image from 'next/image';
+import Illust from '@/img/Illust_mobileOnBoarding.png';
+import SigninBtn from './SigninBtn';
+import VisibleBtn from '../pc/Keywords/Buttons/visibleBtn';
 
 export default function MobileHome() {
   const [selectedCardIndex, setSelectedCardIndex] =
@@ -32,6 +36,7 @@ export default function MobileHome() {
   );
   const [isKeywordVisible, setKeywordVisibility] =
     useRecoilState(keywordVisibleState);
+
   const { data: session } = useSession();
 
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
@@ -63,97 +68,142 @@ export default function MobileHome() {
   }, [session, selectedCategory]);
 
   return (
-    <div>
-      <div className="mt-[40px] text-title8">
-        <p>{session?.user?.name}님! 내가 저장한</p>
+    <div className="mb-[100px]">
+      <div className="mt-[40px] mb-[15px] text-title8">
+        {session ? (
+          <p>{session.user?.name}님! 내가 저장한</p>
+        ) : (
+          <p>내가 저장한</p>
+        )}
         <span className="underline underline-offset-8 decoration-4 decoration-main-400">
           질문과 답변
         </span>
         <span>을 확인해요</span>
       </div>
-      <p className="mt-[15px] text-caption6 text-gray-500">
-        질문 모음, 나의 프로젝트를 보고 싶다면 pc 버전으로 가주세요
+      <p className="text-caption3 text-gray-500">
+        {session &&
+          '질문 모음, 나의 프로젝트를 보고 싶다면 pc 버전으로 가주세요'}
       </p>
-      <div className="mt-[46px]">
-        <div className="flex items-center">
-          <Pin></Pin>
-          <span className="text-heading1 ml-[10px]">요약 노트</span>
-        </div>
-        <div className="flex mt-[20px]">
-          <Carousel
-            categories={noteCategory}
-            isPc={false}
-            selectedCateogry={selectedCategory}
-            setCategory={setSelectedCategory}
-          ></Carousel>
-        </div>
-      </div>
-      <div className="flex flex-col pt-[20px] pl-[16px] pb-[20px] rounded-[20px] bg-white mt-[20px] mb-[18px]">
-        <div className="flex">
-          <span className="text-caption5">총&nbsp;</span>
-          <span className="text-caption4">{myNotes.questions.length}</span>
-          <span className="text-caption5">개</span>
-        </div>
-        <div className="flex mt-[20px]">
-          <Swiper spaceBetween={12} slidesPerView={1.3} slidesOffsetAfter={40}>
-            {myNotes.questions.length === 0 ? (
-              <>아무것도 없지롱</>
-            ) : (
-              myNotes.questions.map((value, index) => {
-                return (
-                  <SwiperSlide key={index}>
-                    <TenMinuteCard
-                      index={index}
-                      selectedIndex={selectedCardIndex}
-                      text={value.subject}
-                      onClick={setSelectedCardIndex}
-                      isPc={false}
-                      questionId={value.questionId}
-                      isPinned={true}
-                    ></TenMinuteCard>
-                  </SwiperSlide>
-                );
-              })
-            )}
-          </Swiper>
-        </div>
-      </div>
-      <div className="mb-[18px]">
-        <Toggle isToggle={isKeyword} setToggle={setIsKeyword}></Toggle>
-      </div>
-      <div className="mt-[20px]">
-        {isKeyword ? (
-          !myNotes.questions[selectedCardIndex] ||
-          myNotes.questions[selectedCardIndex].keyWordList.length === 0 ? (
-            <Keyword
-              text="작성된 키워드가 없어요."
-              isVisible={isKeywordVisible}
-              isPc={true}
-            ></Keyword>
-          ) : (
-            myNotes.questions[selectedCardIndex].keyWordList.map(
-              (value, index) => {
-                return (
+
+      {session ? (
+        <>
+          <div className="flex flex-row mt-[40px]">
+            <div className="flex items-center">
+              <Pin></Pin>
+              <span className="text-heading1 ml-[10px]">요약 노트</span>
+            </div>
+          </div>
+          <div className="flex mt-[20px]">
+            <Carousel
+              categories={noteCategory}
+              isPc={false}
+              selectedCateogry={selectedCategory}
+              setCategory={setSelectedCategory}
+            ></Carousel>
+          </div>
+
+          <div className="flex flex-col py-[20px] pl-[16px]  rounded-[20px] bg-white mt-[20px] mb-[18px]">
+            <div className="flex">
+              <span className="text-caption5">총&nbsp;</span>
+              <span className="text-caption4">{myNotes.questions.length}</span>
+              <span className="text-caption5">개</span>
+            </div>
+            <div className="flex mt-[20px]">
+              <Swiper
+                spaceBetween={12}
+                slidesPerView={1.3}
+                slidesOffsetAfter={40}
+              >
+                {myNotes.questions.length === 0 ? (
+                  <>아무것도 없지롱</>
+                ) : (
+                  myNotes.questions.map((value, index) => {
+                    return (
+                      <SwiperSlide key={index}>
+                        <TenMinuteCard
+                          index={index}
+                          selectedIndex={selectedCardIndex}
+                          text={value.subject}
+                          onClick={setSelectedCardIndex}
+                          isPc={false}
+                          questionId={value.questionId}
+                          isPinned={true}
+                        ></TenMinuteCard>
+                      </SwiperSlide>
+                    );
+                  })
+                )}
+              </Swiper>
+            </div>
+
+            <div className="flex flex-row justify-between my-[18px] pr-[16px]">
+              <Toggle isToggle={isKeyword} setToggle={setIsKeyword} />
+              <VisibleBtn
+                isVisible={isKeywordVisible}
+                setVisibility={setKeywordVisibility}
+              ></VisibleBtn>
+            </div>
+            <div className="mt-[20px] pr-[16px]">
+              {isKeyword ? (
+                !myNotes.questions[selectedCardIndex] ||
+                myNotes.questions[selectedCardIndex].keyWordList.length ===
+                  0 ? (
                   <Keyword
-                    key={index}
-                    text={value}
+                    text="작성된 키워드가 없어요."
                     isVisible={isKeywordVisible}
                     isPc={true}
                   ></Keyword>
-                );
-              },
-            )
-          )
-        ) : (
-          <>
-            <p className="text-content_body2 whitespace-pre-line ">
-              {myNotes.questions[selectedCardIndex]
-                ? myNotes.questions[selectedCardIndex].mainText
-                : ''}
-            </p>
-          </>
-        )}
-      </div>
+                ) : (
+                  myNotes.questions[selectedCardIndex].keyWordList.map(
+                    (value, index) => {
+                      return (
+                        <Keyword
+                          key={index}
+                          text={value}
+                          isVisible={isKeywordVisible}
+                          isPc={true}
+                        ></Keyword>
+                      );
+                    },
+                  )
+                )
+              ) : (
+                <>
+                  <p
+                    className={
+                      isKeywordVisible
+                        ? 'text-content_body2 whitespace-pre-line'
+                        : 'blur text-content_body2 whitespace-pre-line'
+                    }
+                  >
+                    {myNotes.questions[selectedCardIndex]
+                      ? myNotes.questions[selectedCardIndex].mainText
+                      : ''}
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="bg-white h-[468px] rounded-[20px] mt-[79px] py-[40px] px-[20px]">
+            <div className="flex flex-col text-center">
+              <p className="text-body1 text-gray-700">예상 질문 및 경험은</p>
+              <p className="text-body1">
+                <span className="text-red">PC버전</span>
+                <span className="text-gray-700">에서만 작성 가능해요</span>
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <Image src={Illust} alt="onBoarding" />
+            </div>
+            <div className="flex justify-center">
+              <SigninBtn />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

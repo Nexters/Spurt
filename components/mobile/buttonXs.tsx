@@ -7,7 +7,7 @@ const MobileButtonXs = ({ name, isSelected }: ButtonProps) => {
   return (
     <>
       {isSelected ? (
-        <button className="text-body8 bg-gray-700 text-white py-[6px] px-[16px] flex justify-center items-center rounded-[30px] mr-2 borde border-gray-700">
+        <button className="text-body8 border border-gray-700 bg-gray-700 text-white py-[6px] px-[16px] flex justify-center items-center rounded-[30px] mr-2">
           {name}
         </button>
       ) : (

@@ -72,8 +72,8 @@ const TenMinuteCard = ({
         <div
           className={
             index == selectedIndex
-              ? `flex p-[16px] h-[106px] bg-main-200 rounded-[20px] cursor-pointer min-w-[250px] max-w-[250px]`
-              : `flex p-[16px] h-[106px] bg-gray-100 rounded-[20px] cursor-pointer min-w-[250px] max-w-[250px]`
+              ? `flex p-[16px] h-[106px] bg-main-200 rounded-[11px] cursor-pointer min-w-[250px] max-w-[250px]`
+              : `flex p-[16px] h-[106px] bg-gray-100 rounded-[11px] cursor-pointer min-w-[250px] max-w-[250px] border border-gray_line`
           }
           onClick={() => onClick(index)}
         >

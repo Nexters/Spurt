@@ -79,6 +79,7 @@ const Post = () => {
         }
       }
     }
+
     if (subject) {
       fillContent();
     }
