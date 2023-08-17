@@ -21,8 +21,6 @@ body {
 @media (max-width: 665px) {
   #__next {
     width: 100%;
-    padding-left: 16px;
-    padding-right: 16px;
   }
 }
 
