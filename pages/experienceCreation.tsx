@@ -82,7 +82,7 @@ const ExperienceCreation = () => {
 
   const callExperienceCreationApi = async () => {
     const startDate = startY + '-' + startM;
-    const endDate = proceeding ? null : startY + '-' + startM;
+    const endDate = proceeding ? null : endY + '-' + endM;
     var result = false;
     if (!paramExperienceId) {
       result = await createExperience({
