@@ -12,12 +12,12 @@ export default function MobileHeader() {
         <div className="flex content-center ">
           <Logo></Logo>
         </div>
-        <div className="flex flex-row w-16">
+        <div className="flex flex-row">
           {session ? (
             <Image
               src={session?.user?.image!}
-              width="40"
-              height="40"
+              width="32"
+              height="32"
               className="rounded-full "
               alt="프로필 사진"
             ></Image>
