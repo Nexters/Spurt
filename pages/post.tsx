@@ -1,4 +1,3 @@
-import { Experience } from '@/apis/Experience/fetchExperience';
 import createPost from '@/apis/Questions/createPost';
 import { Question } from '@/apis/Questions/fetchQuestion';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
@@ -33,7 +32,7 @@ export class PostCategory implements IPostCategory {
 
 const Post = () => {
   const router = useRouter();
-  const { subject, paramExperienceId, paramQuestionId } = router.query;
+  const { paramTitle, paramExperienceId, paramQuestionId } = router.query;
 
   const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
@@ -58,9 +57,6 @@ const Post = () => {
 
   useEffect(() => {
     async function fillContent() {
-      if (subject) {
-        setTitle(subject as string);
-      }
       if (questionId) {
         const res = await fetchQuestionById(questionId);
         if (res !== null) {
@@ -80,8 +76,8 @@ const Post = () => {
       }
     }
 
-    if (subject) {
-      fillContent();
+    if (paramTitle) {
+      setTitle(paramTitle as string);
     }
 
     if (paramExperienceId) {
@@ -101,6 +97,7 @@ const Post = () => {
     paramQuestionId,
     questionId,
     inputItems,
+    paramTitle,
   ]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {

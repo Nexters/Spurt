@@ -17,7 +17,7 @@ const QuestionCard = ({ subject }: RandomQuestion) => {
         onClick={() => {
           router.push({
             pathname: session ? '/post' : '/signin',
-            query: session ? { subject } : {},
+            query: session ? { paramTitle: subject } : {},
           });
         }}
       >
