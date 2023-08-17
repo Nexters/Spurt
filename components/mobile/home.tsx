@@ -69,7 +69,7 @@ export default function MobileHome() {
       return (
         <div className="flex flex-col text-center">
           <p className="text-body4 text-main-500">SPURT TIP 01</p>
-          <div className="text-body4 mt-[8px]">
+          <div className="text-title8 mt-[10px]">
             <p className="text-gray-700">들어가기 직전,</p>
             <p className="text-gray-700">요약노트를 보며 면접을 준비해요</p>
           </div>
@@ -79,7 +79,7 @@ export default function MobileHome() {
       return (
         <div className="flex flex-col text-center">
           <p className="text-body4 text-main-500">SPURT TIP 02</p>
-          <div className="text-body4 mt-[8px]">
+          <div className="text-title8 mt-[10px]">
             <p className="text-gray-700">PC에서 질문을 핀 고정하면</p>
             <p className="text-gray-700">
               요약노트에서 빠르게 모아볼 수 있어요
@@ -91,7 +91,7 @@ export default function MobileHome() {
       return (
         <div className="flex flex-col text-center">
           <p className="text-body4 text-main-500">SPURT TIP 03</p>
-          <div className="text-body4 mt-[8px]">
+          <div className="text-title8 mt-[10px]">
             <p className="text-gray-700">예상 질문 및 경험은</p>
             <p className="text-gray-700">PC에서만 작성 가능해요</p>
           </div>
@@ -102,30 +102,33 @@ export default function MobileHome() {
 
   return (
     <>
-      <div className="bg-main-100 py-[40px]">
-        <div className="p-[16px]">
-          <div className="mb-[15px] text-title8">
+      <div className="bg-main-100 pt-[40px]">
+        <div className="px-[16px]">
+          <div className="mb-[14px] text-title9 text-gray-700">
             {session ? (
               <p>{session.user?.name}님! 내가 저장한</p>
             ) : (
               <p>내가 저장한</p>
             )}
-            <span className="underline underline-offset-8 decoration-4 decoration-main-400">
+            <span className="underline underline-offset-4 decoration-4 decoration-main-400">
               질문과 답변
             </span>
             <span>을 확인해요</span>
           </div>
-          <p className="text-caption3 text-gray-500">
-            {session &&
-              '질문 모음, 나의 프로젝트를 보고 싶다면 pc 버전으로 가주세요'}
-          </p>
         </div>
+        <p className="text-caption3 text-gray-500 px-[16px] pb-[20px]">
+          {session ? (
+            '질문 모음, 나의 프로젝트를 보고 싶다면 pc 버전으로 가주세요'
+          ) : (
+            <div className="h-[20px]"></div>
+          )}
+        </p>
       </div>
 
-      <div className="p-[16px]">
+      <div className="px-[16px]">
         {session ? (
           <>
-            <div className="flex flex-row mt-[40px]">
+            <div className="flex flex-row mt-[20px]">
               <div className="flex items-center">
                 <Pin></Pin>
                 <span className="text-heading1 ml-[10px]">요약 노트</span>
@@ -139,25 +142,31 @@ export default function MobileHome() {
                 setCategory={setSelectedCategory}
               ></Carousel>
             </div>
-
-            <div className="flex flex-col py-[20px] pl-[16px]  rounded-[20px] bg-white mt-[20px] mb-[18px]">
-              <div className="flex">
-                <span className="text-caption5">총&nbsp;</span>
-                <span className="text-caption4">
-                  {myNotes.questions.length}
-                </span>
-                <span className="text-caption5">개</span>
+            {myNotes.questions.length === 0 ? (
+              <div className="bg-white h-[344px] rounded-[20px] mt-[20px] gap-[6px] flex flex-col justify-center items-center">
+                <p className="text-body1 text-gray-600">
+                  아직 등록한 질문-답변이 없어요
+                </p>
+                <p className="text-body7 text-gray-500">
+                  PC에서 예상질문과 답변을 만들어 주세요
+                </p>
               </div>
-              <div className="mt-[20px]">
-                <Swiper
-                  spaceBetween={12}
-                  slidesPerView={1.3}
-                  slidesOffsetAfter={40}
-                >
-                  {myNotes.questions.length === 0 ? (
-                    <>아무것도 없지롱</>
-                  ) : (
-                    myNotes.questions.map((value, index) => {
+            ) : (
+              <div className="flex flex-col py-[20px] pl-[16px]  rounded-[20px] bg-white mt-[20px] mb-[18px]">
+                <div className="flex">
+                  <span className="text-caption5">총&nbsp;</span>
+                  <span className="text-caption4">
+                    {myNotes.questions.length}
+                  </span>
+                  <span className="text-caption5">개</span>
+                </div>
+                <div className="mt-[20px]">
+                  <Swiper
+                    spaceBetween={12}
+                    slidesPerView={1.3}
+                    slidesOffsetAfter={40}
+                  >
+                    {myNotes.questions.map((value, index) => {
                       return (
                         <SwiperSlide key={index}>
                           <TenMinuteCard
@@ -171,62 +180,63 @@ export default function MobileHome() {
                           ></TenMinuteCard>
                         </SwiperSlide>
                       );
-                    })
-                  )}
-                </Swiper>
-              </div>
+                    })}
+                  </Swiper>
+                </div>
 
-              <div className="flex flex-row justify-between my-[18px] pr-[16px]">
-                <Toggle isToggle={isKeyword} setToggle={setIsKeyword} />
-                <VisibleBtn
-                  isVisible={isKeywordVisible}
-                  setVisibility={setKeywordVisibility}
-                ></VisibleBtn>
-              </div>
-              <div className="mt-[20px] pr-[16px]">
-                {isKeyword ? (
-                  !myNotes.questions[selectedCardIndex] ||
-                  myNotes.questions[selectedCardIndex].keyWordList.length ===
-                    0 ? (
-                    <Keyword
-                      text="작성된 키워드가 없어요."
-                      isVisible={isKeywordVisible}
-                      isPc={true}
-                    ></Keyword>
-                  ) : (
-                    myNotes.questions[selectedCardIndex].keyWordList.map(
-                      (value, index) => {
-                        return (
-                          <Keyword
-                            key={index}
-                            text={value}
-                            isVisible={isKeywordVisible}
-                            isPc={true}
-                          ></Keyword>
-                        );
-                      },
+                <div className="flex flex-row justify-between my-[18px] pr-[16px]">
+                  <Toggle isToggle={isKeyword} setToggle={setIsKeyword} />
+                  <VisibleBtn
+                    isVisible={isKeywordVisible}
+                    setVisibility={setKeywordVisibility}
+                  ></VisibleBtn>
+                </div>
+                <div className="mt-[20px] pr-[16px]">
+                  {isKeyword ? (
+                    !myNotes.questions[selectedCardIndex] ||
+                    myNotes.questions[selectedCardIndex].keyWordList.length ===
+                      0 ? (
+                      <Keyword
+                        text="작성된 키워드가 없어요."
+                        isVisible={isKeywordVisible}
+                        isPc={true}
+                      ></Keyword>
+                    ) : (
+                      myNotes.questions[selectedCardIndex].keyWordList.map(
+                        (value, index) => {
+                          return (
+                            <Keyword
+                              key={index}
+                              text={value}
+                              isVisible={isKeywordVisible}
+                              isPc={true}
+                            ></Keyword>
+                          );
+                        },
+                      )
                     )
-                  )
-                ) : (
-                  <>
-                    <div
-                      className={
-                        isKeywordVisible
-                          ? 'text-content_body2 whitespace-pre-line'
-                          : 'blur text-content_body2 whitespace-pre-line'
-                      }
-                      dangerouslySetInnerHTML={{
-                        __html: myNotes?.questions[selectedCardIndex]?.mainText,
-                      }}
-                    ></div>
-                  </>
-                )}
+                  ) : (
+                    <>
+                      <div
+                        className={
+                          isKeywordVisible
+                            ? 'text-content_body2 whitespace-pre-line'
+                            : 'blur text-content_body2 whitespace-pre-line'
+                        }
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            myNotes?.questions[selectedCardIndex]?.mainText,
+                        }}
+                      ></div>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </>
         ) : (
           <>
-            <div className="bg-white rounded-[20px] mt-[30px] py-[32px] px-[23px] select-none">
+            <div className="bg-white rounded-[20px] mt-[30px] pt-[30px] pb-[32px] px-[23px] select-none">
               {guide(guideActiveIndex)}
               <Swiper
                 style={{ width: '300px', height: '400px' }}

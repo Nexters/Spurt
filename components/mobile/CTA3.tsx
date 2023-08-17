@@ -4,8 +4,8 @@ interface Cta3Props {
 
 const CTA3 = ({ text }: Cta3Props) => {
   return (
-    <button className="gap-[10px]  bg-main-400 text-white py-[6px] px-[6px] flex justify-center items-center rounded-[12px] border border-main-500 h-[32px]">
-      <p className="text-body8">{text}</p>
+    <button className="text-body8 w-[67px] h-[36px] bg-main-400 text-white py-[8px] px-[14px] flex justify-center items-center rounded-[10px] border border-main-500 ">
+      <p className="">{text}</p>
     </button>
   );
 };
