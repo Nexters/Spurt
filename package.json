@@ -11,6 +11,7 @@
       "format:fix": "prettier --write --ignore-path .gitignore ."
    },
    "dependencies": {
+      "@tinymce/tinymce-react": "^4.3.0",
       "@types/node": "20.4.1",
       "@types/react": "18.2.14",
       "@types/react-dom": "18.2.6",
@@ -29,6 +30,7 @@
       "recoil": "^0.7.7",
       "swiper": "^10.0.4",
       "tailwindcss": "3.3.2",
+      "tinymce": "^6.6.2",
       "typescript": "5.1.6"
    },
    "devDependencies": {

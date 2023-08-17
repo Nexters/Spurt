@@ -5,6 +5,7 @@ import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import SumKeyWord from '@/components/pc/Keywords/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Keywords/Buttons/addKeyword';
 import PostCarousel from '@/components/pc/Keywords/Carousel/PostCarousel';
+import QuickEditor from '@/components/pc/Keywords/Editor';
 import BackGuide from '@/components/pc/Keywords/Modals/BackGuide';
 import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
 import { Category, postCategory } from '@/const/categories';
@@ -46,9 +47,9 @@ const Post = () => {
     setTitle(event.target.value);
   };
 
-  const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value);
-    setContentCount(event.target.value.length);
+  const onChangeContent = (text: string) => {
+    setContent(text);
+    setContentCount(text.length);
   };
 
   const showSaveModal = () => {
@@ -135,9 +136,19 @@ const Post = () => {
     if (hasEmptyKeyword !== undefined || inputItems.length === 20) {
       return;
     }
-    const items = inputItems.map((value) => value).concat(keyword);
+
+    const items = [...inputItems, keyword];
 
     setInputItems(items);
+  };
+
+  const addKeyword = (selectedText: string) => {
+    const obj = localStorage.getItem('keywords');
+    if (obj !== null) {
+      const keywords = [...(JSON.parse(obj) as string[]), selectedText];
+      localStorage.setItem('keywords', JSON.stringify(keywords));
+      setInputItems(keywords);
+    }
   };
 
   const fixInput = (fixedIndex: number) => {
@@ -151,8 +162,10 @@ const Post = () => {
 
     setInputItems(newInputItems);
   };
+
   const deleteInput = (deletedIndex: number) => {
-    setInputItems(inputItems.filter((_, index) => index !== deletedIndex));
+    const test = inputItems.filter((item, index) => index !== deletedIndex);
+    setInputItems(test);
   };
 
   const handleCategories = (categories: PostCategory[]) => {
@@ -192,7 +205,16 @@ const Post = () => {
       fillContent();
       setQuestionId(paramQuestionId as string);
     }
-  }, [exp, experienceId, paramExperienceId, paramQuestionId, questionId]);
+
+    localStorage.setItem('keywords', JSON.stringify(inputItems));
+  }, [
+    exp,
+    experienceId,
+    paramExperienceId,
+    paramQuestionId,
+    questionId,
+    inputItems,
+  ]);
 
   return (
     <>
@@ -227,14 +249,12 @@ const Post = () => {
       </div>
 
       <div className="p-[30px] min-h-[476px] w-full border border-gray-300 rounded-[20px] bg-white">
-        <textarea
-          className="min-h-[360px] w-full text-body3 text-gray-600 resize-none placeholder:text-body3 placeholder:text-gray-300 outline-none"
-          placeholder="답변을 입력해주세요"
-          maxLength={1000}
-          onChange={onChangeContent}
-          value={content}
-        ></textarea>
-        <p className="text-right text-body9 text-gray-300 mb-[30px]">
+        <QuickEditor
+          text={content}
+          setText={onChangeContent}
+          addKeyword={addKeyword}
+        ></QuickEditor>
+        <p className="text-right text-body9 text-gray-300 mt-[30px] mb-[30px]">
           {contentCount} / 1000
         </p>
         <hr />
@@ -248,7 +268,7 @@ const Post = () => {
           <div className="flex mb-[12px] gap-[6px] flex-wrap">
             {inputItems.map((item, index) => (
               <SumKeyWord
-                key={index}
+                key={item}
                 defaultKeywordName={item}
                 fixInput={() => fixInput(index)}
                 deleteInput={() => deleteInput(index)}
