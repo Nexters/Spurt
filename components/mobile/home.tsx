@@ -99,7 +99,7 @@ export default function MobileHome() {
               <span className="text-caption4">{myNotes.questions.length}</span>
               <span className="text-caption5">개</span>
             </div>
-            <div className="flex mt-[20px]">
+            <div className="mt-[20px]">
               <Swiper
                 spaceBetween={12}
                 slidesPerView={1.3}
@@ -160,17 +160,16 @@ export default function MobileHome() {
                 )
               ) : (
                 <>
-                  <p
+                  <div
                     className={
                       isKeywordVisible
                         ? 'text-content_body2 whitespace-pre-line'
                         : 'blur text-content_body2 whitespace-pre-line'
                     }
-                  >
-                    {myNotes.questions[selectedCardIndex]
-                      ? myNotes.questions[selectedCardIndex].mainText
-                      : ''}
-                  </p>
+                    dangerouslySetInnerHTML={{
+                      __html: myNotes?.questions[selectedCardIndex]?.mainText,
+                    }}
+                  ></div>
                 </>
               )}
             </div>

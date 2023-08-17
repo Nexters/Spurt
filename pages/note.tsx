@@ -222,11 +222,11 @@ export default function SummaryNoteHome() {
                             ? 'whitespace-pre-line'
                             : 'whitespace-pre-line blur'
                         }
-                      >
-                        {myNotes.questions[selectedCardIndex]
-                          ? myNotes.questions[selectedCardIndex].mainText
-                          : ''}
-                      </div>
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            myNotes?.questions[selectedCardIndex]?.mainText,
+                        }}
+                      ></div>
                     </div>
                   </div>
                   <div className="flex mt-[50px] justify-end mr-[30px]">

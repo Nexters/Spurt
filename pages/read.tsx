@@ -90,9 +90,10 @@ const ReadPost = () => {
         </div>
         <p className="mb-[50px] text-title1 text-gray-700">{myPost?.subject}</p>
 
-        <div className="mt-[110px] mb-[30px] text-gray-600">
-          {myPost?.mainText}
-        </div>
+        <div
+          className="mt-[110px] mb-[30px] text-gray-600"
+          dangerouslySetInnerHTML={{ __html: myPost?.mainText! }}
+        ></div>
         <div className="flex gap-2 flex-wrap mb-[40px]">
           {myPost?.keyWordList?.map((item, index) => {
             return (
@@ -121,19 +122,6 @@ const ReadPost = () => {
             수정하기 <EditIcon />
           </CTA4>
         </div>
-        {/* {project && (
-          <div className="mt-[-100px] mb-[150px]">
-            <hr />
-            <div className="flex flex-row justify-between mt-[30px]">
-              <p className="text-heading2 text-main-500">
-                기업적 디자인 스튜디오 : 언어재활 환자를 위한 홈 Iot 서비스
-              </p>
-              <p className="text-body2 text-gray-700">총 {10}개</p>
-            </div>
-            <p className="text-title8 text-gray-700 mb-[30px]">다른 예상질문</p>
-            <div className="border border-red h-[192px]">캐러셀 자리</div>
-          </div>
-        )} */}
       </div>
       {showDel && (
         <DeleteGuide
