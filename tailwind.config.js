@@ -69,6 +69,13 @@ module.exports = {
             fontWeight: '700',
           },
         ],
+        title9: [
+          '22px',
+          {
+            lineHeight: '145%',
+            fontWeight: '700',
+          },
+        ],
         heading1: [
           '20px',
           {
