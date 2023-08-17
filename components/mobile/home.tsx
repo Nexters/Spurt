@@ -154,11 +154,11 @@ export default function MobileHome() {
             ) : (
               <div className="flex flex-col py-[20px] pl-[16px]  rounded-[20px] bg-white mt-[20px] mb-[18px]">
                 <div className="flex">
-                  <span className="text-caption5">총&nbsp;</span>
-                  <span className="text-caption4">
+                  <span className="text-caption2">총&nbsp;</span>
+                  <span className="text-caption1">
                     {myNotes.questions.length}
                   </span>
-                  <span className="text-caption5">개</span>
+                  <span className="text-caption2">개</span>
                 </div>
                 <div className="mt-[20px]">
                   <Swiper
