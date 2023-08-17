@@ -13,9 +13,9 @@ const BackGuide = ({ setShow }: ModalProps) => {
           페이지를 나가면, 작성된 글은 저장되지 않아요
         </p>
       </div>
-      <div className="flex w-[460px] h-[89px] border-t-[1px] rounded-b-[30px] bg-white">
+      <div className="flex w-[460px] h-[89px] border-t-[0.8px] rounded-b-[30px] bg-white">
         <button
-          className="flex justify-center items-center border-r-[1px] w-[230px] text-heading2 text-gray-500"
+          className="flex justify-center items-center border-r-[0.8px] w-[230px] text-heading2 text-gray-500"
           onClick={() => setShow()}
         >
           페이지 유지하기

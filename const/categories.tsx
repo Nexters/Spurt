@@ -72,6 +72,7 @@ export const mainMyCategory = [
   major,
   practical,
   collaboration,
+  persandcons,
   conflict,
   etc,
 ];
@@ -92,4 +93,5 @@ export const postCategory = [
   collaboration,
   persandcons,
   conflict,
+  etc,
 ];

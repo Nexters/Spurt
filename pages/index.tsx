@@ -4,6 +4,7 @@ import fetchQuestion, {
 import fetchQuestionByJob, {
   RandomQuestion,
 } from '@/apis/Questions/fetchQuestionByJob';
+import CTA3Black from '@/components/pc/Keywords/Buttons/CTA3-black';
 import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
 import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
@@ -118,7 +119,7 @@ export default function MainHome() {
           ></Carousel>
         )}
 
-        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[80px] rounded-[20px] ">
+        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] ">
           {!session ? (
             <>
               <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
@@ -132,7 +133,7 @@ export default function MainHome() {
                 </div>
 
                 <Link href={session ? '/post' : '/signin'}>
-                  <ButtonS>첫 질문-답변 만들기</ButtonS>
+                  <CTA3Black text={'첫 질문-답변 만들기'}></CTA3Black>
                 </Link>
               </div>
             </>
