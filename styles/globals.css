@@ -22,6 +22,10 @@ body {
   #__next {
     width: 100%;
   }
+
+  .swiper-pagination-bullet-active {
+    background: #feac0c !important;
+  }
 }
 
 .swiper-slide {

@@ -102,9 +102,10 @@ const AnswerCard = ({
           });
         }}
       >
-        <p className="text-body3 text-gray-600 mb-[10px] min-h-[52px] line-clamp-3">
-          {mainText}
-        </p>
+        <div
+          dangerouslySetInnerHTML={{ __html: mainText }}
+          className="text-body3 text-gray-600 mb-[10px] min-h-[52px] line-clamp-3"
+        ></div>
         <p className="text-caption3 text-gray-400">
           {createTimestamp.slice(0, 10)}
         </p>
