@@ -1,4 +1,6 @@
+import { Experience } from '@/apis/Experience/fetchExperience';
 import createPost from '@/apis/Questions/createPost';
+import { Question } from '@/apis/Questions/fetchQuestion';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
 import updateQuestionById from '@/apis/Questions/updateQuestionById';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
@@ -31,7 +33,7 @@ export class PostCategory implements IPostCategory {
 
 const Post = () => {
   const router = useRouter();
-  const { exp, paramExperienceId, paramQuestionId } = router.query;
+  const { subject, paramExperienceId, paramQuestionId } = router.query;
 
   const [questionId, setQuestionId] = useState('');
   const [title, setTitle] = useState('');
@@ -42,6 +44,63 @@ const Post = () => {
   const [showSave, setShowSave] = useState(false);
   const [showBack, setShowBack] = useState(false);
   const [categoryCount, setCategoryCount] = useState(0);
+  const [inputItems, setInputItems] = useState<string[]>([]);
+
+  const [myEdit, setMyEdit] = useState<Question>();
+
+  const [postCategories, setPostCategories] = useState(
+    postCategory.map((category) => {
+      return new PostCategory(category, false);
+    }),
+  );
+
+  const [keyword, setKeyword] = useRecoilState(keywordState);
+
+  useEffect(() => {
+    async function fillContent() {
+      if (subject) {
+        setTitle(subject as string);
+      }
+      if (questionId) {
+        const res = await fetchQuestionById(questionId);
+        if (res !== null) {
+          setTitle(res.subject);
+          setContent(res.mainText);
+          setContentCount(res.mainText.length);
+          setInputItems(res.keyWordList);
+          const postCategories = postCategory.map((category) => {
+            const categories = res.categoryList;
+            const isSelected = categories.includes(category.code)
+              ? true
+              : false;
+            return new PostCategory(category, isSelected);
+          });
+          setPostCategories(postCategories);
+        }
+      }
+    }
+    if (subject) {
+      fillContent();
+    }
+
+    if (paramExperienceId) {
+      //setProject(exp as string);
+      console.log(paramExperienceId);
+    }
+    if (paramExperienceId) setExperienceId(paramExperienceId as string);
+    if (paramQuestionId) {
+      fillContent();
+      setQuestionId(paramQuestionId as string);
+    }
+
+    localStorage.setItem('keywords', JSON.stringify(inputItems));
+  }, [
+    experienceId,
+    paramExperienceId,
+    paramQuestionId,
+    questionId,
+    inputItems,
+  ]);
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -59,26 +118,34 @@ const Post = () => {
     setShowBack(!showBack);
   };
 
+  const handleCategories = (categories: PostCategory[]) => {
+    setCategoryCount(0);
+    setPostCategories(categories);
+    categories.map((item) => {
+      if (item.isSelected !== false) {
+        setCategoryCount(categoryCount + 1);
+      }
+    });
+  };
+
   const handlePost = async () => {
     if (!paramQuestionId) {
+      //질문 등록
       await callPostCreationApi().then(() => {
         showSaveModal();
       });
     } else {
+      //질문 수정
       await callPostEditApi().then(() => {
         showSaveModal();
       });
     }
-    //.then(() => router.back());
-
-    // if (isSuccess) {
-    //   //router.back();
-    // }
   };
 
   const callPostCreationApi = async () => {
+    //질문 등록
     var result = '';
-    if (!exp) {
+    if (!experienceId) {
       result = await createPost({
         subject: title,
         mainText: content,
@@ -102,6 +169,7 @@ const Post = () => {
   };
 
   const callPostEditApi = async () => {
+    //질문 수정
     await updateQuestionById({
       questionId: paramQuestionId as string,
       subject: title,
@@ -120,16 +188,6 @@ const Post = () => {
       showBackModal();
     }
   };
-
-  const [inputItems, setInputItems] = useState<string[]>([]);
-
-  const [postCategories, setPostCategories] = useState(
-    postCategory.map((category) => {
-      return new PostCategory(category, false);
-    }),
-  );
-
-  const [keyword, setKeyword] = useRecoilState(keywordState);
 
   const addInput = () => {
     const hasEmptyKeyword = inputItems.find((value) => value === '');
@@ -168,54 +226,6 @@ const Post = () => {
     setInputItems(test);
   };
 
-  const handleCategories = (categories: PostCategory[]) => {
-    setCategoryCount(0);
-    setPostCategories(categories);
-    categories.map((item) => {
-      if (item.isSelected !== false) {
-        setCategoryCount(categoryCount + 1);
-      }
-    });
-  };
-
-  useEffect(() => {
-    async function fillContent() {
-      if (questionId) {
-        const res = await fetchQuestionById(questionId);
-        if (res !== null) {
-          setTitle(res.subject);
-          setContent(res.mainText);
-          setContentCount(res.mainText.length);
-          setInputItems(res.keyWordList);
-          const postCategories = postCategory.map((category) => {
-            const categories = res.categoryList;
-            const isSelected = categories.includes(category.code)
-              ? true
-              : false;
-            return new PostCategory(category, isSelected);
-          });
-          setPostCategories(postCategories);
-        }
-      }
-    }
-
-    if (exp) setProject(exp as string);
-    if (paramExperienceId) setExperienceId(paramExperienceId as string);
-    if (paramQuestionId) {
-      fillContent();
-      setQuestionId(paramQuestionId as string);
-    }
-
-    localStorage.setItem('keywords', JSON.stringify(inputItems));
-  }, [
-    exp,
-    experienceId,
-    paramExperienceId,
-    paramQuestionId,
-    questionId,
-    inputItems,
-  ]);
-
   return (
     <>
       <div className="flex justify-start h-[100px]">
@@ -225,7 +235,7 @@ const Post = () => {
       </div>
       <div className="flex flex-row mt-[60px] mb-5 items-center">
         <p className="text-title1 mr-[16px]">질문-답변 만들기</p>
-        {exp && (
+        {paramExperienceId && (
           <p className="pl-[12px] text-heading3 text-gray-600 border-l-2 border-l-main-300">
             {project}
           </p>

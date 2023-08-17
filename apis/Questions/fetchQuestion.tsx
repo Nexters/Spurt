@@ -21,6 +21,7 @@ export interface Question {
   keyWordList: string[];
   createTime: string;
   pinIndicator: boolean;
+  experienceId?: number;
 }
 
 export interface Meta {

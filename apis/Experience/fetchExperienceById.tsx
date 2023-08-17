@@ -1,7 +1,7 @@
 import ApiClient from '@/apis/client';
 import { Experience } from './fetchExperience';
 
-const getExperience = async (experienceId: number) => {
+const fetchExperienceById = async (experienceId: number) => {
   try {
     const res = await ApiClient.get(`/v1/experience/${experienceId}`);
     if (res.data.code === 2000) {
@@ -16,4 +16,4 @@ const getExperience = async (experienceId: number) => {
   }
 };
 
-export default getExperience;
+export default fetchExperienceById;

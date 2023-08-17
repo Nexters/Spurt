@@ -185,7 +185,7 @@ export default function MainHome() {
         ></Carousel>
 
         <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px]">
-          <div className="flex flex-row justify-around gap-3 px-[30px]">
+          <div className="flex flex-row gap-3 px-[30px]">
             {random.map((item, index) => {
               return <QuestionCard key={index} subject={item.subject} />;
             })}

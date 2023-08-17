@@ -69,15 +69,12 @@ export default function SummaryNoteHome() {
     }
   }, [session, selectedCategory]);
 
-  const handleEdit = ({
-    paramQuestionId,
-    paramTitle,
-    paramContent,
-    paramCategories,
-  }: EditParam) => {
+  const handleEdit = () => {
     router.push({
       pathname: session ? '/post' : '/signin',
-      query: { paramQuestionId, paramTitle, paramContent, paramCategories },
+      query: {
+        paramQuestionId: myNotes.questions[selectedCardIndex].questionId,
+      },
     });
   };
 
@@ -233,20 +230,7 @@ export default function SummaryNoteHome() {
                     </div>
                   </div>
                   <div className="flex mt-[50px] justify-end mr-[30px]">
-                    <CTA4
-                      onClick={() =>
-                        handleEdit({
-                          paramQuestionId:
-                            myNotes.questions[selectedCardIndex].questionId,
-                          paramTitle:
-                            myNotes.questions[selectedCardIndex].subject,
-                          paramContent:
-                            myNotes.questions[selectedCardIndex].mainText,
-                          paramCategories:
-                            myNotes.questions[selectedCardIndex].categoryList,
-                        })
-                      }
-                    >
+                    <CTA4 onClick={handleEdit}>
                       수정하기<EditIcon></EditIcon>
                     </CTA4>
                   </div>

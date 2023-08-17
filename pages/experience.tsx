@@ -58,7 +58,7 @@ const ExperienceHome = () => {
   const handleQuestion = () => {
     router.push({
       pathname: '/post',
-      query: { exp, paramExperienceId: experienceId },
+      query: { paramExperienceId: experienceId },
     });
   };
 

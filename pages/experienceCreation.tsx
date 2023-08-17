@@ -1,5 +1,5 @@
 import createExperience from '@/apis/Experience/createExperience';
-import getExperience from '@/apis/Experience/getExperience';
+import fetchExperienceById from '@/apis/Experience/fetchExperienceById';
 import updateExperience from '@/apis/Experience/updateExperience';
 import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
 import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
@@ -108,7 +108,7 @@ const ExperienceCreation = () => {
   useEffect(() => {
     async function fillExperienceContent() {
       if (experienceId) {
-        const response = await getExperience(experienceId);
+        const response = await fetchExperienceById(experienceId);
         if (response !== null) {
           setTitle(response.title);
           setContent(response.content);
