@@ -1,8 +1,8 @@
-import BackGuide from '@/components/pc/Keywords/Modals/BackGuide';
-import DeleteGuide from '@/components/pc/Keywords/Modals/DeleteGuide';
-import EditGuide from '@/components/pc/Keywords/Modals/EditGuide';
-import PinGuide from '@/components/pc/Keywords/Modals/PinGuide';
-import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
+import BackGuide from '@/components/pc/Modals/BackGuide';
+import DeleteGuide from '@/components/pc/Modals/DeleteGuide';
+import EditGuide from '@/components/pc/Modals/EditGuide';
+import PinGuide from '@/components/pc/Modals/PinGuide';
+import SaveGuide from '@/components/pc/Modals/SaveGuide';
 import { useState } from 'react';
 
 const ModalTest = () => {

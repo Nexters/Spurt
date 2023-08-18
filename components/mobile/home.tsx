@@ -1,7 +1,7 @@
 import fetchQuestion, {
   QuestionResponse,
 } from '@/apis/Questions/fetchQuestion';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
+import Carousel from '@/components/pc/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
 import Pin from '@/img/mobile-pin-red-24.svg';
 import Ill1 from '@/img/온보딩 1.png';
@@ -26,8 +26,8 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import VisibleBtn from '../pc/Buttons/visibleBtn';
-import Keyword from '../pc/Keywords/Keyword';
-import TenMinuteCard from '../pc/Keywords/Questions/TenMintueCard';
+import Keyword from '../pc/Keyword';
+import TenMinuteCard from '../pc/Questions/TenMintueCard';
 import Toggle from './toggle';
 
 export default function MobileHome() {
