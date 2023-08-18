@@ -6,6 +6,9 @@ import { noteCategory } from '@/const/categories';
 import Illust1 from '@/img/Illust_mobileOnBoarding1.png';
 import Illust2 from '@/img/Illust_mobileOnBoarding2.png';
 import Illust3 from '@/img/Illust_mobileOnBoarding3.png';
+import Ill1 from '@/img/온보딩 1.png';
+import Ill2 from '@/img/온보딩 2.png';
+import Ill3 from '@/img/온보딩 3.png';
 import Pin from '@/img/mobile-pin-red-24.svg';
 import { jobState } from '@/status/JobStatus';
 import {
@@ -254,13 +257,25 @@ export default function MobileHome() {
                     alignItems: 'center',
                   }}
                 >
-                  <Image src={Illust1} alt="onBoarding" />
+                  <Image src={Ill1} alt="onBoarding" width={300} height={300} />
                 </SwiperSlide>
-                <SwiperSlide>
-                  <Image src={Illust2} alt="onBoarding" />
+                <SwiperSlide
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Image src={Ill2} alt="onBoarding" width={300} height={300} />
                 </SwiperSlide>
-                <SwiperSlide>
-                  <Image src={Illust3} alt="onBoarding" />
+                <SwiperSlide
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Image src={Ill3} alt="onBoarding" width={300} height={300} />
                 </SwiperSlide>
               </Swiper>
             </div>
