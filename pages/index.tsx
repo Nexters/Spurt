@@ -70,7 +70,6 @@ export default function MainHome() {
         category: mainMyCategory[selectedMyCategory].code,
         offset: page,
         myQuestionIndicator: true,
-        jobGroup: myJob,
         size: 6,
       });
       setMyPost(result);
