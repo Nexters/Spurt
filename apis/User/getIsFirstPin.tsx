@@ -4,13 +4,11 @@ const getIsFirstPin = async () => {
   try {
     const result = await ApiClient.get(`/v1/user/pin`);
     if (result && result.data && result.data.code === 0) {
-      console.log(result);
+      return result.data.data.hasPined as boolean;
     }
   } catch (e) {
     console.log(e);
-    return false;
   }
-  return false;
 };
 
 export default getIsFirstPin;

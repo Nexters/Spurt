@@ -80,12 +80,15 @@ export default function MainHome() {
   }, [selectedMyCategory, page, session, myJob]);
 
   const handleClickPin = async (post: QuestionResponse) => {
-    const res = await getIsFirstPin();
-    if (res !== undefined && res === false) {
-      setIsViewingPinGuide(true);
-      localStorage.setItem('isFirstPin', 'true');
-    }
     setMyPost(post);
+
+    if (!localStorage.getItem('isFirstPin')) {
+      const res = await getIsFirstPin();
+      if (res !== undefined && res === false) {
+        setIsViewingPinGuide(true);
+        localStorage.setItem('isFirstPin', 'true');
+      }
+    }
   };
 
   return (
