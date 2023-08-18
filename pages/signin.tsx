@@ -1,4 +1,4 @@
-import GoogleSignInButton from '@/components/pc/Keywords/GoogleSignInButton';
+import GoogleSignInButton from '@/components/pc/GoogleSignInButton';
 import IllustSignIn from '@/img/Illust_signIn.png';
 import Image from 'next/image';
 
