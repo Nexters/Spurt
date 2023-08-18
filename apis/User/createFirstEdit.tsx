@@ -1,8 +1,8 @@
 import ApiClient from '@/apis/client';
 
-const createFirst = async () => {
+const createFirstEdit = async () => {
   try {
-    const result = await ApiClient.post(`/v1/user/pin`);
+    const result = await ApiClient.post(`/v1/user/posting`);
     if (result && result.data && result.data.code === 0) {
       console.log(result);
     }
@@ -13,4 +13,4 @@ const createFirst = async () => {
   return false;
 };
 
-export default createFirst;
+export default createFirstEdit;

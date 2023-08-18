@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import { ModalProps } from './PinGuide';
 import CloseIcon from '@/img/delete-circle-54.svg';
+import EditGuideImage from '@/img/editGuide.png';
 
 const EditGuide = ({ setShow }: ModalProps) => {
   return (
@@ -13,6 +15,9 @@ const EditGuide = ({ setShow }: ModalProps) => {
         <div className="text-title1 mt-[60px]">
           <p>텍스트를 드래그하면</p>
           <p>에디팅을 할 수 있어요</p>
+        </div>
+        <div>
+          <Image src={EditGuideImage} alt="editGuide" />
         </div>
       </div>
     </div>
