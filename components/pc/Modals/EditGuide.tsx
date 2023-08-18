@@ -1,23 +1,30 @@
 import Image from 'next/image';
 import { ModalProps } from './PinGuide';
-import CloseIcon from '@/img/delete-circle-54.svg';
+import CloseIcon from '@/img/delete-32.svg';
 import EditGuideImage from '@/img/editGuide.png';
 
 const EditGuide = ({ setShow }: ModalProps) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-70 flex flex-col justify-center items-center">
-      <div className="flex justify-end w-[1000px] mb-[10px]">
-        <button onClick={() => setShow()}>
-          <CloseIcon />
-        </button>
-      </div>
-      <div className="flex flex-col items-center text-center w-[1000px] h-[650px] bg-white rounded-[40px]">
-        <div className="text-title1 mt-[60px]">
-          <p>텍스트를 드래그하면</p>
-          <p>에디팅을 할 수 있어요</p>
+      <div className="flex flex-col text-center w-[1000px] h-[650px] bg-[#F9F6F5] rounded-[40px]">
+        <div className="flex flex-col">
+          <button
+            className="flex justify-end mt-[30px] mr-[30px]"
+            onClick={() => setShow()}
+          >
+            <CloseIcon />
+          </button>
+          <div className="text-title1">
+            <p>텍스트를 드래그하면</p>
+            <p>에디팅을 할 수 있어요</p>
+          </div>
         </div>
-        <div>
-          <Image src={EditGuideImage} alt="editGuide" />
+        <div className="flex rounded-br-[40px] w-[1000px] h-[500px]">
+          <Image
+            src={EditGuideImage}
+            alt="editGuide"
+            className="rounded-br-[40px]"
+          />
         </div>
       </div>
     </div>
