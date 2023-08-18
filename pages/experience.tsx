@@ -209,40 +209,42 @@ const ExperienceHome = () => {
                   >
                     <PlusIcon />
                   </button>
-                  <Swiper
-                    spaceBetween={12}
-                    slidesPerView={3.5}
-                    breakpoints={{
-                      700: {
-                        slidesPerView: 2,
-                      },
-                      1025: {
-                        slidesPerView: 3,
-                      },
-                    }}
-                  >
-                    {!experience[selectedCardIndex] ||
-                    !experience[selectedCardIndex].questionList ||
-                    experience[selectedCardIndex].questionList.questionList
-                      .length === 0 ? (
-                      <></>
-                    ) : (
-                      experience[
-                        selectedCardIndex
-                      ].questionList.questionList.map((value, index) => {
-                        return (
-                          <SwiperSlide key={index}>
-                            <ExperienceQuestionCard
-                              title={value.subject}
-                              questionId={value.questionId}
-                              isPinned={value.pinIndicator}
-                              updateExperience={updateExperience}
-                            ></ExperienceQuestionCard>
-                          </SwiperSlide>
-                        );
-                      })
-                    )}
-                  </Swiper>
+                  <div className="flex overflow-hidden">
+                    <Swiper
+                      spaceBetween={12}
+                      slidesPerView={3.5}
+                      breakpoints={{
+                        700: {
+                          slidesPerView: 2,
+                        },
+                        1025: {
+                          slidesPerView: 3,
+                        },
+                      }}
+                    >
+                      {!experience[selectedCardIndex] ||
+                      !experience[selectedCardIndex].questionList ||
+                      experience[selectedCardIndex].questionList.questionList
+                        .length === 0 ? (
+                        <></>
+                      ) : (
+                        experience[
+                          selectedCardIndex
+                        ].questionList.questionList.map((value, index) => {
+                          return (
+                            <SwiperSlide key={index}>
+                              <ExperienceQuestionCard
+                                title={value.subject}
+                                questionId={value.questionId}
+                                isPinned={value.pinIndicator}
+                                updateExperience={updateExperience}
+                              ></ExperienceQuestionCard>
+                            </SwiperSlide>
+                          );
+                        })
+                      )}
+                    </Swiper>
+                  </div>
                 </div>
               </div>
             </>
