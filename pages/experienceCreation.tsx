@@ -1,10 +1,10 @@
 import createExperience from '@/apis/Experience/createExperience';
 import fetchExperienceById from '@/apis/Experience/fetchExperienceById';
 import updateExperience from '@/apis/Experience/updateExperience';
-import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import InputDate from '@/components/pc/Keywords/Inputs/InputDate';
-import BackGuide from '@/components/pc/Keywords/Modals/BackGuide';
-import SaveGuide from '@/components/pc/Keywords/Modals/SaveGuide';
+import CTA4 from '@/components/pc/Buttons/CTA4';
+import InputDate from '@/components/pc/Inputs/InputDate';
+import BackGuide from '@/components/pc/Modals/BackGuide';
+import SaveGuide from '@/components/pc/Modals/SaveGuide';
 import BackIcon from '@/img/arrow-right-circle-54.svg';
 import NonCheckIcon from '@/img/check box-off-gray-24.svg';
 import CheckIcon from '@/img/check box-on-yellow - 24.svg';

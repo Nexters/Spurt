@@ -1,14 +1,14 @@
 import deleteQuestion from '@/apis/Questions/deleteQuestion';
 import { Question } from '@/apis/Questions/fetchQuestion';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
-import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import DeleteGuide from '@/components/pc/Keywords/Modals/DeleteGuide';
+import CTA4 from '@/components/pc/Buttons/CTA4';
+import DeleteGuide from '@/components/pc/Modals/DeleteGuide';
 import { allCategoryMaps } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-yellow-54.svg';
 import EditIcon from '@/img/edit-16.svg';
+import ArrowIcon from '@/img/experience-arrow-gray- 16.svg';
 import CircleIcon from '@/img/question-circle-4.svg';
 import DelIcon from '@/img/trash-16.svg';
-import ArrowIcon from '@/img/experience-arrow-gray- 16.svg';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 

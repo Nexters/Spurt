@@ -3,13 +3,10 @@ import fetchQuestion, {
 } from '@/apis/Questions/fetchQuestion';
 import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
-import Illust1 from '@/img/Illust_mobileOnBoarding1.png';
-import Illust2 from '@/img/Illust_mobileOnBoarding2.png';
-import Illust3 from '@/img/Illust_mobileOnBoarding3.png';
+import Pin from '@/img/mobile-pin-red-24.svg';
 import Ill1 from '@/img/온보딩 1.png';
 import Ill2 from '@/img/온보딩 2.png';
 import Ill3 from '@/img/온보딩 3.png';
-import Pin from '@/img/mobile-pin-red-24.svg';
 import { jobState } from '@/status/JobStatus';
 import {
   contentToggleState,
@@ -28,7 +25,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import VisibleBtn from '../pc/Keywords/Buttons/visibleBtn';
+import VisibleBtn from '../pc/Buttons/visibleBtn';
 import Keyword from '../pc/Keywords/Keyword';
 import TenMinuteCard from '../pc/Keywords/Questions/TenMintueCard';
 import Toggle from './toggle';

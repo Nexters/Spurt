@@ -4,14 +4,14 @@ import fetchQuestion, {
 import fetchQuestionByJob, {
   RandomQuestion,
 } from '@/apis/Questions/fetchQuestionByJob';
-import CTA3Black from '@/components/pc/Keywords/Buttons/CTA3-black';
-import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import RandomBtn from '@/components/pc/Keywords/Buttons/randomBtn';
-import Carousel from '@/components/pc/Keywords/Carousel/Carousel';
-import Paging from '@/components/pc/Keywords/Paging/Paging';
-import AnswerCard from '@/components/pc/Keywords/Questions/AnswerCard';
-import QuestionCard from '@/components/pc/Keywords/Questions/QuestionCard';
-import Header from '@/components/pc/Keywords/header';
+import CTA3Black from '@/components/pc/Buttons/CTA3-black';
+import ButtonS from '@/components/pc/Buttons/button-s';
+import RandomBtn from '@/components/pc/Buttons/randomBtn';
+import Carousel from '@/components/pc/Carousel/Carousel';
+import Paging from '@/components/pc/Paging/Paging';
+import AnswerCard from '@/components/pc/Questions/AnswerCard';
+import QuestionCard from '@/components/pc/Questions/QuestionCard';
+import Header from '@/components/pc/header';
 import { mainMyCategory, mainOtherCategory } from '@/const/categories';
 import Illust from '@/img/Illust_question.png';
 import RotateIcon from '@/img/rotate-24.svg';

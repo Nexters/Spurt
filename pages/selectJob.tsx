@@ -1,6 +1,6 @@
 import signup from '@/apis/Questions/signup';
-import ButtonXl from '@/components/pc/Keywords/Buttons/button-xl';
-import JobBtn from '@/components/pc/Keywords/Buttons/jobBtn';
+import ButtonXl from '@/components/pc/Buttons/button-xl';
+import JobBtn from '@/components/pc/Buttons/jobBtn';
 import {
   allJobGroupList,
   allJobGroupMap,
@@ -9,7 +9,6 @@ import {
 import { jobState } from '@/status/JobStatus';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 const SelectJob = () => {

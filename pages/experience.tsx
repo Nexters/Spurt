@@ -2,13 +2,13 @@ import deleteExperienceById from '@/apis/Experience/deleteExperienceById';
 import fetchExperience, {
   Experience as ExperienceHome,
 } from '@/apis/Experience/fetchExperience';
-import CTA3Black from '@/components/pc/Keywords/Buttons/CTA3-black';
-import CTA4 from '@/components/pc/Keywords/Buttons/CTA4';
-import ButtonS from '@/components/pc/Keywords/Buttons/button-s';
-import ExperienceCard from '@/components/pc/Keywords/Experience/ExperienceCard';
-import ExperienceQuestionCard from '@/components/pc/Keywords/Experience/ExperienceQuestionCard';
-import DeleteGuide from '@/components/pc/Keywords/Modals/DeleteGuide';
-import Header from '@/components/pc/Keywords/header';
+import CTA3Black from '@/components/pc/Buttons/CTA3-black';
+import CTA4 from '@/components/pc/Buttons/CTA4';
+import ButtonS from '@/components/pc/Buttons/button-s';
+import ExperienceCard from '@/components/pc/Experience/ExperienceCard';
+import ExperienceQuestionCard from '@/components/pc/Experience/ExperienceQuestionCard';
+import DeleteGuide from '@/components/pc/Modals/DeleteGuide';
+import Header from '@/components/pc/header';
 import Illust from '@/img/Illust_myProject.png';
 import ModifyIcon from '@/img/edit-16.svg';
 import LinkIcon from '@/img/link-yellow-18.svg';

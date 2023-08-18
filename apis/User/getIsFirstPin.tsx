@@ -1,6 +1,6 @@
 import ApiClient from '@/apis/client';
 
-const createFirstPin = async () => {
+const getIsFirstPin = async () => {
   try {
     const result = await ApiClient.post(`/v1/user/pin`);
     if (result && result.data && result.data.code === 0) {
@@ -13,4 +13,4 @@ const createFirstPin = async () => {
   return false;
 };
 
-export default createFirstPin;
+export default getIsFirstPin;
