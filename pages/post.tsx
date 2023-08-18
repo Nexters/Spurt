@@ -3,12 +3,14 @@ import createPost from '@/apis/Questions/createPost';
 import { Question } from '@/apis/Questions/fetchQuestion';
 import fetchQuestionById from '@/apis/Questions/fetchQuestionById';
 import updateQuestionById from '@/apis/Questions/updateQuestionById';
+import getIsFirstEdit from '@/apis/User/getIsFirstEdit';
 import CTA4 from '@/components/pc/Buttons/CTA4';
 import SumKeyWord from '@/components/pc/Buttons/Keyword';
 import AddKeyWordBtn from '@/components/pc/Buttons/addKeyword';
 import PostCarousel from '@/components/pc/Carousel/PostCarousel';
 import QuickEditor from '@/components/pc/Editor';
 import BackGuide from '@/components/pc/Modals/BackGuide';
+import EditGuide from '@/components/pc/Modals/EditGuide';
 import SaveGuide from '@/components/pc/Modals/SaveGuide';
 import { Category, postCategory } from '@/const/categories';
 import ArrowRightIcon from '@/img/arrow-right-circle-54.svg';
@@ -90,6 +92,17 @@ const Post = () => {
       }
     }
 
+    async function callModalGuide() {
+      const res = await getIsFirstEdit();
+      if (res !== undefined && res === false) {
+        localStorage.setItem('isFirstEdit', 'true');
+      }
+    }
+
+    if (!localStorage.getItem('isFirstEdit')) {
+      callModalGuide();
+    }
+
     if (paramTitle) {
       setTitle(paramTitle as string);
     }
@@ -98,6 +111,7 @@ const Post = () => {
       fillExperienceName();
       setExperienceId(paramExperienceId as string);
     }
+
     if (paramQuestionId) {
       fillContent();
       setQuestionId(paramQuestionId as string);
@@ -330,6 +344,9 @@ const Post = () => {
       </div>
       {showSave && <SaveGuide setShow={() => showSaveModal()} />}
       {showBack && <BackGuide setShow={() => showBackModal()} />}
+      {localStorage.getItem('isFirstEdit') === 'false' && (
+        <EditGuide setShow={() => console.log('show')}></EditGuide>
+      )}
     </>
   );
 };
