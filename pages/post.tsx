@@ -60,6 +60,8 @@ const Post = () => {
 
   const [quesiton, setQuesiton] = useState<Question>();
 
+  const [isViewingEditGuide, setIsViewingEditGuide] = useState(false);
+
   useEffect(() => {
     async function fillContent() {
       if (questionId) {
@@ -95,6 +97,7 @@ const Post = () => {
     async function callModalGuide() {
       const res = await getIsFirstEdit();
       if (res !== undefined && res === false) {
+        setIsViewingEditGuide(true);
         localStorage.setItem('isFirstEdit', 'true');
       }
     }
@@ -142,6 +145,10 @@ const Post = () => {
   };
   const showBackModal = () => {
     setShowBack(!showBack);
+  };
+
+  const showEditGuide = () => {
+    setIsViewingEditGuide(!isViewingEditGuide);
   };
 
   const handleCategories = (categories: PostCategory[]) => {
@@ -344,8 +351,8 @@ const Post = () => {
       </div>
       {showSave && <SaveGuide setShow={() => showSaveModal()} />}
       {showBack && <BackGuide setShow={() => showBackModal()} />}
-      {localStorage.getItem('isFirstEdit') === 'false' && (
-        <EditGuide setShow={() => console.log('show')}></EditGuide>
+      {isViewingEditGuide && (
+        <EditGuide setShow={() => showEditGuide()}></EditGuide>
       )}
     </>
   );
