@@ -4,10 +4,12 @@ import fetchQuestion, {
 import fetchQuestionByJob, {
   RandomQuestion,
 } from '@/apis/Questions/fetchQuestionByJob';
+import getIsFirstPin from '@/apis/User/getIsFirstPin';
 import CTA3Black from '@/components/pc/Buttons/CTA3-black';
 import ButtonS from '@/components/pc/Buttons/button-s';
 import RandomBtn from '@/components/pc/Buttons/randomBtn';
 import Carousel from '@/components/pc/Carousel/Carousel';
+import PinGuide from '@/components/pc/Modals/PinGuide';
 import Paging from '@/components/pc/Paging/Paging';
 import AnswerCard from '@/components/pc/Questions/AnswerCard';
 import QuestionCard from '@/components/pc/Questions/QuestionCard';
@@ -40,6 +42,8 @@ export default function MainHome() {
   const [myPost, setMyPost] = useState<QuestionResponse>();
   const [random, setRandom] = useState<RandomQuestion[]>([]);
 
+  const [isViewingPinGuide, setIsViewingPinGuide] = useState(false);
+
   const handleData = () => {
     async function getRandomQuestion() {
       const result = await fetchQuestionByJob(
@@ -66,14 +70,21 @@ export default function MainHome() {
         category: mainMyCategory[selectedMyCategory].code,
         offset: page,
         myQuestionIndicator: true,
+        jobGroup: myJob,
         size: 6,
       });
       setMyPost(result);
     }
+
     if (session) getMyQuestion();
   }, [selectedMyCategory, page, session, myJob]);
 
-  const handleClickPin = (post: QuestionResponse) => {
+  const handleClickPin = async (post: QuestionResponse) => {
+    const res = await getIsFirstPin();
+    if (res !== undefined && res === false) {
+      setIsViewingPinGuide(true);
+      localStorage.setItem('isFirstPin', 'true');
+    }
     setMyPost(post);
   };
 
@@ -197,6 +208,13 @@ export default function MainHome() {
           </div>
         </div>
       </div>
+      {isViewingPinGuide && (
+        <PinGuide
+          setShow={() => {
+            setIsViewingPinGuide(!isViewingPinGuide);
+          }}
+        ></PinGuide>
+      )}
     </>
   );
 }

@@ -1,8 +1,8 @@
-import ButtonXl from '../Buttons/button-xl';
-import Guide from '@/img/pinGuide.png';
 import CloseIcon from '@/img/delete-32.svg';
+import Guide from '@/img/pinGuide.png';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import ButtonXl from '../Buttons/button-xl';
 
 export interface ModalProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,7 +12,7 @@ export interface ModalProps
 const PinGuide = ({ setShow }: ModalProps) => {
   const router = useRouter();
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-70 flex flex-col justify-center items-center">
+    <div className="fixed z-[50] top-0 left-0 w-full h-full bg-gray-700 bg-opacity-70 flex flex-col justify-center items-center">
       <div className="flex flex-col w-[580px] h-[518px] rounded-t-[40px] bg-main-100">
         <button
           className="flex justify-end mt-[30px] mr-[30px]"
