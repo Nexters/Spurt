@@ -4,7 +4,6 @@ import fetchQuestion, {
 import fetchQuestionByJob, {
   RandomQuestion,
 } from '@/apis/Questions/fetchQuestionByJob';
-import getIsFirstPin from '@/apis/User/getIsFirstPin';
 import CTA3Black from '@/components/pc/Buttons/CTA3-black';
 import ButtonS from '@/components/pc/Buttons/button-s';
 import RandomBtn from '@/components/pc/Buttons/randomBtn';
@@ -80,14 +79,6 @@ export default function MainHome() {
 
   const handleClickPin = async (post: QuestionResponse) => {
     setMyPost(post);
-
-    if (!localStorage.getItem('isFirstPin')) {
-      const res = await getIsFirstPin();
-      if (res !== undefined && res === false) {
-        setIsViewingPinGuide(true);
-        localStorage.setItem('isFirstPin', 'true');
-      }
-    }
   };
 
   return (
@@ -168,6 +159,7 @@ export default function MainHome() {
                       createTimestamp={item.createTime}
                       isPinned={item.pinIndicator}
                       onClickPin={handleClickPin}
+                      setIsViewingPinGuide={setIsViewingPinGuide}
                     />
                   );
                 })}
