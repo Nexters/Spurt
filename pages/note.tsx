@@ -13,6 +13,7 @@ import { noteCategory } from '@/const/categories';
 import Illust from '@/img/Illust_summaryNote.png';
 import EditIcon from '@/img/edit-16.svg';
 import Pin from '@/img/pc-pin-red-24.svg';
+import Pin2 from '@/img/pc-pin-red-border-24.svg';
 import { jobState } from '@/status/JobStatus';
 import {
   answerVisibleState,
@@ -102,11 +103,9 @@ export default function SummaryNoteHome() {
           <Image src={Illust} alt="SummaryNote"></Image>
         </div>
         <div className="mt-[46px]">
-          <div className="flex items-center">
-            <Pin width={24} height={24}></Pin>
-            <span className="text-gray-700 text-title2 ml-[10px]">
-              요약 노트
-            </span>
+          <div className="flex items-center gap-2">
+            <Pin2></Pin2>
+            <span className="text-gray-700 text-title2">요약 노트</span>
           </div>
         </div>
         {session ? (
