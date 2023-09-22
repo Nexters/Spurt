@@ -103,7 +103,7 @@ export default function SummaryNoteHome() {
         </div>
         <div className="mt-[46px]">
           <div className="flex items-center">
-            <Pin></Pin>
+            <Pin width={24} height={24}></Pin>
             <span className="text-gray-700 text-title2 ml-[10px]">
               요약 노트
             </span>
