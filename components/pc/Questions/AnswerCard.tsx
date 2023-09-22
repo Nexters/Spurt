@@ -2,6 +2,7 @@ import fetchQuestion, {
   QuestionResponse,
 } from '@/apis/Questions/fetchQuestion';
 import updatePost, { UpdatePostParam } from '@/apis/Questions/updatePost';
+import getIsFirstPin from '@/apis/User/getIsFirstPin';
 import { allCategoryMaps, mainMyCategory } from '@/const/categories';
 import PinFill from '@/img/pin-fill-42.svg';
 import PinStroke from '@/img/pin-stroke-42.svg';
@@ -19,6 +20,7 @@ interface AnswerCardProps {
   createTimestamp: string;
   isPinned: boolean;
   onClickPin: (response: QuestionResponse) => void;
+  setIsViewingPinGuide: (value: boolean) => void;
 }
 
 const AnswerCard = ({
@@ -29,6 +31,7 @@ const AnswerCard = ({
   createTimestamp,
   isPinned,
   onClickPin,
+  setIsViewingPinGuide,
 }: AnswerCardProps) => {
   const router = useRouter();
   const [selectedMyCategory, setSelectedMyCategory] = useRecoilState(
@@ -38,6 +41,14 @@ const AnswerCard = ({
   const myJob = useRecoilValue(jobState);
 
   const handlePin = async () => {
+    if (!localStorage.getItem('isFirstPin')) {
+      const res = await getIsFirstPin();
+      if (res !== undefined && res === false) {
+        setIsViewingPinGuide(true);
+        localStorage.setItem('isFirstPin', 'true');
+      }
+    }
+
     await updatePost({
       questionId: questionId,
       pinIndicator: !isPinned,
