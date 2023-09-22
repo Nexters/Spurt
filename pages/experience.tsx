@@ -116,8 +116,8 @@ const ExperienceHome = () => {
         {/* <IllustSvg /> */}
         <Image src={Illust} alt="MyProject" />
       </div>
-      <div className="h-[360px] mb-[100px]">???÷</div>
-      <div className="mt-[300px]">
+      <div className="h-[360px] mb-[100px]"></div>
+      <div className="mt-[299px]">
         <p className="text-title2 text-gray-700 mb-[20px]">나의 경험 정리</p>
       </div>
       {session ? (
@@ -125,7 +125,7 @@ const ExperienceHome = () => {
           {experience.length === 0 ? (
             <>
               <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
-                <div className="flex flex-col items-center justify-center rounded-[16px] border border-gray-100 h-[230px] ">
+                <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[230px] ">
                   <div className="text-body7 text-gray-500 mb-[6px]">
                     아직 정리한 나의 경험이 없어요
                   </div>
@@ -253,7 +253,7 @@ const ExperienceHome = () => {
       ) : (
         <>
           <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
-            <div className="flex flex-col items-center justify-center rounded-[16px] border border-gray-100 h-[230px] ">
+            <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[230px] ">
               <div className="text-body7 text-gray-500 mb-[6px]">
                 아직 정리한 나의 경험이 없어요
               </div>

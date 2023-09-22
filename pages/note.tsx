@@ -99,10 +99,10 @@ export default function SummaryNoteHome() {
             </Link>
           </div>
         </div>
-        <div className="mt-[12px] mb-[100px]">
+        <div className="mt-[12px] mb-[80px]">
           <Image src={Illust} alt="SummaryNote"></Image>
         </div>
-        <div className="mt-[46px]">
+        <div className="mt-[40px]">
           <div className="flex items-center gap-2">
             <Pin2></Pin2>
             <span className="text-gray-700 text-title2">요약 노트</span>
@@ -122,7 +122,7 @@ export default function SummaryNoteHome() {
             {myNotes.questions.length === 0 ? (
               <>
                 <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
-                  <div className="flex flex-col items-center justify-center rounded-[16px] border border-gray-100 h-[380px] ">
+                  <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[380px] ">
                     <div className="text-body7 text-gray-500 mb-[6px]">
                       예상 질문을 만들고 답하러 가볼까요?
                     </div>
@@ -240,7 +240,7 @@ export default function SummaryNoteHome() {
         ) : (
           <>
             <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
-              <div className="flex flex-col items-center justify-center rounded-[16px] border border-gray-100 h-[380px] ">
+              <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[380px] ">
                 <div className="text-body7 text-gray-500 mb-[6px]">
                   예상 질문을 만들고 답하러 가볼까요?
                 </div>

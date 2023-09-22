@@ -29,22 +29,23 @@ export default function Header() {
               질문 모음
             </Link>
             <Link
+              href="/experience"
+              className={`${
+                router.pathname === '/experience'
+                  ? 'text-heading1'
+                  : 'text-heading4'
+              } mr-[50px]`}
+            >
+              나의 경험
+            </Link>
+
+            <Link
               href="/note"
               className={`${
                 router.pathname === '/note' ? 'text-heading1' : 'text-heading4'
               } mr-[50px]`}
             >
               요약 노트
-            </Link>
-            <Link
-              href="/experience"
-              className={`${
-                router.pathname === '/experience'
-                  ? 'text-heading1'
-                  : 'text-heading4'
-              }`}
-            >
-              나의 경험
             </Link>
           </div>
         </div>
