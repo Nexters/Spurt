@@ -223,7 +223,7 @@ export default function MobileHome() {
                         className={
                           isKeywordVisible
                             ? 'text-content_body2 whitespace-pre-line'
-                            : 'blur text-content_body2 whitespace-pre-line'
+                            : 'blur-[3px] text-content_body2 whitespace-pre-line'
                         }
                         dangerouslySetInnerHTML={{
                           __html:

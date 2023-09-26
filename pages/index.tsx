@@ -122,7 +122,7 @@ export default function MainHome() {
           ></Carousel>
         )}
 
-        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] ">
+        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] shadow-sm ">
           {!session ? (
             <>
               <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
@@ -188,7 +188,7 @@ export default function MainHome() {
           setCategory={setSelectedOthersCategory}
         ></Carousel>
 
-        <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px]">
+        <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px] shadow-sm">
           <div className="flex flex-row gap-3 px-[30px]">
             {random.map((item, index) => {
               return <QuestionCard key={index} subject={item.subject} />;

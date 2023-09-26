@@ -121,7 +121,7 @@ export default function SummaryNoteHome() {
 
             {myNotes.questions.length === 0 ? (
               <>
-                <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
+                <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px] shadow-sm">
                   <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[380px] ">
                     <div className="text-body7 text-gray-500 mb-[6px]">
                       예상 질문을 만들고 답하러 가볼까요?
@@ -137,7 +137,7 @@ export default function SummaryNoteHome() {
               </>
             ) : (
               <>
-                <div className="flex flex-col pt-[30px] pl-[30px] pb-[30px] rounded-[20px] bg-white mt-[20px]">
+                <div className="flex flex-col pt-[30px] pl-[30px] pb-[30px] rounded-[20px] bg-white mt-[20px] shadow-sm">
                   <div className="flex justify-end mr-[30px]">
                     <p className="text-body2">
                       총 {myNotes.questions.length}개
@@ -219,7 +219,7 @@ export default function SummaryNoteHome() {
                         className={
                           isAnswerVisible
                             ? 'whitespace-pre-line'
-                            : 'whitespace-pre-line blur'
+                            : 'whitespace-pre-line blur-[3px]'
                         }
                         dangerouslySetInnerHTML={{
                           __html:
@@ -239,7 +239,7 @@ export default function SummaryNoteHome() {
           </>
         ) : (
           <>
-            <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
+            <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px] shadow-sm">
               <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[380px] ">
                 <div className="text-body7 text-gray-500 mb-[6px]">
                   예상 질문을 만들고 답하러 가볼까요?

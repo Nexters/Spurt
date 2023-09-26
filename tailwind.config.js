@@ -268,6 +268,9 @@ module.exports = {
         keyword_border: '#fec20c4d',
         main_bg: '#ffe394',
       },
+      boxShadow: {
+        sm: '0px 4px 12px 0px rgba(167,167,167, 0.10)',
+      },
     },
   },
   plugins: [],
