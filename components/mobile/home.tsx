@@ -4,6 +4,7 @@ import fetchQuestion, {
 import Carousel from '@/components/pc/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
 import Pin from '@/img/mobile-pin-red-24.svg';
+import Pin2 from '@/img/mobile-pin-red-border-24.svg';
 import Ill1 from '@/img/온보딩 1.png';
 import Ill2 from '@/img/온보딩 2.png';
 import Ill3 from '@/img/온보딩 3.png';
@@ -128,10 +129,11 @@ export default function MobileHome() {
       <div className="px-[16px]">
         {session ? (
           <>
-            <div className="flex flex-row mt-[20px]">
-              <div className="flex items-center">
-                <Pin></Pin>
-                <span className="text-heading1 ml-[10px]">요약 노트</span>
+            <div className="flex flex-row mt-[20px] ">
+              <div className="flex items-center gap-[6px]">
+                {/* <Pin></Pin> */}
+                <Pin2 width={12} height={18} />
+                <span className="text-heading1">요약 노트</span>
               </div>
             </div>
             <div className="flex mt-[20px]">
