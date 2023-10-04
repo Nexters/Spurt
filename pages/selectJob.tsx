@@ -18,13 +18,11 @@ const SelectJob = () => {
 
   const handleClick = (type: string) => {
     setJob(allJobGroupMap.get(type)?.name as string);
-    //console.log(allJobGroupMap.get(type)?.name as string);
   };
   const handleSignUp = (job: string) => {
     signup(job).then(() => {
       router.push({ pathname: '/' });
     });
-    //onsole.log(job);
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -34,7 +32,6 @@ const SelectJob = () => {
       </div>
       <div className="flex-col gap-[10px] mb-[80px] grid grid-cols-2">
         {allJobGroupList.map((item) => {
-          //console.log(item);
           return (
             <JobBtn
               key={item}

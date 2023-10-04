@@ -21,7 +21,7 @@ import {
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
@@ -44,7 +44,6 @@ export default function MobileHome() {
   const { data: session } = useSession();
 
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
-  const myJob = useRecoilValue(jobState);
 
   const [guideActiveIndex, setGuideActiveIndex] = useState(0);
 
@@ -52,7 +51,6 @@ export default function MobileHome() {
     async function call() {
       const result = await fetchQuestion({
         category: noteCategory[selectedCategory].code,
-        jobGroup: myJob,
         myQuestionIndicator: true,
         pinIndicator: true,
         size: 20,

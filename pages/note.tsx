@@ -14,7 +14,6 @@ import Illust from '@/img/Illust_summaryNote.png';
 import EditIcon from '@/img/edit-16.svg';
 import Pin from '@/img/pc-pin-red-24.svg';
 import Pin2 from '@/img/pc-pin-red-border-24.svg';
-import { jobState } from '@/status/JobStatus';
 import {
   answerVisibleState,
   keywordVisibleState,
@@ -50,14 +49,12 @@ export default function SummaryNoteHome() {
     selectedNoteCategoriesState,
   );
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
-  const myJob = useRecoilValue(jobState);
   const { data: session } = useSession();
 
   useEffect(() => {
     async function call() {
       const result = await fetchQuestion({
         category: noteCategory[selectedCategory].code,
-        jobGroup: myJob,
         myQuestionIndicator: true,
         size: 20,
         pinIndicator: true,
