@@ -13,7 +13,7 @@ import { noteCategory } from '@/const/categories';
 import Illust from '@/img/Illust_summaryNote.png';
 import EditIcon from '@/img/edit-16.svg';
 import Pin from '@/img/pc-pin-red-24.svg';
-import { jobState } from '@/status/JobStatus';
+import Pin2 from '@/img/pc-pin-red-border-24.svg';
 import {
   answerVisibleState,
   keywordVisibleState,
@@ -49,14 +49,12 @@ export default function SummaryNoteHome() {
     selectedNoteCategoriesState,
   );
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
-  const myJob = useRecoilValue(jobState);
   const { data: session } = useSession();
 
   useEffect(() => {
     async function call() {
       const result = await fetchQuestion({
         category: noteCategory[selectedCategory].code,
-        jobGroup: myJob,
         myQuestionIndicator: true,
         size: 20,
         pinIndicator: true,
@@ -98,15 +96,13 @@ export default function SummaryNoteHome() {
             </Link>
           </div>
         </div>
-        <div className="mt-[12px] mb-[100px]">
+        <div className="mt-[12px] mb-[80px]">
           <Image src={Illust} alt="SummaryNote"></Image>
         </div>
-        <div className="mt-[46px]">
-          <div className="flex items-center">
-            <Pin width={24} height={24}></Pin>
-            <span className="text-gray-700 text-title2 ml-[10px]">
-              요약 노트
-            </span>
+        <div className="mt-[40px]">
+          <div className="flex items-center gap-2">
+            <Pin2></Pin2>
+            <span className="text-gray-700 text-title2">요약 노트</span>
           </div>
         </div>
         {session ? (
@@ -122,8 +118,8 @@ export default function SummaryNoteHome() {
 
             {myNotes.questions.length === 0 ? (
               <>
-                <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
-                  <div className="flex flex-col items-center justify-center rounded-[16px] border border-gray-100 h-[380px] ">
+                <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px] shadow-sm">
+                  <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[380px] ">
                     <div className="text-body7 text-gray-500 mb-[6px]">
                       예상 질문을 만들고 답하러 가볼까요?
                     </div>
@@ -138,7 +134,7 @@ export default function SummaryNoteHome() {
               </>
             ) : (
               <>
-                <div className="flex flex-col pt-[30px] pl-[30px] pb-[30px] rounded-[20px] bg-white mt-[20px]">
+                <div className="flex flex-col pt-[30px] pl-[30px] pb-[30px] rounded-[20px] bg-white mt-[20px] shadow-sm">
                   <div className="flex justify-end mr-[30px]">
                     <p className="text-body2">
                       총 {myNotes.questions.length}개
@@ -220,7 +216,7 @@ export default function SummaryNoteHome() {
                         className={
                           isAnswerVisible
                             ? 'whitespace-pre-line'
-                            : 'whitespace-pre-line blur'
+                            : 'whitespace-pre-line blur-[3px]'
                         }
                         dangerouslySetInnerHTML={{
                           __html:
@@ -240,8 +236,8 @@ export default function SummaryNoteHome() {
           </>
         ) : (
           <>
-            <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px]">
-              <div className="flex flex-col items-center justify-center rounded-[16px] border border-gray-100 h-[380px] ">
+            <div className="flex flex-col px-[30px] py-[30px] rounded-[20px] bg-white mt-[20px] shadow-sm">
+              <div className="flex flex-col items-center justify-center rounded-[16px] border-[0.7px] border-gray_line h-[380px] ">
                 <div className="text-body7 text-gray-500 mb-[6px]">
                   예상 질문을 만들고 답하러 가볼까요?
                 </div>

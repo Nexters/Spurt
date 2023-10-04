@@ -4,6 +4,7 @@ import fetchQuestion, {
 import Carousel from '@/components/pc/Carousel/Carousel';
 import { noteCategory } from '@/const/categories';
 import Pin from '@/img/mobile-pin-red-24.svg';
+import Pin2 from '@/img/mobile-pin-red-border-24.svg';
 import Ill1 from '@/img/온보딩 1.png';
 import Ill2 from '@/img/온보딩 2.png';
 import Ill3 from '@/img/온보딩 3.png';
@@ -20,7 +21,7 @@ import {
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
@@ -43,7 +44,6 @@ export default function MobileHome() {
   const { data: session } = useSession();
 
   const [myNotes, setMyNotes] = useRecoilState<QuestionResponse>(myNotesState);
-  const myJob = useRecoilValue(jobState);
 
   const [guideActiveIndex, setGuideActiveIndex] = useState(0);
 
@@ -51,7 +51,6 @@ export default function MobileHome() {
     async function call() {
       const result = await fetchQuestion({
         category: noteCategory[selectedCategory].code,
-        jobGroup: myJob,
         myQuestionIndicator: true,
         pinIndicator: true,
         size: 20,
@@ -128,10 +127,11 @@ export default function MobileHome() {
       <div className="px-[16px]">
         {session ? (
           <>
-            <div className="flex flex-row mt-[20px]">
-              <div className="flex items-center">
-                <Pin></Pin>
-                <span className="text-heading1 ml-[10px]">요약 노트</span>
+            <div className="flex flex-row mt-[20px] ">
+              <div className="flex items-center gap-[6px]">
+                {/* <Pin></Pin> */}
+                <Pin2 width={12} height={18} />
+                <span className="text-heading1">요약 노트</span>
               </div>
             </div>
             <div className="flex mt-[20px]">
@@ -221,7 +221,7 @@ export default function MobileHome() {
                         className={
                           isKeywordVisible
                             ? 'text-content_body2 whitespace-pre-line'
-                            : 'blur text-content_body2 whitespace-pre-line'
+                            : 'blur-[3px] text-content_body2 whitespace-pre-line'
                         }
                         dangerouslySetInnerHTML={{
                           __html:
