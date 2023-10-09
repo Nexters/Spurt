@@ -238,6 +238,7 @@ const Post = () => {
     if (obj !== null) {
       const keywords = [...(JSON.parse(obj) as string[]), selectedText];
       localStorage.setItem('keywords', JSON.stringify(keywords));
+      //if (keywords.length <= 30)
       setKeywords(keywords);
     }
   };
@@ -304,7 +305,7 @@ const Post = () => {
         <div className="flex items-center mt-[30px] mb-[20px] gap-[10px]">
           <p className="text-body1 text-gray-600">Keyword</p>
           <p className="text-caption2 text-gray-300">
-            키워드는 각 15자씩 최대 20개까지 가능해요
+            키워드는 각 30자씩 최대 20개까지 가능해요
           </p>
         </div>
         {keywords.length > 0 && (
