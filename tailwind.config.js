@@ -178,10 +178,17 @@ module.exports = {
           '14px',
           {
             lineHeight: '140%',
-            fontWeight: '500',
+            fontWeight: '600',
           },
         ],
         body10: [
+          '14px',
+          {
+            lineHeight: '140%',
+            fontWeight: '500',
+          },
+        ],
+        body11: [
           '12px',
           {
             lineHeight: '140%',

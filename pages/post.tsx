@@ -298,7 +298,7 @@ const Post = () => {
           setText={onChangeContent}
           addKeyword={addKeyword}
         ></QuickEditor>
-        <p className="text-right text-body9 text-gray-300 mt-[30px] mb-[30px]">
+        <p className="text-right text-body11 text-gray-300 mt-[30px] mb-[30px]">
           {contentCount} / 1000
         </p>
         <hr />
