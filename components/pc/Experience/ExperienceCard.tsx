@@ -15,8 +15,8 @@ const ExperienceCard = ({
     <div
       className={
         index == selectedIndex
-          ? `flex flex-col p-[20px] bg-main-200 rounded-[20px] cursor-pointer min-w-[360px] max-w-[360px]`
-          : `flex flex-col p-[20px] bg-white rounded-[20px] cursor-pointer min-w-[360px] max-w-[360px]`
+          ? `flex flex-col p-[20px] bg-main-200 rounded-[20px] cursor-pointer min-w-[360px] max-w-[360px] mb-[10px] shadow-md`
+          : `flex flex-col p-[20px] bg-white rounded-[20px] cursor-pointer min-w-[360px] max-w-[360px] mb-[10px] shadow-sm`
       }
       onClick={() => onClickCard(index)}
     >

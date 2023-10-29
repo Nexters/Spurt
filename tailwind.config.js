@@ -277,6 +277,7 @@ module.exports = {
       },
       boxShadow: {
         sm: '0px 4px 12px 0px rgba(167,167,167, 0.10)',
+        md: '0px 2px 5px 0px rgba(200, 147, 43, 0.28)',
       },
     },
   },

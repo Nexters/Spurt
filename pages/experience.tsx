@@ -140,7 +140,7 @@ const ExperienceHome = () => {
             </>
           ) : (
             <>
-              <div className="mb-[20px]">
+              <div className="mb-[10px]">
                 <Swiper spaceBetween={12} slidesPerView={2.7}>
                   {experience.map((value, index) => {
                     return (
