@@ -32,10 +32,10 @@ const PostCarousel = ({
   return (
     <>
       <Swiper
-        spaceBetween={6}
         slidesPerView={5}
         slidesOffsetAfter={20}
         autoHeight={true}
+        simulateTouch={false}
       >
         {postCateogries.map((category, index) => (
           <SwiperSlide key={index} onClick={() => handleClick(index)}>

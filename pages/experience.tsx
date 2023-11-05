@@ -213,14 +213,14 @@ const ExperienceHome = () => {
                     <Swiper
                       spaceBetween={12}
                       slidesPerView={3.5}
-                      breakpoints={{
-                        700: {
-                          slidesPerView: 2,
-                        },
-                        1025: {
-                          slidesPerView: 3,
-                        },
-                      }}
+                      // breakpoints={{
+                      //   700: {
+                      //     slidesPerView: 2,
+                      //   },
+                      //   1025: {
+                      //     slidesPerView: 3,
+                      //   },
+                      // }}
                     >
                       {!experience[selectedCardIndex] ||
                       !experience[selectedCardIndex].questionList ||

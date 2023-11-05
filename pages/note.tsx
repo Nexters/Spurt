@@ -143,15 +143,15 @@ export default function SummaryNoteHome() {
                   <div className="mt-[20px]">
                     <Swiper
                       spaceBetween={12}
-                      slidesPerView={2}
-                      breakpoints={{
-                        750: {
-                          slidesPerView: 2,
-                        },
-                        1025: {
-                          slidesPerView: 3,
-                        },
-                      }}
+                      slidesPerView={4.05}
+                      // breakpoints={{
+                      //   750: {
+                      //     slidesPerView: 2,
+                      //   },
+                      //   1025: {
+                      //     slidesPerView: 3,
+                      //   },
+                      // }}
                     >
                       {myNotes.questions.map((value, index) => {
                         return (
