@@ -141,7 +141,21 @@ const ExperienceHome = () => {
           ) : (
             <>
               <div className="mb-[10px]">
-                <Swiper spaceBetween={12} slidesPerView={2.7}>
+                <Swiper
+                  spaceBetween={12}
+                  slidesPerView={2.7}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 1.75,
+                    },
+                    768: {
+                      slidesPerView: 2.09,
+                    },
+                    1024: {
+                      slidesPerView: 2.73,
+                    },
+                  }}
+                >
                   {experience.map((value, index) => {
                     return (
                       <SwiperSlide key={index}>
@@ -213,14 +227,17 @@ const ExperienceHome = () => {
                     <Swiper
                       spaceBetween={12}
                       slidesPerView={3.5}
-                      // breakpoints={{
-                      //   700: {
-                      //     slidesPerView: 2,
-                      //   },
-                      //   1025: {
-                      //     slidesPerView: 3,
-                      //   },
-                      // }}
+                      breakpoints={{
+                        640: {
+                          slidesPerView: 2.1,
+                        },
+                        768: {
+                          slidesPerView: 2.64,
+                        },
+                        1024: {
+                          slidesPerView: 3.6,
+                        },
+                      }}
                     >
                       {!experience[selectedCardIndex] ||
                       !experience[selectedCardIndex].questionList ||

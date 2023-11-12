@@ -44,7 +44,7 @@ const Carousel = ({
           ))}
         </Swiper>
       ) : (
-        <Swiper slidesPerView={2} slidesOffsetAfter={20} autoHeight={true}>
+        <Swiper slidesPerView={4.5} slidesOffsetAfter={20} autoHeight={true}>
           {categories.map((category, index) => (
             <SwiperSlide key={index} onClick={() => setCategory(index)}>
               {selectedCateogry == index ? (
