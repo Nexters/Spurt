@@ -107,101 +107,103 @@ export default function MainHome() {
         </div>
 
         <Image src={Illust} alt="Questions" />
-        <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
-          <p>나의 질문 모음</p>
-        </div>
+      </div>
+      <div className="h-[559px] mb-[100px]"></div>
+      <div className="text-title2 text-gray-700 mb-[20px] mt-[80px]">
+        <p>나의 질문 모음</p>
+      </div>
 
+      {!session ? (
+        <></>
+      ) : (
+        <Carousel
+          categories={mainMyCategory}
+          isPc={true}
+          selectedCateogry={selectedMyCategory}
+          setCategory={setSelectedMyCategory}
+        ></Carousel>
+      )}
+
+      <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] shadow-sm ">
         {!session ? (
-          <></>
-        ) : (
-          <Carousel
-            categories={mainMyCategory}
-            isPc={true}
-            selectedCateogry={selectedMyCategory}
-            setCategory={setSelectedMyCategory}
-          ></Carousel>
-        )}
-
-        <div className="flex flex-col bg-white mb-[100px] mt-5 px-[30px] pt-[30px] pb-[30px] rounded-[20px] shadow-sm ">
-          {!session ? (
-            <>
-              <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
-                <div className="flex flex-col mb-6 items-center">
-                  <p className="text-body7 text-gray-600 mb-[6px]">
-                    예상 질문을 만들고 답하러 가볼까요?
-                  </p>
-                  <p className="text-heading1 text-gray-700">
-                    아직 등록한 질문-답변이 없어요
-                  </p>
-                </div>
-
-                <Link href={session ? '/post' : '/signin'}>
-                  <CTA3Black text={'첫 질문-답변 만들기'}></CTA3Black>
-                </Link>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="flex mb-5 items-center justify-between">
-                <p className="text-body2 w-full text-right text-gray-700">
-                  총 {myPost?.meta.totalCount}개
+          <>
+            <div className="flex flex-col justify-center items-center h-[227px] border-[0.7px] border-gray_line rounded-2xl">
+              <div className="flex flex-col mb-6 items-center">
+                <p className="text-body7 text-gray-600 mb-[6px]">
+                  예상 질문을 만들고 답하러 가볼까요?
+                </p>
+                <p className="text-heading1 text-gray-700">
+                  아직 등록한 질문-답변이 없어요
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                {myPost?.questions.map((item) => {
-                  return (
-                    <AnswerCard
-                      key={item.questionId}
-                      questionId={item.questionId}
-                      subject={item.subject}
-                      mainText={item.mainText}
-                      categoryList={item.categoryList}
-                      createTimestamp={item.createTime}
-                      isPinned={item.pinIndicator}
-                      onClickPin={handleClickPin}
-                      setIsViewingPinGuide={setIsViewingPinGuide}
-                    />
-                  );
-                })}
-              </div>
-              <div className="">
-                <Paging
-                  totalCount={myPost?.meta.totalCount}
-                  totalPage={myPost?.meta.totalPage}
-                />
-              </div>
-            </>
-          )}
-        </div>
 
-        <div className="text-title2 text-gray-700 mb-5">
-          <p>
-            <span>{session ? '같은 직군의' : ''} 사람들</span>
-            <span>이</span>
-          </p>
-          <p>최근에 올린 질문</p>
-        </div>
-        <Carousel
-          categories={mainOtherCategory}
-          isPc={true}
-          selectedCateogry={selectedOthersCategory}
-          setCategory={setSelectedOthersCategory}
-        ></Carousel>
+              <Link href={session ? '/post' : '/signin'}>
+                <CTA3Black text={'첫 질문-답변 만들기'}></CTA3Black>
+              </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex mb-5 items-center justify-between">
+              <p className="text-body2 w-full text-right text-gray-700">
+                총 {myPost?.meta.totalCount}개
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {myPost?.questions.map((item) => {
+                return (
+                  <AnswerCard
+                    key={item.questionId}
+                    questionId={item.questionId}
+                    subject={item.subject}
+                    mainText={item.mainText}
+                    categoryList={item.categoryList}
+                    createTimestamp={item.createTime}
+                    isPinned={item.pinIndicator}
+                    onClickPin={handleClickPin}
+                    setIsViewingPinGuide={setIsViewingPinGuide}
+                  />
+                );
+              })}
+            </div>
+            <div className="">
+              <Paging
+                totalCount={myPost?.meta.totalCount}
+                totalPage={myPost?.meta.totalPage}
+              />
+            </div>
+          </>
+        )}
+      </div>
 
-        <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px] shadow-sm">
-          <div className="flex flex-row gap-3 px-[30px]">
-            {random.map((item, index) => {
-              return <QuestionCard key={index} subject={item.subject} />;
-            })}
-          </div>
-          <div className="flex justify-center my-[30px]">
-            <RandomBtn onClick={handleData}>
-              다른 질문 더보기
-              <RotateIcon />
-            </RandomBtn>
-          </div>
+      <div className="text-title2 text-gray-700 mb-5">
+        <p>
+          <span>{session ? '같은 직군의' : ''} 사람들</span>
+          <span>이</span>
+        </p>
+        <p>최근에 올린 질문</p>
+      </div>
+      <Carousel
+        categories={mainOtherCategory}
+        isPc={true}
+        selectedCateogry={selectedOthersCategory}
+        setCategory={setSelectedOthersCategory}
+      ></Carousel>
+
+      <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px] shadow-sm">
+        <div className="flex flex-row gap-3 px-[30px]">
+          {random.map((item, index) => {
+            return <QuestionCard key={index} subject={item.subject} />;
+          })}
+        </div>
+        <div className="flex justify-center my-[30px]">
+          <RandomBtn onClick={handleData}>
+            다른 질문 더보기
+            <RotateIcon />
+          </RandomBtn>
         </div>
       </div>
+
       {isViewingPinGuide && (
         <PinGuide
           setShow={() => {

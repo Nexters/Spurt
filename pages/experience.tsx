@@ -152,7 +152,7 @@ const ExperienceHome = () => {
                       slidesPerView: 2.09,
                     },
                     1024: {
-                      slidesPerView: 2.73,
+                      slidesPerView: 2.71,
                     },
                   }}
                 >
