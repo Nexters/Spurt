@@ -205,7 +205,7 @@ const ExperienceCreation = () => {
             onChange={onChangeContent}
             value={content}
           ></textarea>
-          <p className="text-body9 text-gray-300 text-right">
+          <p className="text-body11 text-gray-300 text-right">
             {contentCount}/300
           </p>
         </div>

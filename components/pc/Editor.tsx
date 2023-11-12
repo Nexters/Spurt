@@ -22,9 +22,9 @@ const QuickEditor = ({ text, setText, addKeyword }: EditorProps) => {
             line-height: 140%;
             color: #d3d3d3;
             opacity: 1;
-    }
-    `,
-        quickbars_selection_toolbar: 'bold | formatselect | addKeyword',
+            }
+            `,
+        quickbars_selection_toolbar: 'Bold addKeyword',
         quickbars_insert_toolbar: false,
         quickbars_image_toolbar: false,
         statusbar: false,
@@ -37,7 +37,7 @@ const QuickEditor = ({ text, setText, addKeyword }: EditorProps) => {
               const selectedText = editor.selection.getContent({
                 format: 'text',
               });
-              if (selectedText.length > 20) {
+              if (selectedText.length > 30) {
                 return;
               }
               addKeyword(selectedText);

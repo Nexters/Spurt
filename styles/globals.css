@@ -63,3 +63,8 @@ body {
 .tox-tinymce {
   border: none !important;
 }
+
+.tox-tbtn {
+  font-size: 18px !important;
+  font-weight: 900 !important;
+}

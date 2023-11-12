@@ -140,8 +140,22 @@ const ExperienceHome = () => {
             </>
           ) : (
             <>
-              <div className="mb-[20px]">
-                <Swiper spaceBetween={12} slidesPerView={2.7}>
+              <div className="mb-[10px]">
+                <Swiper
+                  spaceBetween={12}
+                  slidesPerView={2.7}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 1.75,
+                    },
+                    768: {
+                      slidesPerView: 2.09,
+                    },
+                    1024: {
+                      slidesPerView: 2.71,
+                    },
+                  }}
+                >
                   {experience.map((value, index) => {
                     return (
                       <SwiperSlide key={index}>
@@ -214,11 +228,14 @@ const ExperienceHome = () => {
                       spaceBetween={12}
                       slidesPerView={3.5}
                       breakpoints={{
-                        700: {
-                          slidesPerView: 2,
+                        640: {
+                          slidesPerView: 2.1,
                         },
-                        1025: {
-                          slidesPerView: 3,
+                        768: {
+                          slidesPerView: 2.64,
+                        },
+                        1024: {
+                          slidesPerView: 3.6,
                         },
                       }}
                     >

@@ -7,23 +7,11 @@ const ButtonXs = ({ name, isSelected }: ButtonProps) => {
   return (
     <>
       {isSelected ? (
-        <button
-          className="text-body4 bg-gray-700 text-white py-2 px-[18px] flex justify-center items-center rounded-[30px] mr-2 border border-gray-700"
-          style={{
-            height: '38px',
-            gap: '8px',
-          }}
-        >
+        <button className="text-body5 h-[38px] bg-gray-700 mr-[8px] text-white py-2 px-[18px] rounded-[30px] border border-gray-700">
           {name}
         </button>
       ) : (
-        <button
-          className="text-body6 py-2 px-[18px] flex justify-center items-center rounded-[30px] mr-2 border-gray-500 border"
-          style={{
-            height: '38px',
-            gap: '8px',
-          }}
-        >
+        <button className="text-body6 h-[38px] py-2 px-[18px] rounded-[30px] mr-[8px] border-gray-500 border">
           {name}
         </button>
       )}
