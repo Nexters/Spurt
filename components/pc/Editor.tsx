@@ -23,6 +23,9 @@ const QuickEditor = ({ text, setText, addKeyword }: EditorProps) => {
             color: #d3d3d3;
             opacity: 1;
             }
+            body {
+              margin: 0px
+            }
             `,
         quickbars_selection_toolbar: 'Bold addKeyword',
         quickbars_insert_toolbar: false,
