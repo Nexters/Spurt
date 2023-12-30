@@ -3,7 +3,8 @@ import { getSession, signIn } from 'next-auth/react';
 
 const ApiClient = () => {
   const defaultOptions = {
-    baseURL: 'https://sirius-spurt.duckdns.org',
+    baseURL: 'https://api.spurtapp.com',
+    //baseURL: 'https://sirius-spurt.duckdns.org',
     //baseURL: 'https://whenwheres.com/',
   };
 
