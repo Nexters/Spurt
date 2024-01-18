@@ -1,4 +1,3 @@
-import { Category, postCategory } from '@/const/categories';
 import { atom } from 'recoil';
 
 export const selectedPostCategoryState = atom({
@@ -9,4 +8,9 @@ export const selectedPostCategoryState = atom({
 export const keywordState = atom({
   key: 'keyword',
   default: '',
+});
+
+export const keywordsState = atom<string[]>({
+  key: 'keywordList',
+  default: [],
 });

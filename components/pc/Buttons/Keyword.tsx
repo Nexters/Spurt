@@ -2,7 +2,6 @@ import DeleteIcon from '@/img/delete-16.svg';
 import { keywordState } from '@/status/PostStatus';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { text } from 'stream/consumers';
 
 interface KeywordProps {
   defaultKeywordName: string;
@@ -32,7 +31,6 @@ const SumKeyWord = ({
     if (inputRef.current) {
       const textWidth = measureTextWidth(inputValue);
       const newWidth = Math.max(42, textWidth + 30);
-      console.log(`textWidth : ${textWidth}, newWidth : ${newWidth}`);
       inputRef.current.style.width = `${newWidth}px`;
     }
   }, [inputValue]);
@@ -66,6 +64,11 @@ const SumKeyWord = ({
                 setKeyword('');
                 setFocus(false);
               }
+            }}
+            onBlur={() => {
+              setFocus(false);
+              setKeyword('');
+              fixInput(index);
             }}
           ></input>
         </div>
