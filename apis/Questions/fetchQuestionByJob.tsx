@@ -3,14 +3,15 @@ import ApiClient from '@/apis/client';
 export interface RandomQuestion {
   subject: string;
   jobGroup?: string;
+  offset?: number;
 }
 
-const fetchQuestionByJob = async (category: string) => {
+const fetchQuestionByJob = async (category: string, offset: number) => {
   try {
     const res = await ApiClient.get(`/v1/question/random`, {
       params: {
         category: category,
-        offset: 4,
+        offset: offset,
       },
     });
     if (res.data.code === 2000) {

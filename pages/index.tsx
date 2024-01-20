@@ -40,6 +40,7 @@ export default function MainHome() {
   const myJob = useRecoilValue(jobState);
   const [myPost, setMyPost] = useState<QuestionResponse>();
   const [random, setRandom] = useState<RandomQuestion[]>([]);
+  const [offsetNumber, setOffsetNumber] = useState(4);
 
   const [isViewingPinGuide, setIsViewingPinGuide] = useState(false);
 
@@ -47,21 +48,32 @@ export default function MainHome() {
     async function getRandomQuestion() {
       const result = await fetchQuestionByJob(
         mainOtherCategory[selectedOthersCategory].code,
+        offsetNumber,
       );
       setRandom(result);
     }
     getRandomQuestion();
   };
 
+  const getWindowSize = () => {
+    const windowWidth = window.innerWidth;
+    if (windowWidth >= 1024) setOffsetNumber(4);
+    else if (windowWidth >= 768) setOffsetNumber(3);
+    else setOffsetNumber(2);
+    console.log(windowWidth);
+    handleData();
+  };
+
   useEffect(() => {
     async function getRandomQuestion() {
       const result = await fetchQuestionByJob(
         mainOtherCategory[selectedOthersCategory].code,
+        offsetNumber,
       );
       setRandom(result);
     }
     getRandomQuestion();
-  }, [selectedOthersCategory]);
+  }, [offsetNumber, selectedOthersCategory]);
 
   useEffect(() => {
     async function getMyQuestion() {
@@ -188,7 +200,7 @@ export default function MainHome() {
         isPc={true}
         selectedCateogry={selectedOthersCategory}
         setCategory={setSelectedOthersCategory}
-      ></Carousel>
+      />
 
       <div className="flex flex-col mt-5 bg-white rounded-[20px] pt-[30px] mb-[100px] shadow-sm">
         <div className="flex flex-row gap-3 px-[30px]">
@@ -197,7 +209,7 @@ export default function MainHome() {
           })}
         </div>
         <div className="flex justify-center my-[30px]">
-          <RandomBtn onClick={handleData}>
+          <RandomBtn onClick={getWindowSize}>
             다른 질문 더보기
             <RotateIcon />
           </RandomBtn>
